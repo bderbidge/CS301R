@@ -1,0 +1,28 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:colorAccent">#FF4081</item>
+        <item name="colorAccent">#FF4081</item>
+        <item name="colorPrimary">#1670C9</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:statusBarColor">#004698</item>
+        <item name="colorPrimaryDark">@android:color/background_dark</item>
+        <item name="android:colorBackground">@android:color/background_light</item>
+        <item name="colorButtonNormal">#e8eaed</item>
+    </style>
+
+
+    <style name="BuyTheme" parent="Theme.AppCompat.Light.DarkActionBar" >
+        <item name="android:colorAccent">#FF4081</item>
+        <item name="colorAccent">#FF4081</item>
+        <item name="colorPrimary">#1670C9</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:statusBarColor">#004698</item>
+        <item name="colorPrimaryDark">@android:color/background_dark</item>
+        <item name="android:colorBackground">@android:color/background_light</item>
+        <item name="colorButtonNormal">#e8eaed</item>
+
+    </style>
+</resources>
