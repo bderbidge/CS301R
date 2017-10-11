@@ -4,4 +4,19 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_firstname">First Name</string>
+    <string name="login_lastname">Last Name</string>
+    <string name="login_btn">SIGN IN</string>
+    <string name="register_btn">CREATE NEW ACCOUNT</string>
+    <string name="forgot_password">FORGOT PASSWORD</string>
+    <string name="or">OR</string>
+    <string name="EXTRA_USERNAME">username</string>
+    <string name="EXTRA_PASSWORD">password</string>
+    <string name="EXTRA_FIRSTNAME">firstname</string>
+    <string name="EXTRA_LASTNAME">lastname</string>
+    <string name="TAG_login">login</string>
+    <string name="TAG_register">register</string>
+    <string name="TAG_currentfrag">current</string>
 </resources>

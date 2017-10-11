@@ -3,26 +3,89 @@
     <!-- Base application theme. -->
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" >
-        <item name="android:colorAccent">#FF4081</item>
-        <item name="colorAccent">#FF4081</item>
-        <item name="colorPrimary">#1670C9</item>
-        <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="android:statusBarColor">#004698</item>
-        <item name="colorPrimaryDark">@android:color/background_dark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/White</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:colorBackground">@android:color/background_light</item>
-        <item name="colorButtonNormal">#e8eaed</item>
+        <item name="colorButtonNormal">@color/buttonNormal</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Title" parent="@style/AppTheme">
+        <item name="android:textSize">60sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_marginBottom">30dp</item>
+        <item name="android:text">@string/app_name</item>
+    </style>
+    <style name="AppTheme.EditTextLabel" parent="AppTheme">
+        <item name="android:layout_column">1</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+    <style name="AppTheme.EditTextLabelColorTheme">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:theme">@style/SwitchTheme</item>
+    </style>
+    <style name="AppTheme.EditText">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_column">1</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:imeOptions">flagNoExtractUi</item>
+        <item name="android:theme">@style/SwitchTheme</item>
+    </style>
+    <style name="AppTheme.Button">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/White</item>
+    </style>
+    <style name="AppTheme.PrimaryButton" parent="AppTheme.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:layout_marginEnd">30dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/White</item>
+    </style>
+    <style name="AppTheme.SecondaryButton" parent="AppTheme.PrimaryButton">
+        <item name="android:layout_marginStart">45dp</item>
+        <item name="android:layout_marginEnd">45dp</item>
+        <item name="android:backgroundTint">@color/colorLoginBtn</item>
+
+    </style>
+    <style name="AppTheme.Text">
+        <item name="android:textColor">@color/greyedText</item>
+        <item name="android:backgroundTint">@color/greyedText</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    <style name="SwitchTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorAccent">@color/colorPrimary</item>
+        <item name="android:colorControlActivated">@color/colorPrimary</item>
+    </style>
 
     <style name="BuyTheme" parent="Theme.AppCompat.Light.DarkActionBar" >
-        <item name="android:colorAccent">#FF4081</item>
-        <item name="colorAccent">#FF4081</item>
-        <item name="colorPrimary">#1670C9</item>
-        <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="android:statusBarColor">#004698</item>
-        <item name="colorPrimaryDark">@android:color/background_dark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/White</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:colorBackground">@android:color/background_light</item>
-        <item name="colorButtonNormal">#e8eaed</item>
-
+        <item name="colorButtonNormal">@color/buttonNormal</item>
     </style>
 </resources>
