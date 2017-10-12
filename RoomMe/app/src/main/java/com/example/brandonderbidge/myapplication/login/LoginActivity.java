@@ -6,15 +6,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.brandonderbidge.myapplication.BuyActivity;
+import com.example.brandonderbidge.myapplication.buy.BuyActivity;
 import com.example.brandonderbidge.myapplication.R;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = "LoginController";
+    private static final String TAG = "LoginActivity";
     private LoginController loginController;
 
     @Override
@@ -64,14 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void createToast(String message, int toastLength) {
-        Toast.makeText(getBaseContext(), message, toastLength).show();
-    }
-
     public void switchToBuyActivity() {
-        Log.v(TAG, "Switching to Lobby Activity");
-        Intent lobbySwitchIntent = new Intent(this, BuyActivity.class);
-        startActivity(lobbySwitchIntent);
+        Log.v(TAG, "Switching to Buy Activity");
+        Intent buyIntent = new Intent(this, BuyActivity.class);
+        startActivity(buyIntent);
     }
 
     public void setLoginFragment(Bundle savedInstanceState) {
@@ -100,6 +95,10 @@ public class LoginActivity extends AppCompatActivity {
         ft.replace(R.id.login_fragment_container, regFrag, getString(R.string.TAG_register))
                 .addToBackStack("register")
                 .commit();
+    }
+
+    public void createToast(String message, int toastLength) {
+        Toast.makeText(getBaseContext(), message, toastLength).show();
     }
 
     public void showProgressWheel(boolean show) {
