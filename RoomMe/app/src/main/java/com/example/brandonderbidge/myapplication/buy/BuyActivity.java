@@ -51,6 +51,7 @@ public class BuyActivity extends AppCompatActivity {
         adapter = new CustomAdapter(listOfContracts);
         recyclerView.setAdapter(adapter);
 
+        changeNavItemSelected("buy");
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
