@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
 
@@ -46,8 +47,14 @@ public class LoginFragment extends Fragment {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSpinner.setVisibility(View.VISIBLE);
-                loginController.login(usernameText.getText().toString(), passwordText.getText().toString());
+                //mSpinner.setVisibility(View.VISIBLE);
+                //loginController.login(usernameText.getText().toString(), passwordText.getText().toString());
+                if (loginController.validData(false, usernameText.getText().toString(), passwordText.getText().toString(), null, null)) {
+                    ((LoginActivity) getActivity()).createToast("Welcome, " + usernameText.getText().toString(), Toast.LENGTH_SHORT);
+                    ((LoginActivity) getActivity()).switchToBuyActivity();
+                } else {
+                    ((LoginActivity) getActivity()).createToast("Invalid username and/or password", Toast.LENGTH_SHORT);
+                }
             }
         });
 
