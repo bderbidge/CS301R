@@ -1,9 +1,5 @@
 package com.example.brandonderbidge.myapplication.buy;
 
-import android.util.Log;
-import android.widget.Toast;
-
-
 
 public class BuyController {
     private static final String TAG = "LoginController";

@@ -1,4 +1,4 @@
-package com.example.brandonderbidge.myapplication;
+package com.example.brandonderbidge.myapplication.buy;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.brandonderbidge.myapplication.R;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     private ArrayList<DataModel> dataSet;
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewName;
         TextView textViewVersion;
@@ -25,9 +27,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            this.textViewName = (TextView) itemView.findViewById(R.id.textViewName);
-            this.textViewVersion = (TextView) itemView.findViewById(R.id.textViewVersion);
-            this.imageViewIcon = (ImageView) itemView.findViewById(R.id.imageView);
+            this.textViewName = itemView.findViewById(R.id.apartmentName);
+            this.textViewVersion = itemView.findViewById(R.id.costOfRent);
+            this.imageViewIcon = itemView.findViewById(R.id.imageView);
         }
     }
 
