@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.brandonderbidge.myapplication.BottomNavigationViewHelper;
 import com.example.brandonderbidge.myapplication.Contract;
 import com.example.brandonderbidge.myapplication.R;
 import com.joanzapata.iconify.IconDrawable;
@@ -54,6 +55,8 @@ public class BuyActivity extends AppCompatActivity {
         changeNavItemSelected("buy");
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
