@@ -1,8 +1,10 @@
 package com.example.brandonderbidge.myapplication.login;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -28,6 +30,8 @@ public class RegisterFragment extends Fragment {
     private EditText lastnameET;
     private Button registerBtn;
     private LoginController loginController;
+    private Button maleBtn;
+    private Button femaleBtn;
     private ProgressBar mSpinner;
 
     public RegisterFragment() {}
@@ -42,21 +46,45 @@ public class RegisterFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         setHasOptionsMenu(true);
 
-        usernameET = (EditText) view.findViewById(R.id.user_name);
+        usernameET = (EditText) view.findViewById(R.id.username);
         passwordET = (EditText) view.findViewById(R.id.password);
         firstnameET = (EditText) view.findViewById(R.id.first_name);
         lastnameET = (EditText) view.findViewById(R.id.last_name);
+        maleBtn = (Button) view.findViewById(R.id.male_btn);
+        femaleBtn = (Button) view.findViewById(R.id.female_btn);
+
         registerBtn = (Button) view.findViewById(R.id.register_btn);
         //mSpinner = (ProgressBar) view.findViewById(R.id.progressBar);
+
+        maleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                maleBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.White));
+                femaleBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.greyedText));
+
+                maleBtn.setBackground(getResources().getDrawable(R.drawable.toggle_button_left_clicked, null));
+                femaleBtn.setBackground(getResources().getDrawable(R.drawable.toggle_button_right, null));
+            }
+        });
+
+        femaleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                femaleBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.White));
+                maleBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.greyedText));
+
+                femaleBtn.setBackground(getResources().getDrawable(R.drawable.toggle_button_right_clicked, null));
+                maleBtn.setBackground(getResources().getDrawable(R.drawable.toggle_button_left, null));
+            }
+        });
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            //    mSpinner.setVisibility(View.VISIBLE);
-                loginController.register(usernameET.getText().toString(), passwordET.getText().toString(),
-                        firstnameET.getText().toString(), lastnameET.getText().toString());
-
                 switchToBuyActivity();
+            //    mSpinner.setVisibility(View.VISIBLE);
+                /*loginController.register(usernameET.getText().toString(), passwordET.getText().toString(),
+                        firstnameET.getText().toString(), lastnameET.getText().toString());*/
             }
         });
 

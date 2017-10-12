@@ -9,5 +9,6 @@
     <color name="colorAccentLight">#ff79b0</color>
     <color name="White">#FFFFFF</color>
     <color name="buttonNormal">#e8eaed</color>
+    <color name="buttonBorder">#c4c4c4</color>
     <color name="greyedText">#636363</color>
 </resources>

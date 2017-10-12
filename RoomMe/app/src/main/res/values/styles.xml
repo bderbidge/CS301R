@@ -30,8 +30,8 @@
         <item name="android:layout_column">1</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">20dp</item>
-        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:layout_marginEnd">30dp</item>
         <item name="android:layout_marginTop">10dp</item>
     </style>
     <style name="AppTheme.EditTextLabelColorTheme">
@@ -66,12 +66,27 @@
         <item name="android:layout_marginStart">45dp</item>
         <item name="android:layout_marginEnd">45dp</item>
         <item name="android:backgroundTint">@color/colorLoginBtn</item>
-
     </style>
     <style name="AppTheme.Text">
         <item name="android:textColor">@color/greyedText</item>
         <item name="android:backgroundTint">@color/greyedText</item>
         <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    <style name="toggleButton">
+        <item name="android:textColor">@color/greyedText</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:padding">10dp</item>
+    </style>
+    <style name="toggleButtonLeft" parent="toggleButton">
+        <item name="android:background">@drawable/toggle_button_left_clicked</item>
+        <item name="android:textColor">@color/White</item>
+    </style>
+    <style name="toggleButtonRight" parent="toggleButton">
+        <item name="android:background">@drawable/toggle_button_right</item>
     </style>
     <style name="SwitchTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorAccent">@color/colorPrimary</item>

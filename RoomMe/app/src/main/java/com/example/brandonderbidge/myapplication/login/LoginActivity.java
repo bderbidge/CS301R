@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         LoginFragment testLoginFrag = (LoginFragment) getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_login));
         RegisterFragment testRegFrag = (RegisterFragment) getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_register));
 
-        outState.putString(getString(R.string.EXTRA_USERNAME), ((EditText) findViewById(R.id.user_name)).getText().toString());
+        outState.putString(getString(R.string.EXTRA_USERNAME), ((EditText) findViewById(R.id.username)).getText().toString());
         outState.putString(getString(R.string.EXTRA_PASSWORD), ((EditText) findViewById(R.id.password)).getText().toString());
 
         if(testRegFrag != null && testRegFrag.isVisible()) {

@@ -8,6 +8,8 @@
     <string name="login_password">Password</string>
     <string name="login_firstname">First Name</string>
     <string name="login_lastname">Last Name</string>
+    <string name="login_male">Male</string>
+    <string name="login_female">Female</string>
     <string name="login_btn">SIGN IN</string>
     <string name="register_btn">CREATE NEW ACCOUNT</string>
     <string name="forgot_password">FORGOT PASSWORD</string>

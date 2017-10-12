@@ -38,7 +38,7 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         setHasOptionsMenu(true);
 
-        usernameText = (EditText) view.findViewById(R.id.user_name);
+        usernameText = (EditText) view.findViewById(R.id.username);
         passwordText = (EditText) view.findViewById(R.id.password);
         loginBtn = (Button) view.findViewById(R.id.login_btn);
         registerFragmentBtn = (TextView) view.findViewById(R.id.register_fragment_button);
