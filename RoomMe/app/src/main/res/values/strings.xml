@@ -11,6 +11,10 @@
     <string name="login_btn">SIGN IN</string>
     <string name="register_btn">CREATE NEW ACCOUNT</string>
     <string name="forgot_password">FORGOT PASSWORD</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
+    <string name="messages">Messages</string>
+    <string name="more">More</string>
     <string name="or">OR</string>
     <string name="EXTRA_USERNAME">username</string>
     <string name="EXTRA_PASSWORD">password</string>
@@ -18,5 +22,6 @@
     <string name="EXTRA_LASTNAME">lastname</string>
     <string name="TAG_login">login</string>
     <string name="TAG_register">register</string>
+    <string name="TAG_buy">buy</string>
     <string name="TAG_currentfrag">current</string>
 </resources>
