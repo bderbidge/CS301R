@@ -17,65 +17,6 @@ public class BuyController {
         this.buyActivity = buyActivity;
     }
 
-    public void login(String username, String password) {
-        Log.v(TAG,"Entering login");
-        if(!validData(false, username, password, null, null)) {
-            Log.e(TAG, "Invalid login Information");
-            this.buyActivity.createToast("Invalid Sign in information", Toast.LENGTH_SHORT);
-            buyActivity.showProgressWheel(true);
-            return;
-        }
-
-        //LoginTask task = new LoginTask();
-
-        //task.execute(new LoginCmdData(username, password, FirebaseInstanceId.getInstance().getToken()));
-
-        Log.v(TAG,"Exiting login");
-    }
-
-    void register(String username, String password, String firstname, String lastname) {
-        Log.v(TAG,"Entering register");
-        if(!validData(true, username, password, firstname, lastname)) {
-            Log.e(TAG, "Invalid register Information");
-            buyActivity.createToast("Invalid Register Information", Toast.LENGTH_SHORT);
-            buyActivity.showProgressWheel(true);
-            return;
-        }
-
-        //LoginTask task = new LoginTask();
-
-        //task.execute(new RegisterCmdData(username, password, firstname, lastname, FirebaseInstanceId.getInstance().getToken()));
-        Log.v(TAG,"Exiting register");
-    }
-
-    boolean validData(boolean register, String username, String password, String firstname, String lastname) {
-        boolean isValid = true;
-        if (register) {
-            if (firstname == null || firstname.equals("")) {
-                Log.e(TAG, "firstname not provided");
-                // make firstname red
-                isValid = false;
-            }
-            if (lastname == null || lastname.equals("")) {
-                Log.e(TAG, "lastname not provided");
-                // make lastname red
-                isValid = false;
-            }
-        }
-
-        if (username == null || username.equals("")) {
-            Log.e(TAG, "username not provided");
-            // make username red
-            isValid = false;
-        }
-        if (password == null || password.equals("")) {
-            Log.e(TAG, "password not provided");
-            // make password red
-            isValid = false;
-        }
-
-        return isValid;
-    }
 
     /*private class LoginTask extends AsyncTask<LoginCmdData, Void, LoginResult> {
         @Override

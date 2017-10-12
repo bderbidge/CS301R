@@ -4,21 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
-import com.example.brandonderbidge.myapplication.login.LoginActivity;
-import com.example.brandonderbidge.myapplication.login.LoginController;
-import com.joanzapata.iconify.IconDrawable;
-import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -32,7 +25,7 @@ public class BuyFragment extends Fragment {
 
     public BuyFragment() {}
 
-    public void setLoginController(BuyController buyController) {
+    public void setBuyController(BuyController buyController) {
         this.buyController = buyController;
     }
 
@@ -108,7 +101,5 @@ public class BuyFragment extends Fragment {
         }
 
         buyController = new BuyController((BuyActivity) getActivity());
-
-        buyController.validData(false, username, password, null, null);
     }
 }

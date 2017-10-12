@@ -32,7 +32,7 @@ public class BuyActivity extends AppCompatActivity {
         buyFragment.setArguments(savedInstanceState);
 
         buyFragment.setArguments(savedInstanceState);
-        buyFragment.setLoginController(buyController);
+        buyFragment.setBuyController(buyController);
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
