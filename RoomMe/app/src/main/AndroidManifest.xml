@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BuyActivity"
+            android:name=".buy.BuyActivity"
             android:label="BuyActivity"
             android:theme="@style/BuyTheme" />
     </application>

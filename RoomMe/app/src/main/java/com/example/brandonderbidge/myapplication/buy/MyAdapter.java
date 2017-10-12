@@ -1,9 +1,11 @@
-package com.example.brandonderbidge.myapplication;
+package com.example.brandonderbidge.myapplication.buy;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.brandonderbidge.myapplication.R;
 
 /**
  * Created by brandonderbidge on 10/5/17.
