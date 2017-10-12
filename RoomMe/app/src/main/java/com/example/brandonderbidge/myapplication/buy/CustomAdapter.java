@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.brandonderbidge.myapplication.Contract;
 import com.example.brandonderbidge.myapplication.R;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
-    private ArrayList<DataModel> dataSet;
+    private ArrayList<Contract> dataSet;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -33,7 +34,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         }
     }
 
-    public CustomAdapter(ArrayList<DataModel> data) {
+    public CustomAdapter(ArrayList<Contract> data) {
         this.dataSet = data;
     }
 
@@ -57,7 +58,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         ImageView imageView = holder.imageViewIcon;
 
         textViewName.setText(dataSet.get(listPosition).getName());
-        textViewVersion.setText(dataSet.get(listPosition).getVersion());
+        textViewVersion.setText(dataSet.get(listPosition).getPrice());
         imageView.setImageResource(dataSet.get(listPosition).getImage());
     }
 

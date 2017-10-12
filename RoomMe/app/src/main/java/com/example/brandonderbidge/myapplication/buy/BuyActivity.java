@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.brandonderbidge.myapplication.Contract;
 import com.example.brandonderbidge.myapplication.R;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
@@ -23,7 +24,7 @@ public class BuyActivity extends AppCompatActivity {
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-    private static ArrayList<DataModel> data;
+    private static ArrayList<Contract> listOfContracts;
     static View.OnClickListener myOnClickListener;
 
     @Override
@@ -42,7 +43,7 @@ public class BuyActivity extends AppCompatActivity {
 
         loadFakeData();
 
-        adapter = new CustomAdapter(data);
+        adapter = new CustomAdapter(listOfContracts);
         recyclerView.setAdapter(adapter);
 
 
@@ -79,12 +80,17 @@ public class BuyActivity extends AppCompatActivity {
     private void loadFakeData() {
 
 
-        data = new ArrayList<>();
+        listOfContracts = new ArrayList<>();
         for (int i = 0; i < MyData.nameArray.length; i++) {
 
-            data.add(new DataModel(
+            listOfContracts.add(new Contract(
                     MyData.nameArray[i],
-                    MyData.versionArray[i]
+                    MyData.priceArray[i],
+                    MyData.cityArray[i],
+                    MyData.stateArray[i],
+                    MyData.maritalStatusArray[i],
+                    MyData.sexStatusArray[i]
+
             ));
         }
     }
