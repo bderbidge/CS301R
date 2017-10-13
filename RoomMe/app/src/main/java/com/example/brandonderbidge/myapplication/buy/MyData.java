@@ -10,9 +10,9 @@ public class MyData {
 
     static String[] nameArray = {"Centennial", "Centennial 2", "The Riv", "Roman Gardens", "King Henry", "Brown Stone"};
     static String[] priceArray = {"$200", "$300", "$300", "$400", "$200", "$400" };
-    static String[] cityArray = {"Provo", "Provo 2", "Provo", "Provo", "Provo", "Provo"};
+    static String[] cityArray = {"Provo", "SLC", "Mapelton", "Provo", "Provo", "Provo"};
     static String[] stateArray = {"UT", "UT", "UT", "UT", "UT", "UT" };
-    static String[] maritalStatusArray = {"Single", "Married 2", "Married", "Married", "Single", "Single"};
-    static String[] sexStatusArray ={"M", "F", "F", "M", "M", "F"};
+    static String[] maritalStatusArray = {"Single", "Married", "Married", "Married", "Single", "Single"};
+    static String[] sexStatusArray ={"Male", "Female", "Female", "Male", "Male", "Female"};
 
 }
