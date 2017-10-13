@@ -16,7 +16,8 @@
         android:layout_marginTop="9dp"
         card_view:cardBackgroundColor="@color/White"
         card_view:cardElevation="5dp"
-        card_view:cardUseCompatPadding="true">
+        card_view:cardUseCompatPadding="true"
+        android:layout_alignParentBottom="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,6 +31,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
+                android:background="#FF4081"
                 android:text="Button" />
 
             <ImageView
@@ -82,6 +84,26 @@
                 android:layout_marginTop="9dp"
                 android:text="Men's Single"
                 android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="153dp"
+                android:layout_marginStart="39dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/sellerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Brandon Derbidge"
+                android:layout_marginStart="24dp"
+                android:layout_below="@+id/imageView"
+                android:layout_alignStart="@+id/genderRoomType" />
 
         </RelativeLayout>
 
