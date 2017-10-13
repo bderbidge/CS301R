@@ -82,8 +82,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewCityState = holder.textViewcityState;
         TextView genderRoomType = holder.genderRoomType;
 
+        String price = "$" + dataSet.get(listPosition).getPrice();
+
         textViewName.setText(dataSet.get(listPosition).getName());
-        textViewCostOfRent.setText(dataSet.get(listPosition).getPrice());
+
+        textViewCostOfRent.setText(price);
+
+
         imageView.setImageResource(dataSet.get(listPosition).getImage());
         textViewCityState.setText(dataSet.get(listPosition).getCity() + ", " + dataSet.get(listPosition).getState());
 

@@ -14,9 +14,12 @@
     <string name="register_btn">CREATE NEW ACCOUNT</string>
     <string name="forgot_password">FORGOT PASSWORD</string>
     <string name="buy">Buy</string>
+    <string name="price_label">Price</string>
+    <string name="display_price">$%d</string>
     <string name="sell">Sell</string>
     <string name="messages">Messages</string>
     <string name="more">More</string>
+    <string name="filter_action">sort/filter</string>
     <string name="or">OR</string>
     <string name="EXTRA_USERNAME">username</string>
     <string name="EXTRA_PASSWORD">password</string>
