@@ -2,11 +2,14 @@ package com.example.brandonderbidge.myapplication.buy;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class BuyActivity extends AppCompatActivity {
-
+    private final String TAG = "BuyActivity";
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
@@ -82,7 +85,6 @@ public class BuyActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-
     }
 
 
@@ -120,13 +122,27 @@ public class BuyActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.buy_menu, menu);
+
+        menu.findItem(R.id.filter_item)
+            .setIcon(new IconDrawable(getBaseContext(), FontAwesomeIcons.fa_filter)
+            .colorRes(R.color.White)
+            .actionBarSize());
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()) {
+            case R.id.filter_item:
+                showDialog();
+                break;
+            default:
+
+        }
 
         return true;
     }
@@ -176,7 +192,22 @@ public class BuyActivity extends AppCompatActivity {
                         .sizeDp(14));
     }
 
+    public void showDialog() {
+        Log.v(TAG, "Showing Dialog");
 
+        if (findViewById(R.id.filter_layout) == null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FilterDialog newFragment = new FilterDialog();
+
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            // For a little polish, specify a transition animation
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            // To make it fullscreen, use the 'content' root view as the container
+            // for the fragment, which is always the root view for the activity
+            transaction.add(android.R.id.content, newFragment)
+                    .addToBackStack(null).commit();
+        }
+    }
 
 
 }
