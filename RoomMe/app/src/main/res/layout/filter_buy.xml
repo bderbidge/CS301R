@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
@@ -15,5 +16,88 @@
         app:layout_constraintStart_toStartOf="parent"
         android:background="@null"
         android:src="@drawable/ic_close" />
+
+    <TextView
+        android:id="@+id/filter_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/close_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="30dp"
+        android:textSize="45sp"
+        android:gravity="center_horizontal"
+        android:text="@string/filter" />
+
+    <LinearLayout
+        android:id="@+id/price_range"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/filter_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal" android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/money_sign"/>
+
+        <EditText
+            android:id="@+id/price_low"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/price_low"
+            android:inputType="numberDecimal"
+            android:layout_marginStart="0dp"
+            style="@style/AppTheme.EditText"/>
+
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/to" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/money_sign"/>
+
+        <EditText
+            android:id="@+id/price_high"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/price_high"
+            android:inputType="numberDecimal"
+            android:layout_marginStart="0dp"
+            style="@style/AppTheme.EditText"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/select_sex_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/price_range"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="30dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/male_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_male"
+            style="@style/toggleButtonLeft" />
+        <Button
+            android:id="@+id/female_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_female"
+            style="@style/toggleButtonRight" />
+
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

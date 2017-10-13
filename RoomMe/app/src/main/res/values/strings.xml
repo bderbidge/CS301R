@@ -16,11 +16,16 @@
     <string name="buy">Buy</string>
     <string name="price_label">Price</string>
     <string name="display_price">$%d</string>
+    <string name="money_sign">$</string>
     <string name="sell">Sell</string>
     <string name="messages">Messages</string>
     <string name="more">More</string>
     <string name="filter_action">sort/filter</string>
+    <string name="filter">Filter</string>
     <string name="or">OR</string>
+    <string name="to">to</string>
+    <string name="price_low">Price Low</string>
+    <string name="price_high">Price High</string>
     <string name="EXTRA_USERNAME">username</string>
     <string name="EXTRA_PASSWORD">password</string>
     <string name="EXTRA_FIRSTNAME">firstname</string>

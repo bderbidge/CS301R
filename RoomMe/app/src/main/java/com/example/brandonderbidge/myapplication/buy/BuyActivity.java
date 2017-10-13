@@ -1,5 +1,6 @@
 package com.example.brandonderbidge.myapplication.buy;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
@@ -13,10 +14,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.BottomNavigationViewHelper;
 import com.example.brandonderbidge.myapplication.Contract;
+import com.example.brandonderbidge.myapplication.FilterModel;
 import com.example.brandonderbidge.myapplication.R;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
@@ -28,7 +31,7 @@ import java.util.Map;
 
 public class BuyActivity extends AppCompatActivity {
     private final String TAG = "BuyActivity";
-    private static RecyclerView.Adapter adapter;
+    private static CustomAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     private static ArrayList<Contract> listOfContracts;
@@ -49,9 +52,6 @@ public class BuyActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
-        loadFakeData(null);
-
         adapter = new CustomAdapter(listOfContracts);
         recyclerView.setAdapter(adapter);
 
@@ -67,42 +67,41 @@ public class BuyActivity extends AppCompatActivity {
                         switch (item.getItemId()) {
 
                             case R.id.navigation_buy:
-                                createToast("Buy Item Selected", Toast.LENGTH_SHORT);
+                                createToast("Buy Page Selected", Toast.LENGTH_SHORT);
                                 changeNavItemSelected("buy");
                                 break;
                             case R.id.navigation_sell:
-                                createToast("Sell Item Selected", Toast.LENGTH_SHORT);
+                                createToast("Sell Page Selected", Toast.LENGTH_SHORT);
                                 changeNavItemSelected("sell");
                                 break;
                             case R.id.navigation_messages:
-                                createToast("Messages Item Selected", Toast.LENGTH_SHORT);
+                                createToast("Messages Page Selected", Toast.LENGTH_SHORT);
                                 changeNavItemSelected("messages");
                                 break;
                             case R.id.navigation_more:
-                                createToast("More Item Selected", Toast.LENGTH_SHORT);
+                                createToast("More Page Selected", Toast.LENGTH_SHORT);
                                 changeNavItemSelected("more");
                         }
                         return true;
                     }
                 });
+
+
+        loadFakeData();
     }
 
 
-    private void loadFakeData(Map<String, Object> filters) {
+    public void loadFakeData() {
         listOfContracts = new ArrayList<>();
         boolean add = true;
 
         for (int i = 0; i < MyData.nameArray.length; i++) {
-            if (filters != null) {
-                if (filters.containsKey("sex") && !MyData.sexStatusArray[i].equals(filters.get("sex"))) {
-                    add = false;
-                } else if (filters.containsKey("low price") && false == true) {
-                    add = false;
-                } else if (filters.containsKey("high price") && false==true) {
-                    add = false;
-                } else if (filters.containsKey("martial status") && false == true) {
-                    add = false;
-                }
+            if (FilterModel.getInstance().getSex() != null && !MyData.sexStatusArray[i].equals(FilterModel.getInstance().getSex())) {
+                add = false;
+            } else if (FilterModel.getInstance().getPriceLow() != null && MyData.priceArray[i] > FilterModel.getInstance().getPriceLow()) {
+                add = false;
+            } else if (FilterModel.getInstance().getPriceHigh() != null && MyData.priceArray[i] < FilterModel.getInstance().getPriceHigh()) {
+                add = false;
             }
 
             if (add) {
@@ -116,6 +115,9 @@ public class BuyActivity extends AppCompatActivity {
                 ));
             }
         }
+
+        adapter.setDataSet(listOfContracts);
+        adapter.notifyDataSetChanged();
     }
 
 
@@ -208,6 +210,4 @@ public class BuyActivity extends AppCompatActivity {
                     .addToBackStack(null).commit();
         }
     }
-
-
 }

@@ -38,6 +38,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.dataSet = data;
     }
 
+    public void setDataSet(ArrayList<Contract> dataSet) {
+        this.dataSet = dataSet;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                            int viewType) {
