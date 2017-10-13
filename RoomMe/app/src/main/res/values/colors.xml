@@ -11,4 +11,6 @@
     <color name="buttonNormal">#e8eaed</color>
     <color name="buttonBorder">#c4c4c4</color>
     <color name="greyedText">#636363</color>
+    <color name="background">#E9EBEE</color>
+
 </resources>

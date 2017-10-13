@@ -1,5 +1,8 @@
 package com.example.brandonderbidge.myapplication.buy;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.brandonderbidge.myapplication.Contract;
+import com.example.brandonderbidge.myapplication.Model;
 import com.example.brandonderbidge.myapplication.R;
+import com.example.brandonderbidge.myapplication.login.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -20,17 +25,35 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     private ArrayList<Contract> dataSet;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener{
 
         TextView textViewName;
-        TextView textViewVersion;
+        TextView textViewCostOfRent;
         ImageView imageViewIcon;
+        TextView textViewcityState;
+        TextView genderRoomType;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
             this.textViewName = itemView.findViewById(R.id.apartmentName);
-            this.textViewVersion = itemView.findViewById(R.id.costOfRent);
+            this.textViewCostOfRent = itemView.findViewById(R.id.costOfRent);
             this.imageViewIcon = itemView.findViewById(R.id.imageView);
+            this.textViewcityState = itemView.findViewById(R.id.cityState);
+            this.genderRoomType = itemView.findViewById(R.id.genderRoomType);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            Contract contract =  dataSet.get(getLayoutPosition());
+            Model.instance().setSelectedContract(contract);
+
+            Intent intent = new Intent(v.getContext(), ContractActivity.class);
+            v.getContext().startActivity(intent);
+
         }
     }
 
@@ -58,14 +81,25 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
 
         TextView textViewName = holder.textViewName;
-        TextView textViewVersion = holder.textViewVersion;
+        TextView textViewCostOfRent = holder.textViewCostOfRent;
         ImageView imageView = holder.imageViewIcon;
+        TextView textViewCityState = holder.textViewcityState;
+        TextView genderRoomType = holder.genderRoomType;
 
         String price = "$" + dataSet.get(listPosition).getPrice();
 
         textViewName.setText(dataSet.get(listPosition).getName());
-        textViewVersion.setText(price);
+
+        textViewCostOfRent.setText(price);
+
+
         imageView.setImageResource(dataSet.get(listPosition).getImage());
+        textViewCityState.setText(dataSet.get(listPosition).getCity() + ", " + dataSet.get(listPosition).getState());
+
+        if(dataSet.get(listPosition).getMaritalStatus().equals("Married"))
+            genderRoomType.setText(dataSet.get(listPosition).getMaritalStatus());
+        else
+            genderRoomType.setText(dataSet.get(listPosition).getSex() + " " + dataSet.get(listPosition).getMaritalStatus());
     }
 
     @Override

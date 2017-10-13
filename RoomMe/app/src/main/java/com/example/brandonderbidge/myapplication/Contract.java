@@ -9,7 +9,6 @@ import java.util.Date;
 public class Contract {
 
     String name;
-
     String address;
     int apartmentNum;
     int image;

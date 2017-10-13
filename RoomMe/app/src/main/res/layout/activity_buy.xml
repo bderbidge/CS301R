@@ -11,7 +11,8 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:weightSum="1"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background">
 
 
     <LinearLayout
