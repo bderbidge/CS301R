@@ -1,5 +1,8 @@
 package com.example.brandonderbidge.myapplication.buy;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.brandonderbidge.myapplication.Contract;
+import com.example.brandonderbidge.myapplication.Model;
 import com.example.brandonderbidge.myapplication.R;
+import com.example.brandonderbidge.myapplication.login.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -20,13 +25,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     private ArrayList<Contract> dataSet;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener{
 
         TextView textViewName;
         TextView textViewCostOfRent;
         ImageView imageViewIcon;
         TextView textViewcityState;
         TextView genderRoomType;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -35,6 +42,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             this.imageViewIcon = itemView.findViewById(R.id.imageView);
             this.textViewcityState = itemView.findViewById(R.id.cityState);
             this.genderRoomType = itemView.findViewById(R.id.genderRoomType);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            Contract contract =  dataSet.get(getLayoutPosition());
+            Model.instance().setSelectedContract(contract);
+
+            Intent intent = new Intent(v.getContext(), ContractActivity.class);
+            v.getContext().startActivity(intent);
+
         }
     }
 

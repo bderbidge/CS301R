@@ -22,6 +22,8 @@
             android:name=".buy.BuyActivity"
             android:label="BuyActivity"
             android:theme="@style/BuyTheme" />
+        <activity android:name=".buy.ContractActivity"
+            android:theme="@style/BuyTheme"></activity>
     </application>
 
 </manifest>
