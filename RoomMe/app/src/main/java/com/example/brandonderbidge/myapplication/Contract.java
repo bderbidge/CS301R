@@ -17,12 +17,12 @@ public class Contract {
     String city;
     String state;
     int zipCode;
-    String price;
+    Double price;
     String maritalStatus;
     String sex;
     String additionalNotes;
 
-    public Contract(String name,String price, String city, String state, String maritalStatus, String sex) {
+    public Contract(String name, Double price, String city, String state, String maritalStatus, String sex) {
 
         this.name = name;
         this.city = city;
@@ -89,11 +89,11 @@ public class Contract {
         this.zipCode = zipCode;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

@@ -57,8 +57,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewVersion = holder.textViewVersion;
         ImageView imageView = holder.imageViewIcon;
 
+        String price = "$" + dataSet.get(listPosition).getPrice();
+
         textViewName.setText(dataSet.get(listPosition).getName());
-        textViewVersion.setText(dataSet.get(listPosition).getPrice());
+        textViewVersion.setText(price);
         imageView.setImageResource(dataSet.get(listPosition).getImage());
     }
 
