@@ -8,11 +8,12 @@ import java.util.Date;
 
 public class Contract {
 
-    String name;
+    String apartmentName;
+    String sellerName;
     String address;
     int apartmentNum;
     int image;
-    Date sellBy;
+    String sellBy;
     String city;
     String state;
     int zipCode;
@@ -23,7 +24,7 @@ public class Contract {
 
     public Contract(String name, Double price, String city, String state, String maritalStatus, String sex) {
 
-        this.name = name;
+        this.apartmentName = name;
         this.city = city;
         this.state = state;
         this.price = price;
@@ -31,8 +32,8 @@ public class Contract {
         this.sex = sex;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setapartmentName(String name) {
+        this.apartmentName = name;
     }
 
 
@@ -56,11 +57,11 @@ public class Contract {
         this.image = image;
     }
 
-    public Date getSellBy() {
+    public String getSellBy() {
         return sellBy;
     }
 
-    public void setSellBy(Date sellBy) {
+    public void setSellBy(String sellBy) {
         this.sellBy = sellBy;
     }
 
@@ -120,13 +121,25 @@ public class Contract {
         this.additionalNotes = additionalNotes;
     }
 
-    public String getName() {
-        return name;
+    public String getApartmentName() {
+        return apartmentName;
     }
 
 
     public int getImage() {
         return image;
+    }
+
+    public void setApartmentName(String apartmentName) {
+        this.apartmentName = apartmentName;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
 
 

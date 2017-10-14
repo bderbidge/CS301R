@@ -12,5 +12,6 @@
     <color name="buttonBorder">#c4c4c4</color>
     <color name="greyedText">#636363</color>
     <color name="background">#E9EBEE</color>
+    <color name="black">#000000</color>
 
 </resources>

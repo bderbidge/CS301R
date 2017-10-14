@@ -20,10 +20,12 @@
         </activity>
         <activity
             android:name=".buy.BuyActivity"
-            android:label="BuyActivity"
+            android:label="RoomMe"
             android:theme="@style/BuyTheme" />
-        <activity android:name=".buy.ContractActivity"
-            android:theme="@style/BuyTheme"></activity>
+        <activity
+            android:theme="@style/BuyTheme"
+            android:label="RoomMe"
+            android:name=".buy.ContractActivity"></activity>
     </application>
 
 </manifest>

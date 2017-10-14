@@ -88,7 +88,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         String price = "$" + dataSet.get(listPosition).getPrice();
 
-        textViewName.setText(dataSet.get(listPosition).getName());
+        textViewName.setText(dataSet.get(listPosition).getApartmentName());
 
         textViewCostOfRent.setText(price);
 
