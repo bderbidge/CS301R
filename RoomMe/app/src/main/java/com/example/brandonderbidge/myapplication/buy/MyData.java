@@ -9,7 +9,7 @@ import com.example.brandonderbidge.myapplication.R;
 public class MyData {
 
     static String[] nameArray = {"Centennial", "Centennial 2", "The Riv", "Roman Gardens", "King Henry", "Brown Stone"};
-    static Double[] priceArray = {200.0, 300.0, 300.0, 400.0, 200.0, 400.0 };
+    static Double[] priceArray = {200.00, 300.00, 300.00, 400.00, 200.00, 400.00 };
     static String[] cityArray = {"Provo", "Provo 2", "Provo", "Provo", "Provo", "Provo"};
     static String[] stateArray = {"UT", "UT", "UT", "UT", "UT", "UT" };
     static String[] maritalStatusArray = {"Single", "Married", "Married", "Married", "Single", "Single"};

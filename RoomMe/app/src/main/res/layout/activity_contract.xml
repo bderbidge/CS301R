@@ -21,7 +21,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="498dp"
             android:orientation="horizontal">
 
             <Button
@@ -40,7 +40,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/cityState"
                 android:layout_marginTop="28dp"
-                android:src="@drawable/UT_Provo_TestRiviera_p0524952_6_1_PhotoGallery"/>
+                android:src="@drawable/theriv"/>
 
             <TextView
                 android:id="@+id/costOfRent"
@@ -102,11 +102,11 @@
                 android:id="@+id/sellerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/notes"
-                android:layout_below="@+id/imageView"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="18dp"
                 android:text="Brandon Derbidge"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:layout_below="@+id/imageView"
+                android:layout_alignStart="@+id/notes" />
 
             <TextView
                 android:id="@+id/sellBy"
