@@ -155,7 +155,6 @@ public class FilterDialog extends DialogFragment {
                         && FilterModel.getInstance().getMaritalStatus().equalsIgnoreCase("married")) {
                     FilterModel.getInstance().setMaritalStatus(null);
                     changeBtnStyle(marriedBtn, R.drawable.toggle_button_right, R.color.greyedText);
-                    selectSexContainer.setVisibility(View.VISIBLE);
                 } else {
                     FilterModel.getInstance().setMaritalStatus("married");
                     changeBtnStyle(marriedBtn, R.drawable.toggle_button_right_clicked, R.color.White);

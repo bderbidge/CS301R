@@ -102,19 +102,21 @@ public class BuyActivity extends AppCompatActivity {
 
         for (int i = 0; i < MyData.nameArray.length; i++) {
             Contract contract = MyData.contracts[i];
-            if (FilterModel.getInstance().getSex() != null
-                    && contract.getSex() != null
-                    && !contract.getSex().equalsIgnoreCase(FilterModel.getInstance().getSex())) {
-                continue;
-            } else if (FilterModel.getInstance().getPriceLow() != null
+            
+            if (FilterModel.getInstance().getMaritalStatus() != null) {
+                if (!contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
+                   continue;
+                } else if (FilterModel.getInstance().getSex() != null
+                        && contract.getSex() != null
+                        && !contract.getSex().equalsIgnoreCase(FilterModel.getInstance().getSex())) {
+                    continue;
+                }
+            }
+            if (FilterModel.getInstance().getPriceLow() != null
                     && contract.getPrice() < FilterModel.getInstance().getPriceLow()) {
                 continue;
             } else if (FilterModel.getInstance().getPriceHigh() != null
                     && contract.getPrice() > FilterModel.getInstance().getPriceHigh()) {
-                continue;
-            } else if (FilterModel.getInstance().getMaritalStatus() != null
-                    && contract.getMaritalStatus() != null
-                    && !contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
                 continue;
             }
 
