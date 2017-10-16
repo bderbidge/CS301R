@@ -22,6 +22,8 @@
     <string name="more">More</string>
     <string name="filter_action">sort/filter</string>
     <string name="filter">Filter</string>
+    <string name="single">Single</string>
+    <string name="married">Married</string>
     <string name="or">OR</string>
     <string name="to">to</string>
     <string name="price_low">Price Low</string>
