@@ -94,27 +94,32 @@ public class BuyActivity extends AppCompatActivity {
 
     public void loadFakeData() {
         listOfContracts = new ArrayList<>();
-        boolean add = true;
+
+        Log.e(TAG, "Sex Filter: " + FilterModel.getInstance().getSex());
+        Log.e(TAG, "Price High Filter: " + FilterModel.getInstance().getPriceHigh());
+        Log.e(TAG, "Price Low Filter: " + FilterModel.getInstance().getPriceLow());
+        Log.e(TAG, "Marital Status Filter: " + FilterModel.getInstance().getMaritalStatus());
 
         for (int i = 0; i < MyData.nameArray.length; i++) {
-            if (FilterModel.getInstance().getSex() != null && !MyData.sexStatusArray[i].equals(FilterModel.getInstance().getSex())) {
-                add = false;
-            } else if (FilterModel.getInstance().getPriceLow() != null && MyData.priceArray[i] > FilterModel.getInstance().getPriceLow()) {
-                add = false;
-            } else if (FilterModel.getInstance().getPriceHigh() != null && MyData.priceArray[i] < FilterModel.getInstance().getPriceHigh()) {
-                add = false;
+            Contract contract = MyData.contracts[i];
+            if (FilterModel.getInstance().getSex() != null
+                    && contract.getSex() != null
+                    && !contract.getSex().equalsIgnoreCase(FilterModel.getInstance().getSex())) {
+                continue;
+            } else if (FilterModel.getInstance().getPriceLow() != null
+                    && contract.getPrice() < FilterModel.getInstance().getPriceLow()) {
+                continue;
+            } else if (FilterModel.getInstance().getPriceHigh() != null
+                    && contract.getPrice() > FilterModel.getInstance().getPriceHigh()) {
+                continue;
+            } else if (FilterModel.getInstance().getMaritalStatus() != null
+                    && contract.getMaritalStatus() != null
+                    && !contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
+                continue;
             }
 
-            if (add) {
-                listOfContracts.add(new Contract(
-                    MyData.nameArray[i],
-                    MyData.priceArray[i],
-                    MyData.cityArray[i],
-                    MyData.stateArray[i],
-                    MyData.maritalStatusArray[i],
-                    MyData.sexStatusArray[i]
-                ));
-            }
+
+            listOfContracts.add(MyData.contracts[i]);
         }
 
         adapter.setDataSet(listOfContracts);
