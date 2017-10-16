@@ -1,4 +1,4 @@
-package com.example.brandonderbidge.myapplication;
+package com.example.brandonderbidge.myapplication.main;
 
 /**
  * Created by brandonderbidge on 10/12/17.

@@ -13,5 +13,6 @@
     <color name="greyedText">#636363</color>
     <color name="background">#E9EBEE</color>
     <color name="black">#000000</color>
+    <color name="colorlessButtonPressed">#510053</color>
 
 </resources>

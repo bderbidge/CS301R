@@ -1,4 +1,4 @@
-package com.example.brandonderbidge.myapplication;
+package com.example.brandonderbidge.myapplication.model;
 
 /**
  * Created by justinbrunner on 10/12/17.
@@ -11,6 +11,8 @@ public class FilterModel {
     private Double priceHigh;
     private String sex;
     private String maritalStatus;
+    private String prevSex;
+    private String prevMaritalStatus;
 
     private FilterModel() {}
 
@@ -52,5 +54,21 @@ public class FilterModel {
 
     public void setMaritalStatus(String maritalStatus) {
         this.maritalStatus = maritalStatus;
+    }
+
+    public String getPrevSex() {
+        return prevSex;
+    }
+
+    public void setPrevSex(String prevSex) {
+        this.prevSex = prevSex;
+    }
+
+    public String getPrevMaritalStatus() {
+        return prevMaritalStatus;
+    }
+
+    public void setPrevMaritalStatus(String prevMaritalStatus) {
+        this.prevMaritalStatus = prevMaritalStatus;
     }
 }

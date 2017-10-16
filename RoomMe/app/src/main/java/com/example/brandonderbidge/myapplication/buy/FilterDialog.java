@@ -1,6 +1,5 @@
 package com.example.brandonderbidge.myapplication.buy;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -9,26 +8,18 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.example.brandonderbidge.myapplication.FilterModel;
+import com.example.brandonderbidge.myapplication.model.FilterModel;
 import com.example.brandonderbidge.myapplication.R;
 
 /**
@@ -36,15 +27,18 @@ import com.example.brandonderbidge.myapplication.R;
  */
 
 public class FilterDialog extends DialogFragment {
-    ConstraintLayout filterLayout;
-    ImageButton closeBtn;
-    EditText priceLow;
-    EditText priceHigh;
-    Button maleBtn;
-    Button femaleBtn;
-    Button singleBtn;
-    Button marriedBtn;
-    LinearLayout selectSexContainer;
+    private String TAG = "FilterDialog";
+    private ConstraintLayout filterLayout;
+    private ImageButton closeBtn;
+    private EditText priceLow;
+    private EditText priceHigh;
+    private Button maleBtn;
+    private Button femaleBtn;
+    private Button singleBtn;
+    private Button marriedBtn;
+    private LinearLayout selectSexContainer;
+    private Button cancelBtn;
+    private Button applyBtn;
     /** The system calls this to get the DialogFragment's layout, regardless
      of whether it's being displayed as a dialog or an embedded fragment. */
     @Override
@@ -61,22 +55,16 @@ public class FilterDialog extends DialogFragment {
         singleBtn = view.findViewById(R.id.single);
         marriedBtn = view.findViewById(R.id.married);
         selectSexContainer = view.findViewById(R.id.select_sex_container);
+        cancelBtn = view.findViewById(R.id.cancel_filter);
+        applyBtn = view.findViewById(R.id.apply_filter);
 
         filterLayout.setBackground(new ColorDrawable(Color.WHITE));
 
-        String priceLowText = FilterModel.getInstance().getPriceLow() == null ? "" : Double.toString(FilterModel.getInstance().getPriceLow());
+        final String priceLowText = FilterModel.getInstance().getPriceLow() == null ? "" : Double.toString(FilterModel.getInstance().getPriceLow());
         priceLow.setText(priceLowText);
 
         String priceHighText = FilterModel.getInstance().getPriceHigh() == null ? "" : Double.toString(FilterModel.getInstance().getPriceHigh());
         priceHigh.setText(priceHighText);
-
-        if (FilterModel.getInstance().getSex() != null) {
-            if (FilterModel.getInstance().getSex().equalsIgnoreCase("male")) {
-                changeBtnStyle(maleBtn, R.drawable.toggle_button_left_clicked, R.color.White);
-            } else if (FilterModel.getInstance().getSex().equalsIgnoreCase("female")) {
-                changeBtnStyle(femaleBtn, R.drawable.toggle_button_left_clicked, R.color.White);
-            }
-        }
 
         selectSexContainer.setVisibility(View.GONE);
 
@@ -87,47 +75,15 @@ public class FilterDialog extends DialogFragment {
             } else if (FilterModel.getInstance().getMaritalStatus().equalsIgnoreCase("married")) {
                 changeBtnStyle(marriedBtn, R.drawable.toggle_button_left_clicked, R.color.White);
             }
-        }
 
-        closeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
-
-        maleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (FilterModel.getInstance().getSex() != null && FilterModel.getInstance().getSex().equalsIgnoreCase("male")) {
-                    FilterModel.getInstance().setSex(null);
-                    changeBtnStyle(maleBtn, R.drawable.toggle_button_left, R.color.greyedText);
-                } else {
-                    FilterModel.getInstance().setSex("male");
+            if (FilterModel.getInstance().getSex() != null) {
+                if (FilterModel.getInstance().getSex().equalsIgnoreCase("male")) {
                     changeBtnStyle(maleBtn, R.drawable.toggle_button_left_clicked, R.color.White);
-                    changeBtnStyle(femaleBtn, R.drawable.toggle_button_right, R.color.greyedText);
+                } else if (FilterModel.getInstance().getSex().equalsIgnoreCase("female")) {
+                    changeBtnStyle(femaleBtn, R.drawable.toggle_button_left_clicked, R.color.White);
                 }
-
-                ((BuyActivity) getActivity()).loadFakeData();
             }
-        });
-
-        femaleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (FilterModel.getInstance().getSex() != null && FilterModel.getInstance().getSex().equalsIgnoreCase("female")) {
-                    FilterModel.getInstance().setSex(null);
-                    changeBtnStyle(femaleBtn, R.drawable.toggle_button_right, R.color.greyedText);
-                } else {
-                    FilterModel.getInstance().setSex("female");
-                    changeBtnStyle(femaleBtn, R.drawable.toggle_button_right_clicked, R.color.White);
-                    changeBtnStyle(maleBtn, R.drawable.toggle_button_left, R.color.greyedText);
-                }
-
-                ((BuyActivity) getActivity()).loadFakeData();
-            }
-        });
+        }
 
         singleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +100,16 @@ public class FilterDialog extends DialogFragment {
                     selectSexContainer.setVisibility(View.VISIBLE);
                 }
 
-                ((BuyActivity) getActivity()).loadFakeData();
+                if (FilterModel.getInstance().getSex() != null) {
+                    if (FilterModel.getInstance().getSex().equalsIgnoreCase("male")) {
+                        changeBtnStyle(maleBtn, R.drawable.toggle_button_left_clicked, R.color.White);
+                        changeBtnStyle(femaleBtn, R.drawable.toggle_button_right, R.color.greyedText);
+
+                    } else if (FilterModel.getInstance().getSex().equalsIgnoreCase("female")) {
+                        changeBtnStyle(femaleBtn, R.drawable.toggle_button_right_clicked, R.color.White);
+                        changeBtnStyle(maleBtn, R.drawable.toggle_button_left, R.color.greyedText);
+                    }
+                }
             }
         });
 
@@ -162,36 +127,70 @@ public class FilterDialog extends DialogFragment {
                     selectSexContainer.setVisibility(View.GONE);
 
                 }
-
-                ((BuyActivity) getActivity()).loadFakeData();
             }
         });
 
-        priceLow.addTextChangedListener(new TextWatcher() {
+        maleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                updatePriceLow();
+            public void onClick(View view) {
+                if (FilterModel.getInstance().getSex() != null && FilterModel.getInstance().getSex().equalsIgnoreCase("male")) {
+                    FilterModel.getInstance().setSex(null);
+                    changeBtnStyle(maleBtn, R.drawable.toggle_button_left, R.color.greyedText);
+                } else {
+                    FilterModel.getInstance().setSex("male");
+                    changeBtnStyle(maleBtn, R.drawable.toggle_button_left_clicked, R.color.White);
+                    changeBtnStyle(femaleBtn, R.drawable.toggle_button_right, R.color.greyedText);
+                }
             }
-
-            @Override
-            public void afterTextChanged(Editable editable) {}
         });
 
-        priceHigh.addTextChangedListener(new TextWatcher() {
+        femaleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                updatePriceHigh();
+            public void onClick(View view) {
+                if (FilterModel.getInstance().getSex() != null && FilterModel.getInstance().getSex().equalsIgnoreCase("female")) {
+                    FilterModel.getInstance().setSex(null);
+                    changeBtnStyle(femaleBtn, R.drawable.toggle_button_right, R.color.greyedText);
+                } else {
+                    FilterModel.getInstance().setSex("female");
+                    changeBtnStyle(femaleBtn, R.drawable.toggle_button_right_clicked, R.color.White);
+                    changeBtnStyle(maleBtn, R.drawable.toggle_button_left, R.color.greyedText);
+                }
             }
-
-            @Override
-            public void afterTextChanged(Editable editable) {}
         });
+
+        applyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v(TAG, "Applying Filter");
+                Double priceLowText = (priceLow.getText().toString().equals("")) ? null : Double.parseDouble(priceLow.getText().toString());
+                FilterModel.getInstance().setPriceLow(priceLowText);
+
+                Double priceHighText = (priceHigh.getText().toString().equals("")) ? null : Double.parseDouble(priceHigh.getText().toString());
+                FilterModel.getInstance().setPriceHigh(priceHighText);
+
+                FilterModel.getInstance().setPrevMaritalStatus(FilterModel.getInstance().getMaritalStatus());
+                FilterModel.getInstance().setPrevSex(FilterModel.getInstance().getSex());
+
+                ((BuyFragment) getFragmentManager().findFragmentByTag(getString(R.string.TAG_buy))).loadContracts();
+
+                dismiss();
+            }
+        });
+
+        View.OnClickListener onDismiss = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v(TAG, "Dismissing Dialog");
+                FilterModel.getInstance().setMaritalStatus(FilterModel.getInstance().getPrevMaritalStatus());
+                FilterModel.getInstance().setSex(FilterModel.getInstance().getPrevSex());
+
+                dismiss();
+            }
+        };
+
+        cancelBtn.setOnClickListener(onDismiss);
+
+        closeBtn.setOnClickListener(onDismiss);
 
         return view;
     }
@@ -216,20 +215,6 @@ public class FilterDialog extends DialogFragment {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void updatePriceLow() {
-        Double priceLowText = (priceLow.getText().toString().equals("")) ? null : Double.parseDouble(priceLow.getText().toString());
-        FilterModel.getInstance().setPriceLow(priceLowText);
-
-        ((BuyActivity) getActivity()).loadFakeData();
-    }
-
-    private void updatePriceHigh() {
-        Double priceHighText = (priceHigh.getText().toString().equals("")) ? null : Double.parseDouble(priceHigh.getText().toString());
-        FilterModel.getInstance().setPriceHigh(priceHighText);
-
-        ((BuyActivity) getActivity()).loadFakeData();
     }
 
     private void changeBtnStyle(Button btn, int drawable, int  textColor) {

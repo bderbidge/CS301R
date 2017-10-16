@@ -22,6 +22,8 @@
     <string name="more">More</string>
     <string name="filter_action">sort/filter</string>
     <string name="filter">Filter</string>
+    <string name="cancel">Cancel</string>
+    <string name="apply">Apply</string>
     <string name="single">Single</string>
     <string name="married">Married</string>
     <string name="or">OR</string>
@@ -35,5 +37,6 @@
     <string name="TAG_login">login</string>
     <string name="TAG_register">register</string>
     <string name="TAG_buy">buy</string>
+    <string name="TAG_main_frag">MainFragment</string>
     <string name="TAG_currentfrag">current</string>
 </resources>

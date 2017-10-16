@@ -1,4 +1,4 @@
-package com.example.brandonderbidge.myapplication.buy;
+package com.example.brandonderbidge.myapplication.sell;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.R;
+import com.example.brandonderbidge.myapplication.buy.ContractActivity;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * Created by brandonderbidge on 10/5/17.
  */
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
+public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> {
 
     private ArrayList<Contract> dataSet;
 
@@ -54,7 +55,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         }
     }
 
-    public CustomAdapter(ArrayList<Contract> data) {
+    public SellAdapter(ArrayList<Contract> data) {
         this.dataSet = data;
     }
 
@@ -98,10 +99,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         imageView.setImageResource(dataSet.get(listPosition).getImage());
         textViewCityState.setText(dataSet.get(listPosition).getCity() + ", " + dataSet.get(listPosition).getState());
 
-        if(dataSet.get(listPosition).getMaritalStatus().equals("Married"))
+        if(dataSet.get(listPosition).getMaritalStatus().equals("Married")) {
             genderRoomType.setText(dataSet.get(listPosition).getMaritalStatus());
-        else
+        } else {
             genderRoomType.setText(dataSet.get(listPosition).getSex() + " " + dataSet.get(listPosition).getMaritalStatus());
+        }
     }
 
     @Override

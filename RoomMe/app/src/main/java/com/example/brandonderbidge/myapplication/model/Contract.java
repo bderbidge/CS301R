@@ -1,6 +1,4 @@
-package com.example.brandonderbidge.myapplication;
-
-import java.util.Date;
+package com.example.brandonderbidge.myapplication.model;
 
 /**
  * Created by brandonderbidge on 10/11/17.

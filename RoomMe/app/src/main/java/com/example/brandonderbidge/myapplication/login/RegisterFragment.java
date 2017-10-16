@@ -1,11 +1,8 @@
 package com.example.brandonderbidge.myapplication.login;
 
-import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,9 +12,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.example.brandonderbidge.myapplication.R;
-import com.example.brandonderbidge.myapplication.buy.BuyActivity;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -46,12 +40,12 @@ public class RegisterFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         setHasOptionsMenu(true);
 
-        usernameET = (EditText) view.findViewById(R.id.username);
-        passwordET = (EditText) view.findViewById(R.id.password);
-        firstnameET = (EditText) view.findViewById(R.id.first_name);
-        lastnameET = (EditText) view.findViewById(R.id.last_name);
-        maleBtn = (Button) view.findViewById(R.id.male_btn);
-        femaleBtn = (Button) view.findViewById(R.id.female_btn);
+        usernameET = view.findViewById(R.id.username);
+        passwordET = view.findViewById(R.id.password);
+        firstnameET = view.findViewById(R.id.first_name);
+        lastnameET = view.findViewById(R.id.last_name);
+        maleBtn = view.findViewById(R.id.male_btn);
+        femaleBtn = view.findViewById(R.id.female_btn);
 
         registerBtn = (Button) view.findViewById(R.id.register_btn);
         //mSpinner = (ProgressBar) view.findViewById(R.id.progressBar);
@@ -81,7 +75,7 @@ public class RegisterFragment extends Fragment {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToBuyActivity();
+                ((LoginActivity) getActivity()).switchToMainActivity();
             //    mSpinner.setVisibility(View.VISIBLE);
                 /*loginController.register(usernameET.getText().toString(), passwordET.getText().toString(),
                         firstnameET.getText().toString(), lastnameET.getText().toString());*/
@@ -91,11 +85,7 @@ public class RegisterFragment extends Fragment {
         return view;
     }
 
-    public void switchToBuyActivity() {
-        Log.d (TAG, "recycler clicked in app bar");
-        Intent intent = new Intent(getActivity(),BuyActivity.class);
-        startActivity(intent);
-    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

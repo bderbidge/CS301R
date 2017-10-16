@@ -9,7 +9,7 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.brandonderbidge.myapplication.buy.BuyActivity;
+import com.example.brandonderbidge.myapplication.main.MainActivity;
 import com.example.brandonderbidge.myapplication.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG, "Starting onCreate of Login Activity");
+        Log.v(TAG, "Starting onCreate of Login Activity");
 
         setContentView(R.layout.activity_login);
 
@@ -63,10 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void switchToBuyActivity() {
-        Log.v(TAG, "Switching to Buy Activity");
-        Intent buyIntent = new Intent(this, BuyActivity.class);
-        startActivity(buyIntent);
+    public void switchToMainActivity() {
+        Log.v(TAG, "Switching to MainActivity Activity");
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void setLoginFragment(Bundle savedInstanceState) {

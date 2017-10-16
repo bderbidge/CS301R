@@ -1,16 +1,16 @@
-package com.example.brandonderbidge.myapplication.buy;
+package com.example.brandonderbidge.myapplication.main;
 
 
-public class BuyController {
-    private static final String TAG = "LoginController";
-    private BuyActivity buyActivity;
+public class MainController {
+    private static final String TAG = "SellController";
+    private MainActivity mainActivity;
 
-    BuyController(BuyActivity buyActivity) {
-        this.buyActivity = buyActivity;
+    MainController(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
-    public void setBuyActivity(BuyActivity buyActivity) {
-        this.buyActivity = buyActivity;
+    public void setsellActivity(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
 
