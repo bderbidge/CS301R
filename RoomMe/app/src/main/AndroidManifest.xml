@@ -11,6 +11,7 @@
         <activity
             android:name=".login.LoginActivity"
             android:label="LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,11 +22,13 @@
         <activity
             android:name=".buy.BuyActivity"
             android:label="RoomMe"
+            android:screenOrientation="portrait"
             android:theme="@style/BuyTheme" />
         <activity
             android:theme="@style/BuyTheme"
             android:label="RoomMe"
-            android:name=".buy.ContractActivity"></activity>
+            android:screenOrientation="portrait"
+            android:name=".buy.ContractActivity" />
     </application>
 
 </manifest>
