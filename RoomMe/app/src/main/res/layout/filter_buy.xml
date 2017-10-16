@@ -75,10 +75,38 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/select_sex_container"
+        android:id="@+id/select_marital_status_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/price_range"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="30dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/single"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/single"
+            style="@style/toggleButtonLeft" />
+
+        <View style="@style/toggleButton.separator" />
+
+        <Button
+            android:id="@+id/married"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/married"
+            style="@style/toggleButtonRight" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/select_sex_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/select_marital_status_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="30dp"
@@ -90,6 +118,9 @@
             android:layout_height="wrap_content"
             android:text="@string/login_male"
             style="@style/toggleButtonLeft" />
+
+        <View style="@style/toggleButton.separator" />
+
         <Button
             android:id="@+id/female_btn"
             android:layout_width="wrap_content"
@@ -98,6 +129,5 @@
             style="@style/toggleButtonRight" />
 
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>
