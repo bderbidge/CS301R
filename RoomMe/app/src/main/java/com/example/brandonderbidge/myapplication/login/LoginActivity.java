@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             setLoginFragment(null);
-        } else if (savedInstanceState.get(getString(R.string.TAG_currentfrag)).equals(getString(R.string.TAG_register))) {
+        } else if (savedInstanceState.get(getString(R.string.TAG_currentfrag)) != null && savedInstanceState.get(getString(R.string.TAG_currentfrag)).equals(getString(R.string.TAG_register))) {
             setRegisterFragment(savedInstanceState);
         } else {
             setLoginFragment(savedInstanceState);
@@ -93,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
         FragmentTransaction ft = fm.beginTransaction();
 
         ft.replace(R.id.login_fragment_container, regFrag, getString(R.string.TAG_register))
-                .addToBackStack("register")
                 .commit();
     }
 
