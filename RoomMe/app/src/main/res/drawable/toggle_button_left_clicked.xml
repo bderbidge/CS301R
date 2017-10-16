@@ -7,7 +7,7 @@
             <corners android:topLeftRadius="2dp" android:bottomLeftRadius="2dp" />
         </shape>
     </item>
-    <item >
+    <item>
         <shape>
             <gradient android:angle="270"
                 android:endColor="@color/colorPrimaryLight" android:startColor="@color/colorPrimaryLight" />
