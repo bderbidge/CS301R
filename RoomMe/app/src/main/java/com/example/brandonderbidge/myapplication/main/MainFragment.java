@@ -76,7 +76,7 @@ public class MainFragment extends Fragment {
         return view;
     }
 
-    @Override
+    /*@Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
        super.onViewCreated(view, savedInstanceState);
 
@@ -94,9 +94,9 @@ public class MainFragment extends Fragment {
                 .beginTransaction()
                 .replace(R.id.fragment_main_content, fragment, getString(R.string.TAG_currentfrag))
                 .commit();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
@@ -108,7 +108,7 @@ public class MainFragment extends Fragment {
         } else if(buyFragment != null && buyFragment.isVisible()) {
             outState.putString(getString(R.string.TAG_currentfrag), getString(R.string.TAG_buy));
         }
-    }
+    }*/
 
     public void changeNavItemSelected(String nav) {
         if (bnv == null) {

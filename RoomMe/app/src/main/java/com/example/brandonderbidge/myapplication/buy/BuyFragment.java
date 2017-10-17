@@ -122,8 +122,6 @@ public class BuyFragment extends Fragment {
     public void showDialog() {
         Log.v(TAG, "Showing Dialog");
 
-
-
         if (getActivity().findViewById(R.id.filter_layout) == null) {
             FragmentManager fragmentManager = getFragmentManager();
             FilterDialog newFragment = new FilterDialog();

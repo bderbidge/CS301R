@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.model.FilterModel;
 import com.example.brandonderbidge.myapplication.R;
@@ -171,7 +172,12 @@ public class FilterDialog extends DialogFragment {
                 FilterModel.getInstance().setPrevMaritalStatus(FilterModel.getInstance().getMaritalStatus());
                 FilterModel.getInstance().setPrevSex(FilterModel.getInstance().getSex());
 
-                ((BuyFragment) getFragmentManager().findFragmentByTag(getString(R.string.TAG_buy))).loadContracts();
+                if ((getActivity().getSupportFragmentManager()).findFragmentByTag(getString(R.string.TAG_buy)) != null) {
+                    ((BuyFragment) (getActivity().getSupportFragmentManager()).findFragmentByTag(getString(R.string.TAG_buy))).loadContracts();
+                } else {
+                    Log.e(TAG, "Could not find Buy Fragment");
+                    Toast.makeText(getContext(), "There was an error applying your filter settings. Please contect support", Toast.LENGTH_LONG);
+                }
 
                 dismiss();
             }
