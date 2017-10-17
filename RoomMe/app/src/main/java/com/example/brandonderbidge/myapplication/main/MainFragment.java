@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.buy.BuyFragment;
@@ -79,24 +80,34 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
        super.onViewCreated(view, savedInstanceState);
 
-        /*String username = "",
-                password = "";
-
         Bundle args = getArguments();
+        Fragment fragment = new BuyFragment();
 
         if (args != null) { //data was previously in fields, probably from a previous screen orientation
-            username = args.getString(getString(R.string.EXTRA_USERNAME));
-            password = args.getString(getString(R.string.EXTRA_PASSWORD));
-
-            //set fields and check button based on what was passed in
-            usernameText.setText(username);
-            passwordText.setText(password);
-
+            if (args.getString(getString(R.string.TAG_currentfrag)) != null
+                    && args.getString(getString(R.string.TAG_currentfrag)).equals(getString(R.string.TAG_sell))) {
+                fragment = new SellFragment();
+            }
         }
 
-        loginController = new LoginController((LoginActivity) getActivity());
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_main_content, fragment, getString(R.string.TAG_currentfrag))
+                .commit();
+    }
 
-        loginController.validData(false, username, password, null, null);*/
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        BuyFragment buyFragment = (BuyFragment) getFragmentManager().findFragmentByTag(getString(R.string.TAG_buy));
+        SellFragment sellFragment = (SellFragment) getFragmentManager().findFragmentByTag(getString(R.string.TAG_sell));
+
+        if(sellFragment != null && sellFragment.isVisible()) {
+            outState.putString(getString(R.string.TAG_currentfrag), getString(R.string.TAG_sell));
+        } else if(buyFragment != null && buyFragment.isVisible()) {
+            outState.putString(getString(R.string.TAG_currentfrag), getString(R.string.TAG_buy));
+        }
     }
 
     public void changeNavItemSelected(String nav) {
@@ -134,7 +145,7 @@ public class MainFragment extends Fragment {
             ft.replace(R.id.fragment_main_content, buyFrag, getString(R.string.TAG_buy)).commit();
         } if (nav.equals("sell")) {
             SellFragment sellFragment = new SellFragment();
-            ft.replace(R.id.fragment_main_content, sellFragment, getString(R.string.sell));
+            ft.replace(R.id.fragment_main_content, sellFragment, getString(R.string.sell)).commit();
         }
     }
 }

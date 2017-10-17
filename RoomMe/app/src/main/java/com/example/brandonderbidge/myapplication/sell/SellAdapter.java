@@ -49,9 +49,6 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
             Contract contract =  dataSet.get(getLayoutPosition());
             Model.instance().setSelectedContract(contract);
 
-            Intent intent = new Intent(v.getContext(), ContractActivity.class);
-            v.getContext().startActivity(intent);
-
         }
     }
 

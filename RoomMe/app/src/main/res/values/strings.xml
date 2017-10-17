@@ -14,6 +14,8 @@
     <string name="register_btn">CREATE NEW ACCOUNT</string>
     <string name="forgot_password">FORGOT PASSWORD</string>
     <string name="buy">Buy</string>
+    <string name="buy_contracts">Buy Contracts</string>
+    <string name="sell_contracts">Sell Contracts</string>
     <string name="price_label">Price</string>
     <string name="display_price">$%d</string>
     <string name="money_sign">$</string>
@@ -21,6 +23,10 @@
     <string name="messages">Messages</string>
     <string name="more">More</string>
     <string name="filter_action">sort/filter</string>
+    <string name="new_contract">New Contract</string>
+    <string name="apartment_name">Apartment Name</string>
+    <string name="apartment_number">Apt #</string>
+    <string name="sell_by">Sell By</string>
     <string name="filter">Filter</string>
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
@@ -28,6 +34,7 @@
     <string name="married">Married</string>
     <string name="or">OR</string>
     <string name="to">to</string>
+    <string name="search_title">Search</string>
     <string name="price_low">Price Low</string>
     <string name="price_high">Price High</string>
     <string name="EXTRA_USERNAME">username</string>
@@ -37,6 +44,8 @@
     <string name="TAG_login">login</string>
     <string name="TAG_register">register</string>
     <string name="TAG_buy">buy</string>
+    <string name="TAG_sell">sell</string>
     <string name="TAG_main_frag">MainFragment</string>
+    <string name="TAG_new_contract">NewContract</string>
     <string name="TAG_currentfrag">current</string>
 </resources>

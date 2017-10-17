@@ -1,17 +1,17 @@
 package com.example.brandonderbidge.myapplication.sell;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,8 +21,6 @@ import com.example.brandonderbidge.myapplication.main.MainController;
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.buy.FilterDialog;
 import com.example.brandonderbidge.myapplication.model.MyData;
-import com.joanzapata.iconify.IconDrawable;
-import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
 import java.util.ArrayList;
 
@@ -31,9 +29,10 @@ import java.util.ArrayList;
  */
 
 public class SellFragment extends Fragment {
-    private String TAG = "BuyFragment";
+    private String TAG = "SellFragment";
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
+    FloatingActionButton fabNew;
     private SellAdapter adapter;
     private MainController mainController;
     private static ArrayList<Contract> listOfContracts;
@@ -49,6 +48,7 @@ public class SellFragment extends Fragment {
         setHasOptionsMenu(true);
 
         recyclerView = view.findViewById(R.id.sell_recycler_view);
+        fabNew = view.findViewById(R.id.create_new_contract);
 
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -58,6 +58,19 @@ public class SellFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         loadSellContracts();
+        getActivity().setTitle(R.string.sell_contracts);
+
+        fabNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NewContractFragment  newContractFragment = new NewContractFragment();
+                newContractFragment.setMainController(mainController);
+
+                FragmentManager fm = getFragmentManager();
+                fm.beginTransaction().replace(R.id.activity_main_fragment_container, newContractFragment)
+                        .addToBackStack(getString(R.string.TAG_new_contract)).commit();
+            }
+        });
 
         return view;
     }
@@ -91,32 +104,6 @@ public class SellFragment extends Fragment {
 
         adapter.setDataSet(listOfContracts);
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.buy_menu, menu);
-
-        menu.findItem(R.id.filter_item)
-                .setIcon(new IconDrawable(getContext(), FontAwesomeIcons.fa_filter)
-                        .colorRes(R.color.White)
-                        .actionBarSize());
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-
-        switch (item.getItemId()) {
-            case R.id.filter_item:
-                showDialog();
-                break;
-            default:
-
-        }
-
-        return true;
     }
 
     public void showDialog() {

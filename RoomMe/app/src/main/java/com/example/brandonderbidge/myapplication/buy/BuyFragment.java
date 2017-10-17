@@ -57,6 +57,7 @@ public class BuyFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         loadContracts();
+        getActivity().setTitle(R.string.buy_contracts);
 
         return view;
     }
@@ -101,11 +102,6 @@ public class BuyFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.buy_menu, menu);
-
-        menu.findItem(R.id.filter_item)
-                .setIcon(new IconDrawable(getContext(), FontAwesomeIcons.fa_filter)
-                        .colorRes(R.color.White)
-                        .actionBarSize());
     }
 
     @Override
