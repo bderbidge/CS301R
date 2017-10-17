@@ -20,6 +20,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/BuyTheme"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:name=".buy.ContractActivity" />
+        <activity
             android:name=".main.MainActivity"
             android:label=""
             android:screenOrientation="portrait"
