@@ -19,6 +19,8 @@ public class Contract {
     String maritalStatus;
     String sex;
     String additionalNotes;
+    String phoneNumber;
+    String email;
 
     public Contract(String name, Double price, String city, String state, String maritalStatus, String sex) {
 
@@ -30,10 +32,26 @@ public class Contract {
         this.sex = sex;
     }
 
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setapartmentName(String name) {
         this.apartmentName = name;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getAddress() {
         return address;

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
+import com.google.firebase.storage.StorageReference;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "Starting onCreate of Login Activity");
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

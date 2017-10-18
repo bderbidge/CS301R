@@ -20,6 +20,8 @@ import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.FilterModel;
 import com.example.brandonderbidge.myapplication.model.MyData;
 import com.example.brandonderbidge.myapplication.R;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
@@ -36,6 +38,7 @@ public class BuyFragment extends Fragment {
     private static CustomAdapter adapter;
     private MainController mainController;
     private static ArrayList<Contract> listOfContracts;
+    private StorageReference mStorageRef;
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
@@ -44,6 +47,8 @@ public class BuyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        mStorageRef = FirebaseStorage.getInstance().getReference();
         View view = inflater.inflate(R.layout.fragment_buy, container, false);
         setHasOptionsMenu(true);
 
@@ -58,6 +63,8 @@ public class BuyFragment extends Fragment {
 
         loadContracts();
         getActivity().setTitle(R.string.buy_contracts);
+
+
 
         return view;
     }

@@ -1,20 +1,39 @@
 package com.example.brandonderbidge.myapplication.login;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.main.MainActivity;
 import com.example.brandonderbidge.myapplication.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+
+import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private LoginController loginController;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private Button login;
+    private Button register;
+    private TextView emailText;
+    private TextView passwordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,17 +42,86 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        this.loginController = new LoginController(this);
+        login = (Button) findViewById(R.id.login_btn);
+        register = (Button) findViewById(R.id.register);
+        emailText = (TextView) findViewById(R.id.email);
+        passwordText = (TextView) findViewById(R.id.password);
 
-        if (savedInstanceState == null) {
-            setLoginFragment(null);
-        } else if (savedInstanceState.get(getString(R.string.TAG_currentfrag)) != null && savedInstanceState.get(getString(R.string.TAG_currentfrag)).equals(getString(R.string.TAG_register))) {
-            setRegisterFragment(savedInstanceState);
-        } else {
-            setLoginFragment(savedInstanceState);
+
+        this.loginController = new LoginController();
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+        };
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(loginController.validData(emailText.getText().toString(), passwordText.getText().toString() ))
+              signIn(emailText.getText().toString(), passwordText.getText().toString());
+            }
+       });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRegisterActivity();
+            }
+
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
         }
     }
 
+
+
+    public void signIn(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            Toast.makeText(LoginActivity.this, R.string.auth_failed,
+                                    Toast.LENGTH_SHORT).show();
+                        }else {
+                            switchToMainActivity();
+                        }
+
+                        // ...
+                    }
+                });
+    }
     @Override
     public void onBackPressed() {
         if (getFragmentManager().getBackStackEntryCount() > 0) {
@@ -43,24 +131,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    public void switchToRegisterActivity(){
 
-        LoginFragment testLoginFrag = (LoginFragment) getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_login));
-        RegisterFragment testRegFrag = (RegisterFragment) getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_register));
-
-        outState.putString(getString(R.string.EXTRA_USERNAME), ((EditText) findViewById(R.id.username)).getText().toString());
-        outState.putString(getString(R.string.EXTRA_PASSWORD), ((EditText) findViewById(R.id.password)).getText().toString());
-
-        if(testRegFrag != null && testRegFrag.isVisible()) {
-            outState.putString(getString(R.string.EXTRA_FIRSTNAME), ((EditText) findViewById(R.id.first_name)).getText().toString());
-            outState.putString(getString(R.string.EXTRA_LASTNAME), ((EditText) findViewById(R.id.last_name)).getText().toString());
-
-            outState.putString(getString(R.string.TAG_currentfrag), getString(R.string.TAG_register));
-        } else if(testLoginFrag != null && testLoginFrag.isVisible()) {
-            outState.putString(getString(R.string.TAG_currentfrag), getString(R.string.TAG_login));
-        }
+        Log.v(TAG, "Switching to MainActivity Activity");
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     public void switchToMainActivity() {
@@ -69,44 +144,4 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void setLoginFragment(Bundle savedInstanceState) {
-        LoginFragment loginFrag = new LoginFragment();
-        loginFrag.setArguments(savedInstanceState);
-
-        loginFrag.setLoginController(loginController);
-
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        ft.replace(R.id.login_fragment_container, loginFrag, getString(R.string.TAG_login))
-                .commit();
-    }
-
-    public void setRegisterFragment(Bundle savedInstanceState) {
-        RegisterFragment regFrag = new RegisterFragment();
-        regFrag.setArguments(savedInstanceState);
-
-        regFrag.setArguments(savedInstanceState);
-        regFrag.setLoginController(loginController);
-
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        ft.replace(R.id.login_fragment_container, regFrag, getString(R.string.TAG_register))
-                .commit();
-    }
-
-    public void createToast(String message, int toastLength) {
-        Toast.makeText(getBaseContext(), message, toastLength).show();
-    }
-
-    public void showProgressWheel(boolean show) {
-        /*if (findViewById(R.id.progressBar) != null) {
-            if (show) {
-                findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-            } else {
-                findViewById(R.id.progressBar).setVisibility(View.GONE);
-            }
-        }*/
-    }
 }

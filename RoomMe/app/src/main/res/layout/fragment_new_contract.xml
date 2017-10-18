@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,7 +14,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:hintTextAppearance="@style/AppTheme.EditTextLabelColorTheme"
-        style="@style/AppTheme.EditTextLabel">
+        style="@style/AppTheme.EditTextLabel"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        tools:layout_editor_absoluteX="30dp">
 
         <EditText
             style="@style/AppTheme.EditText"
@@ -24,11 +28,12 @@
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="344dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/apartment_name_label"
+        app:layout_constraintTop_toBottomOf="@+id/apartment_name_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" >
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteX="8dp">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/apartment_number_label"

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "315612567207",
+    "firebase_url": "https://roomme-ff743.firebaseio.com",
+    "project_id": "roomme-ff743",
+    "storage_bucket": "roomme-ff743.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315612567207:android:4c241638d666f846",
+        "android_client_info": {
+          "package_name": "com.example.brandonderbidge.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315612567207-7qh9maju2o3to4ou4ejnbokigroippgv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.brandonderbidge.myapplication",
+            "certificate_hash": "abbb740ac4644bb7092f7b8ba82df2e31a0a010a"
+          }
+        },
+        {
+          "client_id": "315612567207-9lsb3c366bss5te59vohiugvu77duiom.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZBAz1Dl9vGv30vCZqDkFU7y844R4zVv8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315612567207-9lsb3c366bss5te59vohiugvu77duiom.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

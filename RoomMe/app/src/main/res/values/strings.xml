@@ -4,7 +4,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="login_username">Username</string>
+    <string name="login_email">Email</string>
     <string name="login_password">Password</string>
     <string name="login_firstname">First Name</string>
     <string name="login_lastname">Last Name</string>
@@ -48,4 +48,8 @@
     <string name="TAG_main_frag">MainFragment</string>
     <string name="TAG_new_contract">NewContract</string>
     <string name="TAG_currentfrag">current</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="auth_failed">Login Failed</string>
 </resources>
