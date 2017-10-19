@@ -134,8 +134,8 @@
 
         </LinearLayout>
 
-        <!--RelativeLayout
-            android:layout_width="368dp"
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/login_btn_layout"
             app:layout_constraintStart_toStartOf="parent"
@@ -152,7 +152,7 @@
                 android:theme="@style/SwitchTheme"
                 android:visibility="gone" />
 
-        </RelativeLayout-->
+        </RelativeLayout>
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
