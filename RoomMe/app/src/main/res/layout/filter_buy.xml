@@ -84,6 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/price_range"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:gravity="center" >
 
@@ -112,6 +113,7 @@
         app:layout_constraintTop_toBottomOf="@+id/select_marital_status_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:gravity="center" >
 
@@ -133,36 +135,16 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/apply_filter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="15dp">
-
-        <Button
-            android:id="@+id/cancel_filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:textColor="@drawable/colorless_button_text"
-            android:textSize="20sp"
-            android:layout_margin="15dp"
-            android:text="@string/cancel"/>
-
-        <Button
-            android:id="@+id/apply_filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:textColor="@drawable/colorless_button_text"
-            android:textSize="20sp"
-            android:layout_margin="15dp"
-            android:text="@string/apply"/>
-
-    </LinearLayout>
+        android:textSize="20sp"
+        style="@style/AppTheme.PrimaryButton"
+        android:layout_marginBottom="30dp"
+        android:text="@string/apply"/>
 
 </android.support.constraint.ConstraintLayout>
