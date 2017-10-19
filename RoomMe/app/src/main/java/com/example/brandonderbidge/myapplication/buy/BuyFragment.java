@@ -20,6 +20,11 @@ import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.FilterModel;
 import com.example.brandonderbidge.myapplication.model.MyData;
 import com.example.brandonderbidge.myapplication.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.joanzapata.iconify.IconDrawable;
@@ -39,6 +44,10 @@ public class BuyFragment extends Fragment {
     private MainController mainController;
     private static ArrayList<Contract> listOfContracts;
     private StorageReference mStorageRef;
+    // Write a message to the database
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Apartments");
+
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
@@ -65,6 +74,20 @@ public class BuyFragment extends Fragment {
         getActivity().setTitle(R.string.buy_contracts);
 
 
+        // Attach a listener to read the data at our posts reference
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Contract contract = dataSnapshot.getValue(Contract.class);
+                System.out.println(contract);
+                System.out.println(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
         return view;
     }

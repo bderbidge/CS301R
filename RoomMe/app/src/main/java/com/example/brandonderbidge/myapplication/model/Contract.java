@@ -6,6 +6,7 @@ package com.example.brandonderbidge.myapplication.model;
 
 public class Contract {
 
+    String ID;
     String apartmentName;
     String sellerName;
     String address;

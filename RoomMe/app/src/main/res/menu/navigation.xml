@@ -10,8 +10,8 @@
         android:title="@string/sell" />
 
     <item
-        android:id="@+id/navigation_messages"
-        android:title="@string/messages" />
+        android:id="@+id/navigation_favorite"
+        android:title="@string/favorite" />
 
     <item
         android:id="@+id/navigation_more"

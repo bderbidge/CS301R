@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.buy.BuyFragment;
+import com.example.brandonderbidge.myapplication.favorites.FavoriteFragment;
 import com.example.brandonderbidge.myapplication.sell.SellFragment;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
@@ -58,9 +59,9 @@ public class MainFragment extends Fragment {
                                 Log.v(TAG, "Switching to Sell Activity");
                                 changeNavItemSelected("sell");
                                 break;
-                            case R.id.navigation_messages:
-                                Log.v(TAG, "Switching to Messages Activity");
-                                changeNavItemSelected("messages");
+                            case R.id.navigation_favorite:
+                                Log.v(TAG, "Switching to Favorites Activity");
+                                changeNavItemSelected("favorites");
                                 break;
                             case R.id.navigation_more:
                                 Log.v(TAG, "Switching to More Activity");
@@ -127,9 +128,9 @@ public class MainFragment extends Fragment {
                         .colorRes(nav.equals("sell") ? R.color.colorPrimary : R.color.greyedText)
                         .sizeDp(14));
 
-        menu.findItem(R.id.navigation_messages).setIcon(
-                new IconDrawable(getContext(), FontAwesomeIcons.fa_comment)
-                        .colorRes(nav.equals("messages") ? R.color.colorPrimary : R.color.greyedText)
+        menu.findItem(R.id.navigation_favorite).setIcon(
+                new IconDrawable(getContext(), FontAwesomeIcons.fa_heart)
+                        .colorRes(nav.equals("favorites") ? R.color.colorPrimary : R.color.greyedText)
                         .sizeDp(14));
 
         menu.findItem(R.id.navigation_more).setIcon(
@@ -146,6 +147,9 @@ public class MainFragment extends Fragment {
         } if (nav.equals("sell")) {
             SellFragment sellFragment = new SellFragment();
             ft.replace(R.id.fragment_main_content, sellFragment, getString(R.string.sell)).commit();
+        } if (nav.equals("favorites")) {
+            FavoriteFragment favoriteFragment = new FavoriteFragment();
+            ft.replace(R.id.fragment_main_content, favoriteFragment, getString(R.string.favorite)).commit();
         }
     }
 }

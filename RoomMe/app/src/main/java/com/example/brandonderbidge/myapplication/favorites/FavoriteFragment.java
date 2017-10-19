@@ -1,12 +1,12 @@
-package com.example.brandonderbidge.myapplication.sell;
+package com.example.brandonderbidge.myapplication.favorites;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,23 +15,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.brandonderbidge.myapplication.model.Contract;
-import com.example.brandonderbidge.myapplication.model.FilterModel;
-import com.example.brandonderbidge.myapplication.main.MainController;
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.buy.FilterDialog;
+import com.example.brandonderbidge.myapplication.main.MainController;
+import com.example.brandonderbidge.myapplication.model.Contract;
+import com.example.brandonderbidge.myapplication.model.FilterModel;
 import com.example.brandonderbidge.myapplication.model.MyData;
+import com.example.brandonderbidge.myapplication.sell.NewContractFragment;
+import com.example.brandonderbidge.myapplication.sell.SellAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 /**
- * Created by justinbrunner on 10/15/17.
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link FavoriteFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link FavoriteFragment#newInstance} factory method to
+ * create an instance of this fragment.
  */
+public class FavoriteFragment extends Fragment {
 
-public class SellFragment extends Fragment {\
-    private String TAG = "SellFragment";
+    private String TAG = "FavoriteFragment";
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     FloatingActionButton fabNew;
@@ -48,7 +55,7 @@ public class SellFragment extends Fragment {\
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sell, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorite, container, false);
         setHasOptionsMenu(true);
 
         recyclerView = view.findViewById(R.id.sell_recycler_view);
@@ -62,19 +69,7 @@ public class SellFragment extends Fragment {\
         recyclerView.setAdapter(adapter);
 
         loadSellContracts();
-        getActivity().setTitle(R.string.sell_contracts);
-
-        fabNew.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NewContractFragment  newContractFragment = new NewContractFragment();
-                newContractFragment.setMainController(mainController);
-
-                FragmentManager fm = getFragmentManager();
-                fm.beginTransaction().replace(R.id.activity_main_fragment_container, newContractFragment)
-                        .addToBackStack(getString(R.string.TAG_new_contract)).commit();
-            }
-        });
+        getActivity().setTitle(R.string.favorite);
 
         return view;
     }
@@ -126,10 +121,6 @@ public class SellFragment extends Fragment {\
                     .commit();
         }
     }
-
-
-
-
 
 
 }

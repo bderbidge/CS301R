@@ -20,7 +20,7 @@
     <string name="display_price">$%d</string>
     <string name="money_sign">$</string>
     <string name="sell">Sell</string>
-    <string name="messages">Messages</string>
+    <string name="favorite">Favorites</string>
     <string name="more">More</string>
     <string name="filter_action">sort/filter</string>
     <string name="new_contract">New Contract</string>
