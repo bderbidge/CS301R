@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button register;
     private TextView emailText;
     private TextView passwordText;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         register = (Button) findViewById(R.id.register);
         emailText = (TextView) findViewById(R.id.email);
         passwordText = (TextView) findViewById(R.id.password);
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         this.loginController = new LoginController();
         mAuth = FirebaseAuth.getInstance();
@@ -70,8 +72,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(loginController.validData(emailText.getText().toString(), passwordText.getText().toString() ))
-              signIn(emailText.getText().toString(), passwordText.getText().toString());
+                if(loginController.validData(emailText.getText().toString(), passwordText.getText().toString() )) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    signIn(emailText.getText().toString(), passwordText.getText().toString());
+                }
             }
        });
 
@@ -105,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressBar.setVisibility(View.GONE);
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
