@@ -1,10 +1,20 @@
 package com.example.brandonderbidge.myapplication.main;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
@@ -19,6 +29,12 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule;
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
     private MainController mainController;
+
+    private static int RESULT_LOAD_IMAGE = 65537;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,5 +66,49 @@ public class MainActivity extends AppCompatActivity {
 
         ft.replace(R.id.activity_main_fragment_container, mainFrag, getString(R.string.TAG_main_frag))
                 .commit();
+    }
+
+
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    RESULT_LOAD_IMAGE
+            );
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.v(TAG, "Return with Image");
+        super.onActivityResult(requestCode, resultCode, data);
+
+        verifyStoragePermissions(this);
+
+        System.out.println(requestCode + ", " + RESULT_LOAD_IMAGE);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
+            Log.v(TAG, "Image Result successful");
+            System.out.println("here");
+
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            // String picturePath contains the path of selected Image
+            ImageView imageView = (ImageView) findViewById(R.id.imgView);
+            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        }
     }
 }

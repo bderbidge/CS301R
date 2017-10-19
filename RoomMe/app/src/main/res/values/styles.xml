@@ -26,6 +26,15 @@
         <item name="android:layout_marginBottom">30dp</item>
         <item name="android:text">@string/app_name</item>
     </style>
+    <style name="AppTheme.Spinner" parent="AppTheme">
+        <item name="android:layout_column">1</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
     <style name="AppTheme.EditTextLabel" parent="AppTheme">
         <item name="android:layout_column">1</item>
         <item name="android:layout_width">match_parent</item>
@@ -47,7 +56,12 @@
         <item name="android:imeOptions">flagNoExtractUi</item>
         <item name="android:theme">@style/SwitchTheme</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:singleLine">true</item>
         <!--item name="android:layout_margin">5dp</item-->
+    </style>
+    <style name="AppTheme.EditText.MultiLine" parent="AppTheme.EditText">
+        <item name="android:singleLine">false</item>
     </style>
     <style name="AppTheme.Button">
         <item name="android:layout_height">wrap_content</item>
@@ -113,5 +127,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:colorBackground">@android:color/background_light</item>
         <item name="colorButtonNormal">@color/buttonNormal</item>
-    </style>s
+    </style>
+    <style name="BuyTheme.darkText" parent="BuyTheme" >
+        <item name="android:textColorPrimary">@color/greyedText</item>
+    </style>
 </resources>

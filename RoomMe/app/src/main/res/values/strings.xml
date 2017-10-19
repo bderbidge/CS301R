@@ -8,8 +8,17 @@
     <string name="login_password">Password</string>
     <string name="login_firstname">First Name</string>
     <string name="login_lastname">Last Name</string>
+    <string name="sex">Sex</string>
     <string name="login_male">Male</string>
     <string name="login_female">Female</string>
+    <string-array name="sex_list">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="marital_status_list">
+        <item>Married</item>
+        <item>Single</item>
+    </string-array>
     <string name="login_btn">SIGN IN</string>
     <string name="register_btn">CREATE NEW ACCOUNT</string>
     <string name="forgot_password">FORGOT PASSWORD</string>
@@ -17,6 +26,9 @@
     <string name="buy_contracts">Buy Contracts</string>
     <string name="sell_contracts">Sell Contracts</string>
     <string name="price_label">Price</string>
+    <string name="price_per_month_label">Price/mo.</string>
+    <string name="additional_info">Additional Info</string>
+    <string name="add_image">+ add image</string>
     <string name="display_price">$%d</string>
     <string name="money_sign">$</string>
     <string name="sell">Sell</string>
@@ -27,9 +39,17 @@
     <string name="apartment_name">Apartment Name</string>
     <string name="apartment_number">Apt #</string>
     <string name="sell_by">Sell By</string>
+    <string name="date_available">Date Available</string>
+    <string name="address">Address</string>
+    <string name="address_2">Address 2</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="postal_code">Postal</string>
     <string name="filter">Filter</string>
     <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
     <string name="apply">Apply</string>
+    <string name="marital_status">Marital Status</string>
     <string name="single">Single</string>
     <string name="married">Married</string>
     <string name="or">OR</string>

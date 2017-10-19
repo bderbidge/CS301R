@@ -71,7 +71,7 @@ public class SellFragment extends Fragment {\
                 newContractFragment.setMainController(mainController);
 
                 FragmentManager fm = getFragmentManager();
-                fm.beginTransaction().replace(R.id.activity_main_fragment_container, newContractFragment)
+                fm.beginTransaction().add(R.id.activity_main_fragment_container, newContractFragment, getString(R.string.TAG_new_contract))
                         .addToBackStack(getString(R.string.TAG_new_contract)).commit();
             }
         });
