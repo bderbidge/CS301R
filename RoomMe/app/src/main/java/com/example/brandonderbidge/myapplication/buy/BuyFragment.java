@@ -24,13 +24,19 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by justinbrunner on 10/15/17.
@@ -78,8 +84,11 @@ public class BuyFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Contract contract = dataSnapshot.getValue(Contract.class);
-                System.out.println(contract);
+                Contract contracts = dataSnapshot.getValue(Contract.class);
+                System.out.println(contracts);
+//                Gson gson = new Gson();
+//                Type type = new TypeToken<Map<String, Contract>>(){}.getType();
+//                Map<String, Contract> myMap = gson.fromJson(json, type);
                 System.out.println(dataSnapshot.getKey());
             }
 

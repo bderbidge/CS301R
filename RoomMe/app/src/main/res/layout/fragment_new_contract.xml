@@ -294,6 +294,14 @@
             android:layout_width="100dp"
             android:layout_height="100dp" />
 
+        <Button
+            android:id="@+id/save_bttn"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:text="Save"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="334dp" />
+
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>

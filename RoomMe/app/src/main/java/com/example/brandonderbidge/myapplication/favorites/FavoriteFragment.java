@@ -75,34 +75,34 @@ public class FavoriteFragment extends Fragment {
     }
 
     public void loadSellContracts() {
-        listOfContracts = new ArrayList<>();
-
-        for (int i = 0; i < MyData.sellContracts.length; i++) {
-            Contract contract = MyData.sellContracts[i];
-
-            if (FilterModel.getInstance().getMaritalStatus() != null) {
-                if (!contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
-                    continue;
-                } else if (FilterModel.getInstance().getSex() != null
-                        && contract.getSex() != null
-                        && !contract.getSex().equalsIgnoreCase(FilterModel.getInstance().getSex())) {
-                    continue;
-                }
-            }
-            if (FilterModel.getInstance().getPriceLow() != null
-                    && contract.getPrice() < FilterModel.getInstance().getPriceLow()) {
-                continue;
-            } else if (FilterModel.getInstance().getPriceHigh() != null
-                    && contract.getPrice() > FilterModel.getInstance().getPriceHigh()) {
-                continue;
-            }
-
-
-            listOfContracts.add(MyData.contracts[i]);
-        }
-
-        adapter.setDataSet(listOfContracts);
-        adapter.notifyDataSetChanged();
+//        listOfContracts = new ArrayList<>();
+//
+//        for (int i = 0; i < MyData.sellContracts.length; i++) {
+//            Contract contract = MyData.sellContracts[i];
+//
+//            if (FilterModel.getInstance().getMaritalStatus() != null) {
+//                if (!contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
+//                    continue;
+//                } else if (FilterModel.getInstance().getSex() != null
+//                        && contract.getSex() != null
+//                        && !contract.getSex().equalsIgnoreCase(FilterModel.getInstance().getSex())) {
+//                    continue;
+//                }
+//            }
+//            if (FilterModel.getInstance().getPriceLow() != null
+//                    && contract.getPrice() < FilterModel.getInstance().getPriceLow()) {
+//                continue;
+//            } else if (FilterModel.getInstance().getPriceHigh() != null
+//                    && contract.getPrice() > FilterModel.getInstance().getPriceHigh()) {
+//                continue;
+//            }
+//
+//
+//            listOfContracts.add(MyData.contracts[i]);
+//        }
+//
+//        adapter.setDataSet(listOfContracts);
+//        adapter.notifyDataSetChanged();
     }
 
     public void showDialog() {

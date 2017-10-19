@@ -6,52 +6,65 @@ package com.example.brandonderbidge.myapplication.model;
 
 public class Contract {
 
-    String ID;
-    String apartmentName;
-    String sellerName;
-    String address;
-    int apartmentNum;
-    int image;
-    String sellBy;
-    String city;
-    String state;
-    int zipCode;
-    Double price;
-    String maritalStatus;
-    String sex;
-    String additionalNotes;
-    String phoneNumber;
-    String email;
+    private String ID;
+    private String apartmentName;
+    private String sellerName;
+    private String address;
+    private int apartmentNum;
+    private int image;
+    private String sellBy;
+    private String city;
+    private String state;
+    private int zipCode;
+    private Double price;
+    private String maritalStatus;
+    private String sex;
+    private String additionalNotes;
+    private String phoneNumber;
+    private String email;
 
-    public Contract(String name, Double price, String city, String state, String maritalStatus, String sex) {
 
-        this.apartmentName = name;
+    public Contract(String ID, String apartmentName, String sellerName, String address, int apartmentNum, int image, String sellBy, String city, String state, int zipCode, Double price, String maritalStatus, String sex, String additionalNotes, String phoneNumber, String email) {
+        this.ID = ID;
+        this.apartmentName = apartmentName;
+        this.sellerName = sellerName;
+        this.address = address;
+        this.apartmentNum = apartmentNum;
+        this.image = image;
+        this.sellBy = sellBy;
         this.city = city;
         this.state = state;
+        this.zipCode = zipCode;
         this.price = price;
         this.maritalStatus = maritalStatus;
         this.sex = sex;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
+        this.additionalNotes = additionalNotes;
+        this.phoneNumber = phoneNumber;
         this.email = email;
     }
 
-    public void setapartmentName(String name) {
-        this.apartmentName = name;
+    public String getID() {
+        return ID;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public String getApartmentName() {
+        return apartmentName;
+    }
+
+    public void setApartmentName(String apartmentName) {
+        this.apartmentName = apartmentName;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
 
     public String getAddress() {
@@ -68,6 +81,10 @@ public class Contract {
 
     public void setApartmentNum(int apartmentNum) {
         this.apartmentNum = apartmentNum;
+    }
+
+    public int getImage() {
+        return image;
     }
 
     public void setImage(int image) {
@@ -138,26 +155,19 @@ public class Contract {
         this.additionalNotes = additionalNotes;
     }
 
-    public String getApartmentName() {
-        return apartmentName;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-
-    public int getImage() {
-        return image;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setApartmentName(String apartmentName) {
-        this.apartmentName = apartmentName;
+    public String getEmail() {
+        return email;
     }
 
-    public String getSellerName() {
-        return sellerName;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName;
-    }
-
-
 }

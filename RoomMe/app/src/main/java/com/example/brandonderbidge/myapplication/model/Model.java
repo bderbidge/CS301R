@@ -1,5 +1,6 @@
 package com.example.brandonderbidge.myapplication.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -13,16 +14,16 @@ public class Model {
 
     private Contract selectedContract;
 
-    public Map<String, Contract> getEmailToContracts() {
-        return emailToContracts;
+    public Map<String, Contract> getIdToContracts() {
+        return idToContracts;
     }
 
-    public void setEmailToContracts(Map<String, Contract> emailToContracts) {
-        this.emailToContracts = emailToContracts;
+    public void setIdToContracts(Map<String, Contract> emailToContracts) {
+        this.idToContracts = emailToContracts;
     }
 
     //Map the ID of the contract to each contract
-    private Map<String, Contract> emailToContracts;
+    private Map<String, Contract> idToContracts = new HashMap<>();
 
     public Contract getSelectedContract(){
         return selectedContract;

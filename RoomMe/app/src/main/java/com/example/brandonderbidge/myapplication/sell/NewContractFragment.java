@@ -24,6 +24,9 @@ import android.widget.Spinner;
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.main.MainController;
 import com.example.brandonderbidge.myapplication.model.Contract;
+import com.example.brandonderbidge.myapplication.model.Model;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -35,6 +38,10 @@ import java.util.GregorianCalendar;
  */
 
 public class NewContractFragment extends Fragment {
+    // Write a message to the database
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Apartments");
+
     private String TAG = "NewContract";
     private MainController mainController;
     Spinner maritalStatusSpinner;
@@ -42,6 +49,7 @@ public class NewContractFragment extends Fragment {
     Button addImage;
     EditText sellBy;
     EditText dateAvailable;
+    Button saveButton;
     boolean isSellByDateFrag;
 
     private static int RESULT_LOAD_IMAGE = 1;
@@ -68,6 +76,7 @@ public class NewContractFragment extends Fragment {
         addImage = view.findViewById(R.id.add_image);
         sellBy = view.findViewById(R.id.sell_by);
         dateAvailable = view.findViewById(R.id.date_available);
+        saveButton = view.findViewById(R.id.save_bttn);
 
         ArrayAdapter<CharSequence> maritalAdapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.marital_status_list, R.layout.spinner_item);
@@ -125,6 +134,18 @@ public class NewContractFragment extends Fragment {
                         Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Contract contract = new Contract("a;sldfjk", "Centenial", "Brandon Derbidge",
+                        "1000N", 1, -1, "12/1/2017", "Provo", "UT", 91205, 200.00,  "Single",
+                        "male","I need to sell!", "8018575056", "brander81@gmail.com");
+                Model.instance().getIdToContracts().put("1_key", contract);
+                myRef.setValue(Model.instance().getIdToContracts());
             }
         });
 
