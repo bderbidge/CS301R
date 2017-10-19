@@ -23,8 +23,11 @@ public class Contract {
     private String phoneNumber;
     private String email;
 
-
-    public Contract(String ID, String apartmentName, String sellerName, String address, int apartmentNum, int image, String sellBy, String city, String state, int zipCode, Double price, String maritalStatus, String sex, String additionalNotes, String phoneNumber, String email) {
+    public Contract(){};
+    public Contract(String ID, String apartmentName, String sellerName, String address,
+                    int apartmentNum, int image, String sellBy, String city, String state,
+                    int zipCode, Double price, String maritalStatus, String sex,
+                    String additionalNotes, String phoneNumber, String email) {
         this.ID = ID;
         this.apartmentName = apartmentName;
         this.sellerName = sellerName;

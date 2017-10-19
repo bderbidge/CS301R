@@ -1,15 +1,18 @@
 package com.example.brandonderbidge.myapplication.model;
 
+import java.util.List;
+
 /**
  * Created by brandonderbidge on 10/17/17.
  */
 
 public class User {
 
-    String sellerName;
-    String maritalStatus;
-    String sex;
-    String phoneNumber;
-    String email;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String email;
+    private List<String> favoriteContracts;
+    private List<String> myContractsToSell;
 
 }

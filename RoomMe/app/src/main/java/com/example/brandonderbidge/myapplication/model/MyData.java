@@ -13,14 +13,16 @@ public class MyData {
     public static String[] maritalStatusArray = {"Single", "Married", "Married", "Married", "Single", "Single"};
     public static String[] sexStatusArray ={"Male", null, null, null, "Male", "Female"};
     public static Contract[] contracts = {
-            new Contract("Centennial", 200.00, "Provo", "UT", "Single", "Male"),
-            new Contract("Centennial 2", 300.00, "Provo 2", "UT", "Married", null),
-            new Contract("The Riv", 300.00, "Provo", "UT", "Married", null),
-            new Contract("Roman Gardens", 400.00, "Provo", "UT", "Married", null),
-            new Contract("King Henry", 200.00, "Provo", "UT", "Single", "Male"),
-            new Contract("Brown Stone", 400.00, "Provo", "UT", "Single", "Female")
+            new Contract("a;sldf2jk", "Centennial","Brandon Derbidge", "1000N",  1, -1, "12/1/2017",   "Provo", "UT", 91205,200.00,"Single", "Male","I need to sell!", "8018575056", "brander81@gmail.com"),
+            new Contract("a;sldfj4k", "Centennial 2","Brandon Derbidge","1000N", 1, -1, "12/1/2017",  "Provo 2", "UT", 91205,300.00,  "Married", null, "I need to sell!", "8018575056", "brander81@gmail.com"),
+            new Contract("a;sldfj3k","The Riv", "Brandon Derbidge", "1000N", 1, -1, "12/1/2017",  "Provo", "UT",91205,300.00, "Married", null,"I need to sell!", "8018575056", "brander81@gmail.com"),
+            new Contract("a;sldfj1k", "Roman Gardens","Brandon Derbidge", "1000N", 1, -1, "12/1/2017","Provo", "UT", 91205, 400.00, "Married", null,"I need to sell!", "8018575056", "brander81@gmail.com"),
+            new Contract("a;sldfjk5", "King Henry","Brandon Derbidge","1000N", 1, -1, "Provo", "UT","12/1/2017",91205, 200.00,  "Single", "Male","I need to sell!", "8018575056", "brander81@gmail.com"),
+            new Contract("a;sldfjk6","Brown Stone", "Brandon Derbidge", "1000N",1, -1, "12/1/2017", "Provo", "UT", 91205, 400.00,"Single", "Female","I need to sell!", "8018575056", "brander81@gmail.com"),
+            new Contract("a;sldfjk", "Centenial", "Brandon Derbidge", "1000N", 1, -1, "12/1/2017", "Provo", "UT", 91205, 200.00,  "Single", "male","I need to sell!", "8018575056", "brander81@gmail.com")
     };
     public static Contract[] sellContracts = {
-            new Contract("James Town", 350.00, "Provo", "UT", "Single", "Male")
+            new Contract("a;sldfjk6","Brown Stone", "Brandon Derbidge", "1000N",1, -1, "12/1/2017", "Provo", "UT", 91205, 400.00,"Single", "Female","I need to sell!", "8018575056", "brander81@gmail.com")
     };
+
 }

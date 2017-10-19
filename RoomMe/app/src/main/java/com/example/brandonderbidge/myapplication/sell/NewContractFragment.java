@@ -76,7 +76,7 @@ public class NewContractFragment extends Fragment {
         addImage = view.findViewById(R.id.add_image);
         sellBy = view.findViewById(R.id.sell_by);
         dateAvailable = view.findViewById(R.id.date_available);
-        saveButton = view.findViewById(R.id.save_bttn);
+        saveButton = view.findViewById(R.id.create_contract_btn);
 
         ArrayAdapter<CharSequence> maritalAdapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.marital_status_list, R.layout.spinner_item);
