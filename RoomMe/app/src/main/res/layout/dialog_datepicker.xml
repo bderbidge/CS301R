@@ -47,4 +47,15 @@
         app:layout_constraintBottom_toTopOf="@id/cancel_datepicker_btn"
         android:background="@color/greyedTextLight" />
 
+    <TextView
+        android:id="@+id/date_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:textColor="@color/White"
+        android:text="@string/date_field" />
+
 </android.support.constraint.ConstraintLayout>

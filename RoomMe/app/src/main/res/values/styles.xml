@@ -66,8 +66,8 @@
     <style name="AppTheme.Button">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">15dp</item>
-        <item name="android:backgroundTint">@color/colorPrimary</item>
-        <item name="android:textColor">@color/White</item>
+        <item name="android:backgroundTint">@color/buttonNormal</item>
+        <item name="android:textColor">@color/greyedText</item>
     </style>
     <style name="AppTheme.PrimaryButton" parent="AppTheme.Button">
         <item name="android:layout_width">match_parent</item>

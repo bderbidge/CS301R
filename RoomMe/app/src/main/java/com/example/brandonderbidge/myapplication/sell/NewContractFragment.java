@@ -93,23 +93,25 @@ public class NewContractFragment extends Fragment {
         sellBy.setShowSoftInputOnFocus(false);
         dateAvailable.setShowSoftInputOnFocus(false);
 
-        sellBy.setOnTouchListener(new View.OnTouchListener() {
+        sellBy.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                closeKeyboard();
-                isSellByDateFrag = true;
-                showDateDialog();
-                return false;
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    closeKeyboard();
+                    isSellByDateFrag = true;
+                    showDateDialog(getString(R.string.sell_by));
+                }
             }
         });
 
-        dateAvailable.setOnTouchListener(new View.OnTouchListener() {
+        dateAvailable.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                closeKeyboard();
-                isSellByDateFrag = false;
-                showDateDialog();
-                return false;
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    closeKeyboard();
+                    isSellByDateFrag = false;
+                    showDateDialog(getString(R.string.date_available));
+                }
             }
         });
 
@@ -173,21 +175,30 @@ public class NewContractFragment extends Fragment {
             ab.setDisplayHomeAsUpEnabled(false);
         }
 
+        Fragment newContractFragment = getFragmentManager().findFragmentByTag(getString(R.string.TAG_datedialog));
+
+        if (newContractFragment != null) {
+            getFragmentManager().beginTransaction().remove(newContractFragment).commit();
+        }
+
+        getActivity().setTitle(R.string.sell_contracts);
+
         getFragmentManager().popBackStack();
     }
 
-    public void showDateDialog() {
+    public void showDateDialog(String dateField) {
 
         if (getActivity().findViewById(R.id.datepicker_dialog_container) == null) {
             FragmentManager fragmentManager = getFragmentManager();
             DatePickerDialog datePickerDialog = new DatePickerDialog();
 
             datePickerDialog.setMainController(mainController);
+            datePickerDialog.setFieldHint(dateField);
 
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            transaction.add(android.R.id.content, datePickerDialog)
+            transaction.add(android.R.id.content, datePickerDialog, getString(R.string.TAG_datedialog))
                     .commit();
         }
     }

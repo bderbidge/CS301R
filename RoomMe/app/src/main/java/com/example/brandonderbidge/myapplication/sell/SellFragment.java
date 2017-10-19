@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * Created by justinbrunner on 10/15/17.
  */
 
-public class SellFragment extends Fragment {\
+public class SellFragment extends Fragment {
     private String TAG = "SellFragment";
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;

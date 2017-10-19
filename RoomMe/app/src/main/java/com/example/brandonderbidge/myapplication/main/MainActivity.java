@@ -10,8 +10,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
@@ -53,6 +55,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void createToast(String message, int toastLength) {
         Toast.makeText(getBaseContext(), message, toastLength).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_new_contract)) != null) {
+            setTitle(R.string.sell_contracts);
+
+            ActionBar ab = getSupportActionBar();
+            if (ab != null) {
+                ab.setDisplayHomeAsUpEnabled(false);
+            }
+        }
+
+        Fragment newContractFragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_datedialog));
+
+        if (newContractFragment != null) {
+            getSupportFragmentManager().beginTransaction().remove(newContractFragment).commit();
+        }
+
+        super.onBackPressed();
     }
 
     public void setSellFragment(Bundle savedInstanceState) {
