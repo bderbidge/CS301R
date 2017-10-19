@@ -17,6 +17,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
@@ -32,9 +33,15 @@ public class DatePickerDialog extends DialogFragment {
     private MainController mainController;
     private Button cancelBtn;
     private Button okBtn;
+    private TextView dateField;
+    private String fieldHint;
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
+    }
+
+    public void setFieldHint(String fieldHint) {
+        this.fieldHint = fieldHint;
     }
 
     /** The system calls this to get the DialogFragment's layout, regardless
@@ -49,6 +56,9 @@ public class DatePickerDialog extends DialogFragment {
         datePicker = view.findViewById(R.id.date_picker);
         okBtn = view.findViewById(R.id.ok_datepicker_btn);
         cancelBtn = view.findViewById(R.id.cancel_datepicker_btn);
+        dateField = view.findViewById(R.id.date_field);
+
+        dateField.setText(fieldHint);
 
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
