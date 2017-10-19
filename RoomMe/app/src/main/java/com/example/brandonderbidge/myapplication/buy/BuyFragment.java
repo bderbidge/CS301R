@@ -84,8 +84,11 @@ public class BuyFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Contract contracts = dataSnapshot.getValue(Contract.class);
-                System.out.println(contracts);
+
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    Contract contract = childSnapshot.getValue(Contract.class);
+                    System.out.println(contract);
+                }
 //                Gson gson = new Gson();
 //                Type type = new TypeToken<Map<String, Contract>>(){}.getType();
 //                Map<String, Contract> myMap = gson.fromJson(json, type);
