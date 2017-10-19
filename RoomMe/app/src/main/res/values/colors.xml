@@ -11,7 +11,9 @@
     <color name="buttonNormal">#e8eaed</color>
     <color name="buttonBorder">#c4c4c4</color>
     <color name="greyedText">#636363</color>
+    <color name="greyedTextLight">#b4b4b4</color>
     <color name="background">#E9EBEE</color>
+    <color name="backgroundTransparent">#b1000000</color>
     <color name="black">#000000</color>
     <color name="colorlessButtonPressed">#510053</color>
 
