@@ -116,11 +116,18 @@ public class ContractActivity extends AppCompatActivity {
                             .equals(Model.instance().getSelectedContract().getID()))
                         success = true;
                 }
+
                 if(success) {
                     heart.setImageResource(R.drawable.ic_action_favorite);
 
-                    Model.instance().getCurrentUser().getFavoriteContracts().remove(Model
-                            .instance().getSelectedContract());
+
+                    for(int i = 0; i < Model.instance().getCurrentUser().getFavoriteContracts().size(); i++)
+                    {
+                        if(Model.instance().getCurrentUser().getFavoriteContracts().get(i).getID()
+                                .equals(Model.instance().getSelectedContract().getID()))
+                            Model.instance().getCurrentUser().getFavoriteContracts().remove(i);
+                    }
+
                     myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model
                             .instance().getCurrentUser());
                 }
