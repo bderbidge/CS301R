@@ -38,8 +38,8 @@ public class FilterDialog extends DialogFragment {
     private Button singleBtn;
     private Button marriedBtn;
     private LinearLayout selectSexContainer;
-    private Button cancelBtn;
     private Button applyBtn;
+
     /** The system calls this to get the DialogFragment's layout, regardless
      of whether it's being displayed as a dialog or an embedded fragment. */
     @Override
@@ -56,7 +56,6 @@ public class FilterDialog extends DialogFragment {
         singleBtn = view.findViewById(R.id.single);
         marriedBtn = view.findViewById(R.id.married);
         selectSexContainer = view.findViewById(R.id.select_sex_container);
-        cancelBtn = view.findViewById(R.id.cancel_filter);
         applyBtn = view.findViewById(R.id.apply_filter);
 
         filterLayout.setBackground(new ColorDrawable(Color.WHITE));
@@ -183,7 +182,7 @@ public class FilterDialog extends DialogFragment {
             }
         });
 
-        View.OnClickListener onDismiss = new View.OnClickListener() {
+        closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.v(TAG, "Dismissing Dialog");
@@ -192,11 +191,7 @@ public class FilterDialog extends DialogFragment {
 
                 dismiss();
             }
-        };
-
-        cancelBtn.setOnClickListener(onDismiss);
-
-        closeBtn.setOnClickListener(onDismiss);
+        });
 
         return view;
     }

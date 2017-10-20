@@ -204,11 +204,10 @@
             android:id="@+id/price_marital_sex_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/additional_address_container"
-            tools:layout_editor_absoluteX="8dp">
+            tools:layout_editor_absoluteX="0dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -260,13 +259,14 @@
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/additional_info_label"
-            app:layout_constraintTop_toBottomOf="@id/price_marital_sex_container"
+            app:layout_constraintTop_toBottomOf="@+id/price_marital_sex_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:hintTextAppearance="@style/AppTheme.EditTextLabelColorTheme"
             style="@style/AppTheme.EditTextLabel"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="30dp">
 
             <EditText
                 android:id="@+id/additional_info"
@@ -280,55 +280,35 @@
             android:id="@+id/imgView"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginStart="30dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/additional_info_label"
+            app:layout_constraintTop_toBottomOf="@+id/additional_info_label"
             android:scaleType="fitCenter"
+            android:layout_marginStart="30dp"
             android:adjustViewBounds="true" />
 
         <Button
             android:id="@+id/add_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/additional_info_label"
+            app:layout_constraintTop_toBottomOf="@+id/additional_info_label"
             app:layout_constraintStart_toEndOf="@id/imgView"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:textColor="@color/colorPrimaryLight"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
             android:text="@string/add_image" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/create_contract_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/imgView"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="15dp">
-
-            <Button
-                android:id="@+id/cancel_contract_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_margin="15dp"
-                style="@style/AppTheme.Button"
-                android:text="@string/cancel_btn"/>
-
-            <Button
-                android:id="@+id/create_contract_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_margin="15dp"
-                style="@style/AppTheme.PrimaryButton"
-                android:text="@string/save_btn"/>
-
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/imgView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="20sp"
+            style="@style/AppTheme.PrimaryButton"
+            android:text="@string/save_btn"
+            tools:layout_editor_absoluteX="8dp" />
 
     </android.support.constraint.ConstraintLayout>
 
