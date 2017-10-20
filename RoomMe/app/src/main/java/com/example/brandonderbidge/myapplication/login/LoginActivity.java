@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.main.MainActivity;
 import com.example.brandonderbidge.myapplication.R;
+import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,8 +26,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -135,6 +140,23 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+
+
+        Query allPostFromAuthor = myRef.orderByChild("email").equalTo(email);
+
+// Add listener for Firebase response on said query
+        allPostFromAuthor.addValueEventListener( new ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot post : dataSnapshot.getChildren() ){
+                    User user = post.getValue(User.class);
+                    Model.instance().setCurrentUser(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
     }
     @Override
     public void onBackPressed() {

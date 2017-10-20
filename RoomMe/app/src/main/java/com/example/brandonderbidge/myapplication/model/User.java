@@ -1,5 +1,7 @@
 package com.example.brandonderbidge.myapplication.model;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -12,14 +14,28 @@ public class User {
     private String lastName;
     private String phoneNumber;
     private String email;
-    private List<String> favoriteContracts;
-    private List<String> myContractsToSell;
 
-    public User(String firstName, String lastName, String phoneNumber, String email) {
+
+    private String ID;
+    private List<Contract> favoriteContracts = new ArrayList<>();
+    private List<Contract> myContractsToSell = new ArrayList<>();
+
+    public User(){}
+
+    public User(String ID, String firstName, String lastName, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.ID = ID;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getFirstName() {
@@ -54,19 +70,19 @@ public class User {
         this.email = email;
     }
 
-    public List<String> getFavoriteContracts() {
+    public List<Contract> getFavoriteContracts() {
         return favoriteContracts;
     }
 
-    public void setFavoriteContracts(List<String> favoriteContracts) {
+    public void setFavoriteContracts(List<Contract> favoriteContracts) {
         this.favoriteContracts = favoriteContracts;
     }
 
-    public List<String> getMyContractsToSell() {
+    public List<Contract> getMyContractsToSell() {
         return myContractsToSell;
     }
 
-    public void setMyContractsToSell(List<String> myContractsToSell) {
+    public void setMyContractsToSell(List<Contract> myContractsToSell) {
         this.myContractsToSell = myContractsToSell;
     }
 }

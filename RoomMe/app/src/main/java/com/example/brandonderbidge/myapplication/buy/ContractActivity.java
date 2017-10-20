@@ -5,12 +5,18 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ContractActivity extends AppCompatActivity {
     TextView apartmentName ;
@@ -22,6 +28,9 @@ public class ContractActivity extends AppCompatActivity {
     TextView notes;
     ImageView dial;
     ImageView email;
+    ImageView heart;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myUser = database.getReference("Users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +50,7 @@ public class ContractActivity extends AppCompatActivity {
         notes = (TextView)findViewById(R.id.notes);
         dial = (ImageView) findViewById(R.id.caller);
         email = (ImageView) findViewById(R.id.email);
-
+        heart = (ImageView) findViewById(R.id.favoriteHeart);
 
         notes.setText(Model.instance().getSelectedContract().getAdditionalNotes());
         sellBy.setText(Model.instance().getSelectedContract().getSellBy());
@@ -73,6 +82,59 @@ public class ContractActivity extends AppCompatActivity {
                 email(Model.instance().getSelectedContract().getEmail());
             }
         });
+
+        heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Model.instance().getCurrentUser().getFavoriteContracts().add(Model.instance().getSelectedContract());
+                myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
+            }
+        });
+
+        boolean success = false;
+        for(int i = 0; i < Model.instance().getCurrentUser().getFavoriteContracts().size(); i++)
+        {
+            if(Model.instance().getCurrentUser().getFavoriteContracts().get(i).getID().equals(Model
+                    .instance().getSelectedContract().getID()))
+                success = true;
+        }
+
+        if(success)
+            heart.setImageResource(R.drawable.ic_full_heart);
+        else
+            heart.setImageResource(R.drawable.ic_action_favorite);
+
+        heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                boolean success = false;
+                for(int i = 0; i < Model.instance().getCurrentUser().getFavoriteContracts().size(); i++)
+                {
+                    if(Model.instance().getCurrentUser().getFavoriteContracts().get(i).getID()
+                            .equals(Model.instance().getSelectedContract().getID()))
+                        success = true;
+                }
+                if(success) {
+                    heart.setImageResource(R.drawable.ic_action_favorite);
+
+                    Model.instance().getCurrentUser().getFavoriteContracts().remove(Model
+                            .instance().getSelectedContract());
+                    myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model
+                            .instance().getCurrentUser());
+                }
+                else {
+                    heart.setImageResource(R.drawable.ic_full_heart);
+                    Model.instance().getCurrentUser().getFavoriteContracts().add(Model
+                            .instance().getSelectedContract());
+                    myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model
+                            .instance().getCurrentUser());
+
+                }
+            }
+        });
+
     }
 
     @Override

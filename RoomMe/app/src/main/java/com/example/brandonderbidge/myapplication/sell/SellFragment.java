@@ -20,6 +20,7 @@ import com.example.brandonderbidge.myapplication.model.FilterModel;
 import com.example.brandonderbidge.myapplication.main.MainController;
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.buy.FilterDialog;
+import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.model.MyData;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -82,8 +83,8 @@ public class SellFragment extends Fragment {
     public void loadSellContracts() {
         listOfContracts = new ArrayList<>();
 
-        for (int i = 0; i < MyData.sellContracts.length; i++) {
-            Contract contract = MyData.sellContracts[i];
+        for (int i = 0; i < Model.instance().getCurrentUser().getMyContractsToSell().size(); i++) {
+            Contract contract = Model.instance().getCurrentUser().getMyContractsToSell().get(i);
 
             if (FilterModel.getInstance().getMaritalStatus() != null) {
                 if (!contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
@@ -103,7 +104,7 @@ public class SellFragment extends Fragment {
             }
 
 
-            listOfContracts.add(MyData.contracts[i]);
+            listOfContracts.add(Model.instance().getCurrentUser().getMyContractsToSell().get(i));
         }
 
         adapter.setDataSet(listOfContracts);

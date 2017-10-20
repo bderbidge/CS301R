@@ -54,6 +54,7 @@ public class BuyFragment extends Fragment {
     // Write a message to the database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Apartments");
+    DatabaseReference userRef = database.getReference("Users");
 
 
     public void setMainController(MainController mainController) {
@@ -94,9 +95,7 @@ public class BuyFragment extends Fragment {
 
                 }
                 loadContracts();
-//                Gson gson = new Gson();
-//                Type type = new TypeToken<Map<String, Contract>>(){}.getType();
-//                Map<String, Contract> myMap = gson.fromJson(json, type);
+
                 System.out.println(dataSnapshot.getKey());
             }
 

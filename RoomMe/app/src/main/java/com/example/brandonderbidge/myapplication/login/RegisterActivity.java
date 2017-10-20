@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.main.MainActivity;
+import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -113,18 +114,17 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }else {
                             switchToMainActivity();
-                            User user = new User("Brandon", "Derbidge", "8018575056", "brander81@gmail.com");
-                            Map<String, User> IdUsers = new HashMap<String, User>();
 
-                            String ID = UUID.randomUUID().toString();
-                            IdUsers.put(ID, user);
-                            myRef.setValue(IdUsers);
                         }
 
                         // ...
                     }
                 });
 
+        String ID = UUID.randomUUID().toString();
+        User user = new User(ID, "Brandon", "Derbidge", "8018575056", "brander81@gmail.com");
+        Model.instance().setCurrentUser(user);
+        myRef.child(ID).setValue(user);
 
     }
     public void switchToMainActivity() {

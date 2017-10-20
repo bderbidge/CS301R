@@ -28,6 +28,7 @@ import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.Model;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class NewContractFragment extends Fragment {
     // Write a message to the database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Apartments");
-    DatabaseReference mySell = database.getReference("Sell");
+    DatabaseReference myUser = database.getReference("Users");
 
     private String TAG = "NewContract";
     private MainController mainController;
@@ -163,19 +164,25 @@ public class NewContractFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
             String temp = price.getText().toString();
             int price1 = Integer.parseInt(temp);
             double price2 = (double)price1;
                 String ID = UUID.randomUUID().toString();
-                Contract contract = new Contract(ID, apartmentName.getText().toString(), "Brandon Derbidge",
+                Contract contract = new Contract(ID, apartmentName.getText().toString(),
+                        Model.instance().getCurrentUser().getFirstName() + " " + Model.instance().getCurrentUser().getLastName(),
                         address.getText().toString() + address2.getText().toString(), apartmentNumber.getText().toString(), -1, sellBy.getText().toString(),
                         city.getText().toString(), state.getText().toString(), postal.getText().toString(), price2
                         , maritalStatusSpinner.getSelectedItem().toString(),
                         sexSpinner.getSelectedItem().toString(),additionalInfo.getText().toString(), "8018575056",
                         "brander81@gmail.com");
+
                 Model.instance().getAllContracts().put(ID, contract);
+                Model.instance().getCurrentUser().getMyContractsToSell().add(contract);
 
                 myRef.setValue(Model.instance().getAllContracts());
+                myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
 
             }
         });

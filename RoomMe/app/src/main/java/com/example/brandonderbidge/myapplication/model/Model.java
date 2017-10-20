@@ -12,7 +12,10 @@ public class Model {
     private static Model model = new Model();
     public static Model instance() { return model; };
 
+    private Contract selectedContract;
+    private Map<String, Contract> idToContracts = new HashMap<>();
     private User currentUser;
+    private Map<String, Contract> allContracts = new HashMap<>();
 
     public User getCurrentUser() {
         return currentUser;
@@ -22,13 +25,13 @@ public class Model {
         this.currentUser = currentUser;
     }
 
-    private Contract selectedContract;
+
 
     public Map<String, Contract> getIdToContracts() {
         return idToContracts;
     }
 
-    private Map<String, Contract> allContracts = new HashMap<>();
+
 
     public Map<String, Contract> getAllContracts() {
         return allContracts;
@@ -42,8 +45,7 @@ public class Model {
         this.idToContracts = emailToContracts;
     }
 
-    //Map the ID of the contract to each contract
-    private Map<String, Contract> idToContracts = new HashMap<>();
+
 
     public Contract getSelectedContract(){
         return selectedContract;

@@ -20,6 +20,7 @@ import com.example.brandonderbidge.myapplication.buy.FilterDialog;
 import com.example.brandonderbidge.myapplication.main.MainController;
 import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.FilterModel;
+import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.model.MyData;
 import com.example.brandonderbidge.myapplication.sell.NewContractFragment;
 import com.example.brandonderbidge.myapplication.sell.SellAdapter;
@@ -28,14 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FavoriteFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FavoriteFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FavoriteFragment extends Fragment {
 
     private String TAG = "FavoriteFragment";
@@ -77,8 +70,8 @@ public class FavoriteFragment extends Fragment {
     public void loadSellContracts() {
         listOfContracts = new ArrayList<>();
 
-        for (int i = 0; i < MyData.sellContracts.length; i++) {
-            Contract contract = MyData.sellContracts[i];
+        for (int i = 0; i < Model.instance().getCurrentUser().getFavoriteContracts().size(); i++) {
+            Contract contract = Model.instance().getCurrentUser().getFavoriteContracts().get(i);
 
             if (FilterModel.getInstance().getMaritalStatus() != null) {
                 if (!contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
@@ -98,7 +91,7 @@ public class FavoriteFragment extends Fragment {
             }
 
 
-            listOfContracts.add(MyData.contracts[i]);
+            listOfContracts.add(Model.instance().getCurrentUser().getFavoriteContracts().get(i));
         }
 
         adapter.setDataSet(listOfContracts);

@@ -52,13 +52,12 @@
                 android:src="@drawable/theriv" />
 
             <ImageView
-                android:id="@+id/imageView11"
+                android:id="@+id/favoriteHeart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/email"
                 android:layout_marginStart="32dp"
-                android:layout_toEndOf="@+id/email"
-                card_view:srcCompat="@drawable/ic_action_favorite" />
+                android:layout_toEndOf="@+id/email" />
 
             <TextView
                 android:id="@+id/costOfRent"
