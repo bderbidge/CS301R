@@ -10,12 +10,12 @@ public class Contract {
     private String apartmentName;
     private String sellerName;
     private String address;
-    private int apartmentNum;
+    private String apartmentNum;
     private int image;
     private String sellBy;
     private String city;
     private String state;
-    private int zipCode;
+    private String zipCode;
     private Double price;
     private String maritalStatus;
     private String sex;
@@ -25,8 +25,8 @@ public class Contract {
 
     public Contract(){};
     public Contract(String ID, String apartmentName, String sellerName, String address,
-                    int apartmentNum, int image, String sellBy, String city, String state,
-                    int zipCode, Double price, String maritalStatus, String sex,
+                    String apartmentNum, int image, String sellBy, String city, String state,
+                    String zipCode, Double price, String maritalStatus, String sex,
                     String additionalNotes, String phoneNumber, String email) {
         this.ID = ID;
         this.apartmentName = apartmentName;
@@ -78,11 +78,11 @@ public class Contract {
         this.address = address;
     }
 
-    public int getApartmentNum() {
+    public String getApartmentNum() {
         return apartmentNum;
     }
 
-    public void setApartmentNum(int apartmentNum) {
+    public void setApartmentNum(String apartmentNum) {
         this.apartmentNum = apartmentNum;
     }
 
@@ -118,11 +118,11 @@ public class Contract {
         this.state = state;
     }
 
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 

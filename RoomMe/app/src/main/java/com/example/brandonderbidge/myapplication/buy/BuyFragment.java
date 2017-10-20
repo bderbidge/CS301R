@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.example.brandonderbidge.myapplication.main.MainController;
 import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.FilterModel;
+import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.model.MyData;
 import com.example.brandonderbidge.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
@@ -60,7 +61,7 @@ public class BuyFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -76,19 +77,23 @@ public class BuyFragment extends Fragment {
         adapter = new CustomAdapter(listOfContracts);
         recyclerView.setAdapter(adapter);
 
-        loadContracts();
         getActivity().setTitle(R.string.buy_contracts);
 
-
+        loadContracts();
         // Attach a listener to read the data at our posts reference
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                Model.instance().getAllContracts().clear();
+
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     Contract contract = childSnapshot.getValue(Contract.class);
                     System.out.println(contract);
+                    Model.instance().getAllContracts().put(contract.getID(), contract);
+
                 }
+                loadContracts();
 //                Gson gson = new Gson();
 //                Type type = new TypeToken<Map<String, Contract>>(){}.getType();
 //                Map<String, Contract> myMap = gson.fromJson(json, type);
@@ -112,8 +117,8 @@ public class BuyFragment extends Fragment {
         Log.v(TAG, "Price Low Filter: " + FilterModel.getInstance().getPriceLow());
         Log.v(TAG, "Marital Status Filter: " + FilterModel.getInstance().getMaritalStatus());
 
-        for (int i = 0; i < MyData.nameArray.length; i++) {
-            Contract contract = MyData.contracts[i];
+        for (Contract value : Model.instance().getAllContracts().values()) {
+            Contract contract = value;
 
             if (FilterModel.getInstance().getMaritalStatus() != null) {
                 if (!contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
@@ -133,7 +138,7 @@ public class BuyFragment extends Fragment {
             }
 
 
-            listOfContracts.add(MyData.contracts[i]);
+            listOfContracts.add(contract);
         }
 
         adapter.setDataSet(listOfContracts);

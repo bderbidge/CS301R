@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -32,6 +33,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.UUID;
 
 /**
  * Created by justinbrunner on 10/16/17.
@@ -41,16 +43,26 @@ public class NewContractFragment extends Fragment {
     // Write a message to the database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Apartments");
+    DatabaseReference mySell = database.getReference("Sell");
 
     private String TAG = "NewContract";
     private MainController mainController;
-    Spinner maritalStatusSpinner;
-    Spinner sexSpinner;
-    Button addImage;
-    EditText sellBy;
-    EditText dateAvailable;
-    Button saveButton;
-    boolean isSellByDateFrag;
+    private Spinner maritalStatusSpinner;
+    private Spinner sexSpinner;
+    private Button addImage;
+    private EditText sellBy;
+    private EditText dateAvailable;
+    private Button saveButton;
+    private boolean isSellByDateFrag;
+    private EditText apartmentName;
+    private EditText apartmentNumber;
+    private EditText address;
+    private EditText address2;
+    private EditText city;
+    private EditText state;
+    private EditText postal;
+    private EditText price;
+    private EditText additionalInfo;
 
     private static int RESULT_LOAD_IMAGE = 1;
 
@@ -77,6 +89,15 @@ public class NewContractFragment extends Fragment {
         sellBy = view.findViewById(R.id.sell_by);
         dateAvailable = view.findViewById(R.id.date_available);
         saveButton = view.findViewById(R.id.create_contract_btn);
+        apartmentName = view.findViewById(R.id.apartment_name);
+        apartmentNumber = view.findViewById(R.id.apartment_number);
+        address = view.findViewById(R.id.address_line_1);
+        address2 = view.findViewById(R.id.address_line_2);
+        city = view.findViewById(R.id.city);
+        state = view.findViewById(R.id.state);
+        postal = view.findViewById(R.id.postal_code);
+        price = view.findViewById(R.id.price);
+        additionalInfo = view.findViewById(R.id.additional_info);
 
         ArrayAdapter<CharSequence> maritalAdapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.marital_status_list, R.layout.spinner_item);
@@ -142,12 +163,20 @@ public class NewContractFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            String temp = price.getText().toString();
+            int price1 = Integer.parseInt(temp);
+            double price2 = (double)price1;
+                String ID = UUID.randomUUID().toString();
+                Contract contract = new Contract(ID, apartmentName.getText().toString(), "Brandon Derbidge",
+                        address.getText().toString() + address2.getText().toString(), apartmentNumber.getText().toString(), -1, sellBy.getText().toString(),
+                        city.getText().toString(), state.getText().toString(), postal.getText().toString(), price2
+                        , maritalStatusSpinner.getSelectedItem().toString(),
+                        sexSpinner.getSelectedItem().toString(),additionalInfo.getText().toString(), "8018575056",
+                        "brander81@gmail.com");
+                Model.instance().getAllContracts().put(ID, contract);
 
-                Contract contract = new Contract("a;sldfjk", "Centenial", "Brandon Derbidge",
-                        "1000N", 1, -1, "12/1/2017", "Provo", "UT", 91205, 200.00,  "Single",
-                        "male","I need to sell!", "8018575056", "brander81@gmail.com");
-                Model.instance().getIdToContracts().put("1_key", contract);
-                myRef.setValue(Model.instance().getIdToContracts());
+                myRef.setValue(Model.instance().getAllContracts());
+
             }
         });
 

@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -96,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void createAccount(String email, String password){
 
-
+        //make a pop up to add your phone number
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -112,17 +113,19 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }else {
                             switchToMainActivity();
+                            User user = new User("Brandon", "Derbidge", "8018575056", "brander81@gmail.com");
+                            Map<String, User> IdUsers = new HashMap<String, User>();
+
+                            String ID = UUID.randomUUID().toString();
+                            IdUsers.put(ID, user);
+                            myRef.setValue(IdUsers);
                         }
 
                         // ...
                     }
                 });
 
-        User user = new User("Brandon", "Derbidge", "8018575056", "brander81@gmail.com");
-        Map<String, User> IdUsers = new HashMap<String, User>();
 
-        IdUsers.put("1", user);
-        myRef.setValue(IdUsers);
     }
     public void switchToMainActivity() {
         Log.v(TAG, "Switching to MainActivity Activity");

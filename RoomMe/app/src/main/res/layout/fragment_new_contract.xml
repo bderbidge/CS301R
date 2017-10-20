@@ -233,7 +233,7 @@
                     android:id="@+id/price"
                     style="@style/AppTheme.EditText"
                     android:hint="@string/price_per_month_label"
-                    android:inputType="date" />
+                    android:inputType="number" />
 
             </android.support.design.widget.TextInputLayout>
 
