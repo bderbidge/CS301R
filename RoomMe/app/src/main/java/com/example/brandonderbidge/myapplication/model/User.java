@@ -15,4 +15,10 @@ public class User {
     private List<String> favoriteContracts;
     private List<String> myContractsToSell;
 
+    public User(String firstName, String lastName, String phoneNumber, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 }

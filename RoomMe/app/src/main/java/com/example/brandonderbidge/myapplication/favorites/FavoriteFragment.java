@@ -42,7 +42,7 @@ public class FavoriteFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerView;
     FloatingActionButton fabNew;
-    private SellAdapter adapter;
+    private FavoriteAdapter adapter;
     private MainController mainController;
     private static ArrayList<Contract> listOfContracts;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -65,7 +65,7 @@ public class FavoriteFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        adapter = new SellAdapter(listOfContracts);
+        adapter = new FavoriteAdapter(listOfContracts);
         recyclerView.setAdapter(adapter);
 
         loadSellContracts();
@@ -75,34 +75,34 @@ public class FavoriteFragment extends Fragment {
     }
 
     public void loadSellContracts() {
-//        listOfContracts = new ArrayList<>();
-//
-//        for (int i = 0; i < MyData.sellContracts.length; i++) {
-//            Contract contract = MyData.sellContracts[i];
-//
-//            if (FilterModel.getInstance().getMaritalStatus() != null) {
-//                if (!contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
-//                    continue;
-//                } else if (FilterModel.getInstance().getSex() != null
-//                        && contract.getSex() != null
-//                        && !contract.getSex().equalsIgnoreCase(FilterModel.getInstance().getSex())) {
-//                    continue;
-//                }
-//            }
-//            if (FilterModel.getInstance().getPriceLow() != null
-//                    && contract.getPrice() < FilterModel.getInstance().getPriceLow()) {
-//                continue;
-//            } else if (FilterModel.getInstance().getPriceHigh() != null
-//                    && contract.getPrice() > FilterModel.getInstance().getPriceHigh()) {
-//                continue;
-//            }
-//
-//
-//            listOfContracts.add(MyData.contracts[i]);
-//        }
-//
-//        adapter.setDataSet(listOfContracts);
-//        adapter.notifyDataSetChanged();
+        listOfContracts = new ArrayList<>();
+
+        for (int i = 0; i < MyData.sellContracts.length; i++) {
+            Contract contract = MyData.sellContracts[i];
+
+            if (FilterModel.getInstance().getMaritalStatus() != null) {
+                if (!contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
+                    continue;
+                } else if (FilterModel.getInstance().getSex() != null
+                        && contract.getSex() != null
+                        && !contract.getSex().equalsIgnoreCase(FilterModel.getInstance().getSex())) {
+                    continue;
+                }
+            }
+            if (FilterModel.getInstance().getPriceLow() != null
+                    && contract.getPrice() < FilterModel.getInstance().getPriceLow()) {
+                continue;
+            } else if (FilterModel.getInstance().getPriceHigh() != null
+                    && contract.getPrice() > FilterModel.getInstance().getPriceHigh()) {
+                continue;
+            }
+
+
+            listOfContracts.add(MyData.contracts[i]);
+        }
+
+        adapter.setDataSet(listOfContracts);
+        adapter.notifyDataSetChanged();
     }
 
     public void showDialog() {

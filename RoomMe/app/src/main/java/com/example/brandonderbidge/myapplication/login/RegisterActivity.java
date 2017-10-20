@@ -14,12 +14,18 @@ import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.main.MainActivity;
+import com.example.brandonderbidge.myapplication.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -33,6 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Button maleBtn;
     private Button femaleBtn;
     private ProgressBar mSpinner;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private    DatabaseReference myRef = database.getReference("Users");
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -95,27 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         int d = Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        if (user != null) {
-                            // User is signed in
 
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(firstnameET.getText().toString() + " " + lastnameET.getText().toString())
-                                    .build();
-
-                            user.updateProfile(profileUpdates)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Log.d(TAG, "User profile updated.");
-                                            }
-                                        }
-                                    });
-                        }
-                        else {
-                            // No user is signed in
-                        }
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
@@ -129,6 +117,12 @@ public class RegisterActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+
+        User user = new User("Brandon", "Derbidge", "8018575056", "brander81@gmail.com");
+        Map<String, User> IdUsers = new HashMap<String, User>();
+
+        IdUsers.put("1", user);
+        myRef.setValue(IdUsers);
     }
     public void switchToMainActivity() {
         Log.v(TAG, "Switching to MainActivity Activity");
