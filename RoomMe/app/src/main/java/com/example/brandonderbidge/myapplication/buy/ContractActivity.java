@@ -40,7 +40,7 @@ public class ContractActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
+        setTitle("Contract");
         apartmentName = (TextView)findViewById(R.id.apartmentName);
         costOfRent = (TextView)findViewById(R.id.costOfRent);
         cityState = (TextView)findViewById(R.id.cityState);
@@ -141,6 +141,7 @@ public class ContractActivity extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 

@@ -61,13 +61,13 @@ public class FavoriteFragment extends Fragment {
         adapter = new FavoriteAdapter(listOfContracts);
         recyclerView.setAdapter(adapter);
 
-        loadSellContracts();
+        loadFavoriteContracts();
         getActivity().setTitle(R.string.favorite);
 
         return view;
     }
 
-    public void loadSellContracts() {
+    public void loadFavoriteContracts() {
         listOfContracts = new ArrayList<>();
 
         for (int i = 0; i < Model.instance().getCurrentUser().getFavoriteContracts().size(); i++) {
@@ -98,6 +98,19 @@ public class FavoriteFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onResume() {
+
+        loadFavoriteContracts();
+        Log.e("DEBUG", "onResume of HomeFragment");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.e("DEBUG", "OnPause of HomeFragment");
+        super.onPause();
+    }
     public void showDialog() {
         Log.v(TAG, "Showing Dialog");
 

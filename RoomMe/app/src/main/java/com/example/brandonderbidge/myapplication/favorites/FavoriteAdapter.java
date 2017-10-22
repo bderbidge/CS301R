@@ -1,5 +1,6 @@
 package com.example.brandonderbidge.myapplication.favorites;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.brandonderbidge.myapplication.R;
+import com.example.brandonderbidge.myapplication.buy.ContractActivity;
 import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.sell.SellAdapter;
@@ -47,6 +49,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
 
                 Contract contract =  dataSet.get(getLayoutPosition());
                 Model.instance().setSelectedContract(contract);
+                Intent intent = new Intent(v.getContext(), ContractActivity.class);
+                v.getContext().startActivity(intent);
 
             }
         }
@@ -59,6 +63,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
         this.dataSet = dataSet;
     }
 
+    public boolean onBackPressed() {
+        return false;
+    }
 
     @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

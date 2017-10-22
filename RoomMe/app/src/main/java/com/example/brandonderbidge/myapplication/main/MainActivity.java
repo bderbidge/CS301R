@@ -57,6 +57,19 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getBaseContext(), message, toastLength).show();
     }
 
+
+    @Override
+    public void onResume() {
+        Log.e("DEBUG", "onResume of HomeFragment");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.e("DEBUG", "OnPause of HomeFragment");
+        super.onPause();
+    }
+
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_new_contract)) != null) {

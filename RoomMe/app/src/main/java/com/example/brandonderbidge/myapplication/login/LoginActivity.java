@@ -20,6 +20,9 @@ import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.model.User;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -47,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView emailText;
     private TextView passwordText;
     private ProgressBar progressBar;
+    private GoogleApiClient mGoogleApiClient;
 
 
     @Override
@@ -62,7 +66,12 @@ public class LoginActivity extends AppCompatActivity {
         passwordText = (TextView) findViewById(R.id.password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        // Set the dimensions of the sign-in button.
+        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
         this.loginController = new LoginController();
+
+
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -92,6 +101,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
        });
+
+        // Configure sign-in to request the user's ID, email address, and basic
+// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override

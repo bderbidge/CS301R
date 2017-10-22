@@ -80,6 +80,14 @@ public class SellFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+
+        loadSellContracts();
+        Log.e("DEBUG", "onResume of HomeFragment");
+        super.onResume();
+    }
+
     public void loadSellContracts() {
         listOfContracts = new ArrayList<>();
 
