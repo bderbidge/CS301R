@@ -137,8 +137,8 @@ public class SellFragment extends Fragment {
     }
 
 
-
-
-
-
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }

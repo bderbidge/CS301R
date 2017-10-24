@@ -184,6 +184,11 @@ public class NewContractFragment extends Fragment {
                 myRef.setValue(Model.instance().getAllContracts());
                 myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
 
+                if(getFragmentManager().findFragmentByTag(getString(R.string.TAG_sell)) != null)
+                    ((SellFragment) getFragmentManager().findFragmentByTag(getString(R.string.TAG_sell))).loadSellContracts();
+                getFragmentManager().popBackStack();
+
+
             }
         });
 
