@@ -133,10 +133,7 @@ public class MainFragment extends Fragment {
                         .colorRes(nav.equals("favorites") ? R.color.colorPrimary : R.color.greyedText)
                         .sizeDp(14));
 
-        menu.findItem(R.id.navigation_more).setIcon(
-                new IconDrawable(getContext(), FontAwesomeIcons.fa_bars)
-                        .colorRes(nav.equals("more") ? R.color.colorPrimary : R.color.greyedText)
-                        .sizeDp(14));
+
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
