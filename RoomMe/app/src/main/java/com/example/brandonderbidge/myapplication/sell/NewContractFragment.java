@@ -175,8 +175,8 @@ public class NewContractFragment extends Fragment {
                         address.getText().toString() + address2.getText().toString(), apartmentNumber.getText().toString(), -1, sellBy.getText().toString(),
                         city.getText().toString(), state.getText().toString(), postal.getText().toString(), price2
                         , maritalStatusSpinner.getSelectedItem().toString(),
-                        sexSpinner.getSelectedItem().toString(),additionalInfo.getText().toString(), "8018575056",
-                        "brander81@gmail.com");
+                        sexSpinner.getSelectedItem().toString(),additionalInfo.getText().toString(), Model.instance().getCurrentUser().getPhoneNumber(),
+                        Model.instance().getCurrentUser().getEmail());
 
                 Model.instance().getAllContracts().put(ID, contract);
                 Model.instance().getCurrentUser().getMyContractsToSell().add(contract);
@@ -184,8 +184,8 @@ public class NewContractFragment extends Fragment {
                 myRef.setValue(Model.instance().getAllContracts());
                 myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
 
-                if(getFragmentManager().findFragmentByTag(getString(R.string.TAG_sell)) != null)
-                    ((SellFragment) getFragmentManager().findFragmentByTag(getString(R.string.TAG_sell))).loadSellContracts();
+                if(getActivity().getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_sell)) != null)
+                    ((SellFragment) getActivity().getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_sell))).loadSellContracts();
                 getFragmentManager().popBackStack();
 
 
