@@ -29,6 +29,7 @@ public class ContractActivity extends AppCompatActivity {
     ImageView dial;
     ImageView email;
     ImageView heart;
+    ImageView textMessage;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myUser = database.getReference("Users");
 
@@ -51,6 +52,7 @@ public class ContractActivity extends AppCompatActivity {
         dial = (ImageView) findViewById(R.id.caller);
         email = (ImageView) findViewById(R.id.email);
         heart = (ImageView) findViewById(R.id.favoriteHeart);
+        textMessage = (ImageView) findViewById(R.id.text_img);
 
         notes.setText(Model.instance().getSelectedContract().getAdditionalNotes());
         sellBy.setText(Model.instance().getSelectedContract().getSellBy());
@@ -89,6 +91,13 @@ public class ContractActivity extends AppCompatActivity {
 
                 Model.instance().getCurrentUser().getFavoriteContracts().add(Model.instance().getSelectedContract());
                 myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
+            }
+        });
+
+        textMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textSeller(Model.instance().getSelectedContract().getPhoneNumber());
             }
         });
 
@@ -145,6 +154,15 @@ public class ContractActivity extends AppCompatActivity {
 
 
     }
+
+
+    public void textSeller(String phoneNumber){
+
+        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+        sendIntent.setData(Uri.parse("smsto:" + phoneNumber));
+        startActivity(sendIntent);
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
