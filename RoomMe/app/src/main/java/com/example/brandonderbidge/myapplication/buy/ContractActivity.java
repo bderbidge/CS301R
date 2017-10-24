@@ -93,11 +93,12 @@ public class ContractActivity extends AppCompatActivity {
         });
 
         boolean success = false;
-        for(int i = 0; i < Model.instance().getCurrentUser().getFavoriteContracts().size(); i++)
-        {
-            if(Model.instance().getCurrentUser().getFavoriteContracts().get(i).getID().equals(Model
-                    .instance().getSelectedContract().getID()))
-                success = true;
+        if(Model.instance().getCurrentUser().getFavoriteContracts() != null) {
+            for (int i = 0; i < Model.instance().getCurrentUser().getFavoriteContracts().size(); i++) {
+                if (Model.instance().getCurrentUser().getFavoriteContracts().get(i).getID().equals(Model
+                        .instance().getSelectedContract().getID()))
+                    success = true;
+            }
         }
 
         if(success)

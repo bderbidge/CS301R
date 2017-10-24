@@ -113,6 +113,10 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this, "Unable to Register User",
                                     Toast.LENGTH_SHORT).show();
                         }else {
+                            String ID = UUID.randomUUID().toString();
+                            User user = new User(ID, "Brandon", "Derbidge", "8018575056", "brander81@gmail.com");
+                            Model.instance().setCurrentUser(user);
+                            myRef.child(ID).setValue(user);
                             switchToMainActivity();
 
                         }
@@ -121,10 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
 
-        String ID = UUID.randomUUID().toString();
-        User user = new User(ID, "Brandon", "Derbidge", "8018575056", "brander81@gmail.com");
-        Model.instance().setCurrentUser(user);
-        myRef.child(ID).setValue(user);
+
 
     }
     public void switchToMainActivity() {
