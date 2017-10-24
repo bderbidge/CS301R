@@ -32,15 +32,13 @@ import java.util.UUID;
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "Register" ;
-    private EditText usernameET;
+    private EditText emailET;
     private EditText passwordET;
     private EditText firstnameET;
     private EditText lastnameET;
+    private EditText phonenumberET;
     private Button registerBtn;
     private LoginController loginController;
-    private Button maleBtn;
-    private Button femaleBtn;
-    private ProgressBar mSpinner;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private    DatabaseReference myRef = database.getReference("Users");
 
@@ -53,44 +51,21 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         Log.v(TAG, "Starting onCreate of Register Activity");
 
-        usernameET = (EditText) findViewById(R.id.username);
+        emailET = (EditText) findViewById(R.id.username);
         passwordET = (EditText)findViewById(R.id.password);
         firstnameET = (EditText)findViewById(R.id.first_name);
         lastnameET = (EditText)findViewById(R.id.last_name);
-        maleBtn = (Button) findViewById(R.id.male_btn);
-        femaleBtn = (Button) findViewById(R.id.female_btn);
+        phonenumberET = (EditText)findViewById(R.id.phone_number);
         mAuth = FirebaseAuth.getInstance();
         registerBtn = (Button) findViewById(R.id.register_btn);
-
-        maleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                maleBtn.setTextColor(Color.WHITE);
-                femaleBtn.setTextColor(Color.GRAY);
-
-                maleBtn.setBackground(getResources().getDrawable(R.drawable.toggle_button_left_clicked, null));
-                femaleBtn.setBackground(getResources().getDrawable(R.drawable.toggle_button_right, null));
-            }
-        });
-
-        femaleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                femaleBtn.setTextColor(Color.WHITE);
-                maleBtn.setTextColor(Color.GRAY);
-
-                femaleBtn.setBackground(getResources().getDrawable(R.drawable.toggle_button_right_clicked, null));
-                maleBtn.setBackground(getResources().getDrawable(R.drawable.toggle_button_left, null));
-            }
-        });
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                createAccount(usernameET.getText().toString(), passwordET.getText().toString());
+                createAccount(emailET.getText().toString(), passwordET.getText().toString());
                 /*mSpinner.setVisibility(View.VISIBLE);
-                loginController.register(usernameET.getText().toString(), passwordET.getText().toString(),
+                loginController.register(emailET.getText().toString(), passwordET.getText().toString(),
                         firstnameET.getText().toString(), lastnameET.getText().toString());*/
             }
         });
@@ -114,14 +89,13 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }else {
                             String ID = UUID.randomUUID().toString();
-                            User user = new User(ID, "Brandon", "Derbidge", "8018575056", "brander81@gmail.com");
+                            User user = new User(ID, firstnameET.getText().toString(),
+                                    lastnameET.getText().toString(), phonenumberET.getText().toString(),
+                                    emailET.getText().toString() );
                             Model.instance().setCurrentUser(user);
                             myRef.child(ID).setValue(user);
                             switchToMainActivity();
-
                         }
-
-                        // ...
                     }
                 });
 

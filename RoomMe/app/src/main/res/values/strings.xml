@@ -8,6 +8,7 @@
     <string name="login_password">Password</string>
     <string name="login_firstname">First Name</string>
     <string name="login_lastname">Last Name</string>
+    <string name="phone_number">Phone Number</string>
     <string name="sex">Sex</string>
     <string name="login_male">Male</string>
     <string name="login_female">Female</string>

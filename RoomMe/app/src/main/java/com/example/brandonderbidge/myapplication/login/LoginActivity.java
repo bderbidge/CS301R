@@ -125,7 +125,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(loginController.validData(emailText.getText().toString(), passwordText.getText().toString() )) {
-                    progressBar.setVisibility(View.VISIBLE);
                     signIn(emailText.getText().toString(), passwordText.getText().toString());
                 }
             }
@@ -155,7 +154,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onStart() {
-        FirebaseAuth.getInstance().signOut();
+//        FirebaseAuth.getInstance().signOut();
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
 
@@ -214,7 +213,6 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressBar.setVisibility(View.GONE);
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
@@ -225,7 +223,36 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
                         }else {
-                            switchToMainActivity();
+
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+
+                            if(currentUser != null) {
+
+                                String email = currentUser.getEmail();
+                                Query allPostFromAuthor = myRef.orderByChild("email").equalTo(email);
+                                allPostFromAuthor.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot snapshot) {
+
+                                        if (snapshot.getValue() != null) {
+                                            for (DataSnapshot post : snapshot.getChildren()) {
+                                                User user = post.getValue(User.class);
+
+                                                Log.d("THIS", "MADE IT TO FIREBASE LOGIN");
+                                                Model.instance().setCurrentUser(user);
+                                                switchToMainActivity();
+
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+
                         }
 
                         // ...
@@ -233,22 +260,22 @@ public class LoginActivity extends AppCompatActivity {
                 });
 
 
-        Query allPostFromAuthor = myRef.orderByChild("email").equalTo(email);
-
-// Add listener for Firebase response on said query
-        allPostFromAuthor.addValueEventListener( new ValueEventListener(){
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot post : dataSnapshot.getChildren() ){
-                    User user = post.getValue(User.class);
-                    Model.instance().setCurrentUser(user);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
+//        Query allPostFromAuthor = myRef.orderByChild("email").equalTo(email);
+//
+//// Add listener for Firebase response on said query
+//        allPostFromAuthor.addValueEventListener( new ValueEventListener(){
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                for(DataSnapshot post : dataSnapshot.getChildren() ){
+//                    User user = post.getValue(User.class);
+//                    Model.instance().setCurrentUser(user);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {}
+//        });
     }
     @Override
     public void onBackPressed() {

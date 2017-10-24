@@ -94,33 +94,55 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
-            android:id="@+id/select_sex_container"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/phone_number_label"
+            app:hintTextAppearance="@style/AppTheme.EditTextLabelColorTheme"
             app:layout_constraintTop_toBottomOf="@id/password_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="35dp"
-            android:orientation="horizontal">
+            style="@style/AppTheme.EditTextLabel">
 
-            <Button
-                android:id="@+id/male_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_male"
-                style="@style/toggleButtonLeft" />
+            <EditText
+                android:id="@+id/phone_number"
+                style="@style/AppTheme.EditText"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:layout_width="match_parent"/>
 
-            <View style="@style/toggleButton.separator" />
+        </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/female_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_female"
-                style="@style/toggleButtonRight" />
+        <!--<LinearLayout-->
+            <!--android:id="@+id/select_sex_container"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/password_label"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--android:layout_marginStart="35dp"-->
+            <!--android:orientation="horizontal"-->
+            <!--tools:layout_editor_absoluteX="-9dp"-->
+            <!--android:layout_marginTop="-18dp">-->
 
-        </LinearLayout>
+            <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/male_btn"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="@string/login_male"&ndash;&gt;-->
+                <!--&lt;!&ndash;style="@style/toggleButtonLeft" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<View style="@style/toggleButton.separator" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/female_btn"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="@string/login_female"&ndash;&gt;-->
+                <!--&lt;!&ndash;style="@style/toggleButtonRight" />&ndash;&gt;-->
+
+           <!---->
+
+
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/login_btn_layout"
@@ -128,10 +150,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/select_sex_container"
+            app:layout_constraintTop_toBottomOf="@+id/phone_number_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteX="0dp">
+            tools:layout_editor_absoluteX="136dp">
 
             <Button
                 style="@style/AppTheme.PrimaryButton"
