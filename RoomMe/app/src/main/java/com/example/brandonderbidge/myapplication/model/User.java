@@ -10,21 +10,26 @@ import java.util.List;
 
 public class User {
 
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String phoneNumber;
     private String email;
-
-
     private String ID;
     private List<Contract> favoriteContracts = new ArrayList<>();
     private List<Contract> myContractsToSell = new ArrayList<>();
 
     public User(){}
 
-    public User(String ID, String firstName, String lastName, String phoneNumber, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+
+        this.fullName = fullName;
+    }
+
+    public User(String ID, String fullName, String phoneNumber, String email) {
+        this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.ID = ID;
@@ -38,21 +43,6 @@ public class User {
         this.ID = ID;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;

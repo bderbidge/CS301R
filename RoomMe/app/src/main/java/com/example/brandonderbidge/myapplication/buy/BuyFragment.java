@@ -35,7 +35,11 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -137,7 +141,25 @@ public class BuyFragment extends Fragment {
             }
 
 
-            listOfContracts.add(contract);
+
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            Date sellByDate;
+            try {
+                sellByDate = df.parse(contract.getSellBy());
+                Date today = new Date();
+                if(sellByDate.after(today)){
+                    System.out.println(contract);
+                    listOfContracts.add(contract);
+                }
+                else {
+                    System.out.println(contract);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+
         }
 
         adapter.setDataSet(listOfContracts);
@@ -180,5 +202,12 @@ public class BuyFragment extends Fragment {
             transaction.add(android.R.id.content, newFragment)
                     .commit();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        loadContracts();
     }
 }

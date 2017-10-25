@@ -165,30 +165,24 @@ public class NewContractFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
             String temp = price.getText().toString();
             int price1 = Integer.parseInt(temp);
             double price2 = (double)price1;
                 String ID = UUID.randomUUID().toString();
                 Contract contract = new Contract(ID, apartmentName.getText().toString(),
-                        Model.instance().getCurrentUser().getFirstName() + " " + Model.instance().getCurrentUser().getLastName(),
+                        Model.instance().getCurrentUser().getFullName(),
                         address.getText().toString() + address2.getText().toString(), apartmentNumber.getText().toString(), -1, sellBy.getText().toString(),
                         city.getText().toString(), state.getText().toString(), postal.getText().toString(), price2
                         , maritalStatusSpinner.getSelectedItem().toString(),
                         sexSpinner.getSelectedItem().toString(),additionalInfo.getText().toString(), Model.instance().getCurrentUser().getPhoneNumber(),
-                        Model.instance().getCurrentUser().getEmail());
+                        Model.instance().getCurrentUser().getEmail(), dateAvailable.getText().toString());
 
                 Model.instance().getAllContracts().put(ID, contract);
                 Model.instance().getCurrentUser().getMyContractsToSell().add(contract);
 
                 myRef.setValue(Model.instance().getAllContracts());
                 myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
-
-                if(getActivity().getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_sell)) != null)
-                    ((SellFragment) getActivity().getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_sell))).loadSellContracts();
                 getFragmentManager().popBackStack();
-
-
             }
         });
 

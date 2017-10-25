@@ -41,6 +41,8 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
             this.textViewcityState = itemView.findViewById(R.id.cityState);
             this.genderRoomType = itemView.findViewById(R.id.genderRoomType);
             itemView.setOnClickListener(this);
+
+
         }
 
         @Override
@@ -107,4 +109,6 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
     public int getItemCount() {
         return dataSet.size();
     }
+
+
 }

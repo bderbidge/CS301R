@@ -24,7 +24,7 @@ public class ContractActivity extends AppCompatActivity {
     TextView cityState ;
     TextView apartmentType;
     TextView sellerName;
-    TextView sellBy;
+    TextView availableDate;
     TextView notes;
     ImageView dial;
     ImageView email;
@@ -47,7 +47,7 @@ public class ContractActivity extends AppCompatActivity {
         cityState = (TextView)findViewById(R.id.cityState);
         apartmentType = (TextView)findViewById(R.id.genderRoomType);
         sellerName = (TextView)findViewById(R.id.sellerName);
-        sellBy = (TextView)findViewById(R.id.sellBy);
+        availableDate = (TextView)findViewById(R.id.sellBy);
         notes = (TextView)findViewById(R.id.notes);
         dial = (ImageView) findViewById(R.id.caller);
         email = (ImageView) findViewById(R.id.email);
@@ -55,7 +55,7 @@ public class ContractActivity extends AppCompatActivity {
         textMessage = (ImageView) findViewById(R.id.text_img);
 
         notes.setText(Model.instance().getSelectedContract().getAdditionalNotes());
-        sellBy.setText(Model.instance().getSelectedContract().getSellBy());
+        availableDate.setText(Model.instance().getSelectedContract().getAvailableDate());
         sellerName.setText(Model.instance().getSelectedContract().getSellerName());
         apartmentName.setText(Model.instance().getSelectedContract().getApartmentName());
 

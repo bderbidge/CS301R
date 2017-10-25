@@ -2,6 +2,7 @@ package com.example.brandonderbidge.myapplication.main;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -14,12 +15,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
+import com.example.brandonderbidge.myapplication.model.Model;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
@@ -31,6 +39,8 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule;
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
     private MainController mainController;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference myRef = database.getReference("Users");
 
     private static int RESULT_LOAD_IMAGE = 65537;
     private static String[] PERMISSIONS_STORAGE = {
@@ -51,6 +61,28 @@ public class MainActivity extends AppCompatActivity {
         this.mainController = new MainController(this);
 
         setSellFragment(savedInstanceState);
+
+        if(Model.instance().getCurrentUser().getPhoneNumber().equals("")){
+
+            LayoutInflater layoutInflaterAndroid = LayoutInflater.from(this);
+            View mView = layoutInflaterAndroid.inflate(R.layout.user_input_dialog_box, null);
+            AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(this);
+            alertDialogBuilderUserInput.setView(mView);
+
+            final EditText userInputDialogEditText = (EditText) mView.findViewById(R.id.userInputDialog);
+            alertDialogBuilderUserInput
+                    .setCancelable(false)
+                    .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialogBox, int id) {
+                            // ToDo get user input here
+                            Model.instance().getCurrentUser().setPhoneNumber(userInputDialogEditText.getText().toString());
+                            myRef.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
+                        }
+                    });
+
+            AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+            alertDialogAndroid.show();
+        }
     }
 
     public void createToast(String message, int toastLength) {

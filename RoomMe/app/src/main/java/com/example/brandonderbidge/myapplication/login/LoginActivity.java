@@ -44,6 +44,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.UUID;
+
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private LoginController loginController;
@@ -181,11 +183,7 @@ public class LoginActivity extends AppCompatActivity {
                             switchToMainActivity();
 
                         }
-                    } else {
-
-                        //create a new user based off of the google account
                     }
-
                 }
 
                 @Override
@@ -261,24 +259,6 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                     }
                 });
-
-
-//        Query allPostFromAuthor = myRef.orderByChild("email").equalTo(email);
-//
-//// Add listener for Firebase response on said query
-//        allPostFromAuthor.addValueEventListener( new ValueEventListener(){
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                for(DataSnapshot post : dataSnapshot.getChildren() ){
-//                    User user = post.getValue(User.class);
-//                    Model.instance().setCurrentUser(user);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {}
-//        });
     }
     @Override
     public void onBackPressed() {
@@ -320,6 +300,12 @@ public class LoginActivity extends AppCompatActivity {
                         else {
 
                             //create a new user based off of the google account
+                            String ID = UUID.randomUUID().toString();
+                            User user = new User(ID, account.getGivenName() +" " +
+                                    account.getFamilyName(), "",
+                                    account.getEmail());
+                            Model.instance().setCurrentUser(user);
+                            myRef.child(ID).setValue(user);
                         }
 
                     }
@@ -360,7 +346,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -393,6 +379,12 @@ public class LoginActivity extends AppCompatActivity {
                                     } else {
 
                                         //create a new user based off of the google account
+                                        String ID = UUID.randomUUID().toString();
+                                        User user = new User(ID, acct.getGivenName() + " " +
+                                                acct.getFamilyName(), "",
+                                                acct.getEmail());
+                                        Model.instance().setCurrentUser(user);
+                                        myRef.child(ID).setValue(user);
                                     }
 
                                 }

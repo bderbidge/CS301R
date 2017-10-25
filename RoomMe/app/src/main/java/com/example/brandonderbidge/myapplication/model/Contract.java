@@ -22,12 +22,15 @@ public class Contract {
     private String additionalNotes;
     private String phoneNumber;
     private String email;
+    private String availableDate;
 
-    public Contract(){};
+
+    public Contract(){}
+
     public Contract(String ID, String apartmentName, String sellerName, String address,
                     String apartmentNum, int image, String sellBy, String city, String state,
                     String zipCode, Double price, String maritalStatus, String sex,
-                    String additionalNotes, String phoneNumber, String email) {
+                    String additionalNotes, String phoneNumber, String email, String availableDate) {
         this.ID = ID;
         this.apartmentName = apartmentName;
         this.sellerName = sellerName;
@@ -44,6 +47,7 @@ public class Contract {
         this.additionalNotes = additionalNotes;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.availableDate = availableDate;
     }
 
     public String getID() {
@@ -173,4 +177,13 @@ public class Contract {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getAvailableDate() {
+        return availableDate;
+    }
+
+    public void setAvailableDate(String availableDate) {
+        this.availableDate = availableDate;
+    }
+
 }

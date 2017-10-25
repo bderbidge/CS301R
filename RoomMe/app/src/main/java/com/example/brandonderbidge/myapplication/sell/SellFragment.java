@@ -77,6 +77,14 @@ public class SellFragment extends Fragment {
             }
         });
 
+        getFragmentManager().addOnBackStackChangedListener(
+                new FragmentManager.OnBackStackChangedListener() {
+                    @Override
+                    public void onBackStackChanged() {
+                        loadSellContracts();
+                    }
+                });
+
         return view;
     }
 
