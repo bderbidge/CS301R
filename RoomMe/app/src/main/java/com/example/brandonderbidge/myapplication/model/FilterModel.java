@@ -13,6 +13,7 @@ public class FilterModel {
     private String maritalStatus;
     private String prevSex;
     private String prevMaritalStatus;
+    private String availableBy;
 
     private FilterModel() {}
 
@@ -70,5 +71,23 @@ public class FilterModel {
 
     public void setPrevMaritalStatus(String prevMaritalStatus) {
         this.prevMaritalStatus = prevMaritalStatus;
+    }
+
+    public String getAvailableBy() {
+        return availableBy;
+    }
+
+    public void setAvailableBy(String availableBy) {
+        this.availableBy = availableBy;
+    }
+
+    public void clear() {
+        priceLow = null;
+        priceHigh = null;
+        sex = null;
+        maritalStatus = null;
+        prevSex = null;
+        prevMaritalStatus = null;
+        availableBy = null;
     }
 }

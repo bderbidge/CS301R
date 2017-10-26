@@ -41,6 +41,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -119,9 +120,25 @@ public class BuyFragment extends Fragment {
         Log.v(TAG, "Price High Filter: " + FilterModel.getInstance().getPriceHigh());
         Log.v(TAG, "Price Low Filter: " + FilterModel.getInstance().getPriceLow());
         Log.v(TAG, "Marital Status Filter: " + FilterModel.getInstance().getMaritalStatus());
+        Log.v(TAG, "Available By Filter: " + FilterModel.getInstance().getAvailableBy());
 
-        for (Contract value : Model.instance().getAllContracts().values()) {
-            Contract contract = value;
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+        Date filterAvailableBy = null;
+
+        if (FilterModel.getInstance().getAvailableBy() != null) {
+            try {
+                filterAvailableBy = formatter.parse(FilterModel.getInstance().getAvailableBy());
+            } catch (ParseException e) {
+                filterAvailableBy = null;
+            }
+        }
+        for (Contract contract : Model.instance().getAllContracts().values()) {
+            Date availableBy;
+            try {
+                availableBy = formatter.parse(contract.getAvailableDate());
+            } catch (ParseException e) {
+                availableBy = null;
+            }
 
             if (FilterModel.getInstance().getMaritalStatus() != null) {
                 if (!contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
@@ -138,14 +155,14 @@ public class BuyFragment extends Fragment {
             } else if (FilterModel.getInstance().getPriceHigh() != null
                     && contract.getPrice() > FilterModel.getInstance().getPriceHigh()) {
                 continue;
+            } else if (filterAvailableBy != null && availableBy != null && availableBy.after(filterAvailableBy)) {
+                continue;
             }
 
 
-
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             Date sellByDate;
             try {
-                sellByDate = df.parse(contract.getSellBy());
+                sellByDate = formatter.parse(contract.getSellBy());
                 Date today = new Date();
                 if(sellByDate.after(today)){
                     System.out.println(contract);
@@ -190,16 +207,16 @@ public class BuyFragment extends Fragment {
     public void showDialog() {
         Log.v(TAG, "Showing Dialog");
 
-        if (getActivity().findViewById(R.id.filter_layout) == null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            FilterDialog newFragment = new FilterDialog();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (getActivity().findViewById(R.id.filter_layout) == null) {
+            FilterDialog filterDialog = new FilterDialog();
             // For a little polish, specify a transition animation
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             // To make it fullscreen, use the 'content' root view as the container
             // for the fragment, which is always the root view for the activity
-            transaction.add(android.R.id.content, newFragment)
+            transaction.add(android.R.id.content, filterDialog, getString(R.string.TAG_filter))
                     .commit();
         }
     }

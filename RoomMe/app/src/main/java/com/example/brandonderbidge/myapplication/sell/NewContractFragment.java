@@ -3,11 +3,13 @@ package com.example.brandonderbidge.myapplication.sell;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.main.MainController;
@@ -56,7 +59,6 @@ public class NewContractFragment extends Fragment {
     private Button saveButton;
     private boolean isSellByDateFrag;
     private EditText apartmentName;
-    private EditText apartmentNumber;
     private EditText address;
     private EditText address2;
     private EditText city;
@@ -91,7 +93,6 @@ public class NewContractFragment extends Fragment {
         dateAvailable = view.findViewById(R.id.date_available);
         saveButton = view.findViewById(R.id.create_contract_btn);
         apartmentName = view.findViewById(R.id.apartment_name);
-        apartmentNumber = view.findViewById(R.id.apartment_number);
         address = view.findViewById(R.id.address_line_1);
         address2 = view.findViewById(R.id.address_line_2);
         city = view.findViewById(R.id.city);
@@ -125,6 +126,14 @@ public class NewContractFragment extends Fragment {
                 }
             }
         });
+        sellBy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeKeyboard();
+                isSellByDateFrag = true;
+                showDateDialog(getString(R.string.sell_by));
+            }
+        });
 
         dateAvailable.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -134,6 +143,14 @@ public class NewContractFragment extends Fragment {
                     isSellByDateFrag = false;
                     showDateDialog(getString(R.string.date_available));
                 }
+            }
+        });
+        dateAvailable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeKeyboard();
+                isSellByDateFrag = false;
+                showDateDialog(getString(R.string.date_available));
             }
         });
 
@@ -165,6 +182,23 @@ public class NewContractFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                if (address.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), "Please provide valid address information", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (city.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), "Please provide valid city information", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (state.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), "Please provide valid state information", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (postal.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), "Please provide a valid postal code", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (price.getText().toString().equals("")) {
+                    Toast.makeText(getContext(), "Please provide a price for the Apartment", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 String temp = price.getText().toString();
                 int price1 = Integer.parseInt(temp);
                 double price2 = (double)price1;
@@ -177,7 +211,7 @@ public class NewContractFragment extends Fragment {
                 String ID = UUID.randomUUID().toString();
                 Contract contract = new Contract(ID, apartmentName.getText().toString(),
                         Model.instance().getCurrentUser().getFullName(),
-                        addressString, apartmentNumber.getText().toString(), -1, sellBy.getText().toString(),
+                        addressString, null, -1, sellBy.getText().toString(),
                         city.getText().toString(), state.getText().toString(), postal.getText().toString(), price2
                         , maritalStatusSpinner.getSelectedItem().toString(),
                         sexSpinner.getSelectedItem().toString(),additionalInfo.getText().toString(), Model.instance().getCurrentUser().getPhoneNumber(),
@@ -188,6 +222,12 @@ public class NewContractFragment extends Fragment {
 
                 myRef.setValue(Model.instance().getAllContracts());
                 myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
+
+                ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
+                if (ab != null) {
+                    ab.setDisplayHomeAsUpEnabled(false);
+                }
+
                 getFragmentManager().popBackStack();
             }
         });
@@ -256,7 +296,8 @@ public class NewContractFragment extends Fragment {
         InputMethodManager inputManager = (InputMethodManager)
                 getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus() == null ? null : getActivity().getCurrentFocus().getWindowToken(),
+        inputManager.hideSoftInputFromWindow(
+                getActivity().getCurrentFocus() == null ? null : getActivity().getCurrentFocus().getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

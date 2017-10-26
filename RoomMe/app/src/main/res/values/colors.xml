@@ -16,5 +16,6 @@
     <color name="backgroundTransparent">#b1000000</color>
     <color name="black">#000000</color>
     <color name="colorlessButtonPressed">#510053</color>
+    <color name="error">#ff0004</color>
 
 </resources>

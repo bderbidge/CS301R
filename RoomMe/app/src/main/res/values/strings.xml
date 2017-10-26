@@ -43,6 +43,7 @@
     <string name="apartment_number">Apt #</string>
     <string name="sell_by">Sell By</string>
     <string name="date_available">Date Available</string>
+    <string name="available_by">Date Available By</string>
     <string name="address">Address</string>
     <string name="address_2">Address 2</string>
     <string name="city">City</string>
@@ -53,7 +54,8 @@
     <string name="cancel_btn">CANCEL</string>
     <string name="ok">OK</string>
     <string name="save_btn">SAVE</string>
-    <string name="apply">Apply</string>
+    <string name="clear">CLEAR</string>
+    <string name="apply">APPLY</string>
     <string name="marital_status">Marital Status</string>
     <string name="single">Single</string>
     <string name="married">Married</string>
@@ -71,6 +73,7 @@
     <string name="TAG_buy">buy</string>
     <string name="TAG_sell">sell</string>
     <string name="TAG_datedialog">datedialog</string>
+    <string name="TAG_filter">filter</string>
     <string name="TAG_main_frag">MainFragment</string>
     <string name="TAG_new_contract">NewContract</string>
     <string name="TAG_currentfrag">current</string>

@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
+import com.example.brandonderbidge.myapplication.buy.BuyFragment;
+import com.example.brandonderbidge.myapplication.buy.FilterDialog;
 import com.example.brandonderbidge.myapplication.main.MainController;
 
 /**
@@ -63,9 +65,15 @@ public class DatePickerDialog extends DialogFragment {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String date = datePicker.getMonth() + "/" + datePicker.getDayOfMonth() + "/" + datePicker.getYear();
-                ((NewContractFragment) getActivity().getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_new_contract)))
-                        .setDate(date);
+                String date = (datePicker.getMonth() + 1) + "/" + datePicker.getDayOfMonth() + "/" + datePicker.getYear();
+
+                if (getActivity().getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_new_contract)) != null) {
+                    ((NewContractFragment) getActivity().getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_new_contract)))
+                            .setDate(date);
+                }else if (getActivity().getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_buy)) != null) {
+                    ((FilterDialog) getActivity().getSupportFragmentManager().findFragmentByTag(getString(R.string.TAG_filter)))
+                            .setDateAvailableFilter(date);
+                }
                 dismiss();
             }
         });
