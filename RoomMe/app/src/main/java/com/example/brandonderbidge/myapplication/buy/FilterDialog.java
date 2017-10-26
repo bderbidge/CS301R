@@ -43,6 +43,7 @@ public class FilterDialog extends DialogFragment {
     private Button singleBtn;
     private Button marriedBtn;
     private EditText availableBy;
+    private ImageButton clearAvailableBy;
     private LinearLayout selectSexContainer;
     private Button clearBtn;
     private Button applyBtn;
@@ -63,6 +64,7 @@ public class FilterDialog extends DialogFragment {
         singleBtn = view.findViewById(R.id.single);
         marriedBtn = view.findViewById(R.id.married);
         availableBy = view.findViewById(R.id.available_by);
+        clearAvailableBy = view.findViewById(R.id.clear_available_by_btn);
         selectSexContainer = view.findViewById(R.id.select_sex_container);
         clearBtn = view.findViewById(R.id.clear_filter);
         applyBtn = view.findViewById(R.id.apply_filter);
@@ -80,6 +82,7 @@ public class FilterDialog extends DialogFragment {
 
         selectSexContainer.setVisibility(View.GONE);
         availableBy.setShowSoftInputOnFocus(false);
+        availableBy.setCursorVisible(false);
 
         availableBy.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -95,6 +98,14 @@ public class FilterDialog extends DialogFragment {
             public void onClick(View view) {
                 closeKeyboard();
                 showDateDialog(getString(R.string.available_by));
+            }
+        });
+
+        clearAvailableBy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                availableBy.setText("");
+                FilterModel.getInstance().setAvailableBy(null);
             }
         });
 
