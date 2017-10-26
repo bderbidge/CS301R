@@ -55,9 +55,7 @@ public class ContractActivity extends AppCompatActivity {
         textMessage = (ImageView) findViewById(R.id.text_img);
 
         notes.setText(Model.instance().getSelectedContract().getAdditionalNotes());
-        availableDate.setText(Model.instance().getSelectedContract().getAddress() +
-                " " + Model.instance().getSelectedContract().getCity() +
-                " " + Model.instance().getSelectedContract().getState());
+        availableDate.setText(Model.instance().getSelectedContract().getAvailableDate());
         sellerName.setText(Model.instance().getSelectedContract().getSellerName());
         apartmentName.setText(Model.instance().getSelectedContract().getApartmentName());
 
@@ -69,7 +67,7 @@ public class ContractActivity extends AppCompatActivity {
 
         String price = "$" + Model.instance().getSelectedContract().getPrice().toString();
         costOfRent.setText(price);
-        cityState.setText(Model.instance().getSelectedContract().getAvailableDate());
+        cityState.setText(Model.instance().getSelectedContract().getCity() + " " + Model.instance().getSelectedContract().getState());
 
 
 

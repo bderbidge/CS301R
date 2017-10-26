@@ -30,26 +30,24 @@
                 android:layout_height="wrap_content"
                 card_view:srcCompat="@drawable/ic_text"
                 android:layout_alignTop="@+id/caller"
-                android:layout_toEndOf="@+id/email"
-                android:layout_marginLeft="35dp"/>
+                android:layout_marginLeft="195dp"/>
 
             <ImageView
                 android:id="@+id/caller"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 card_view:srcCompat="@drawable/ic_action_phone"
-                android:layout_alignTop="@+id/email"
-                android:layout_alignEnd="@+id/genderRoomType" />
+                android:layout_marginLeft="65dp"
+                android:layout_marginTop="260dp"/>
 
             <ImageView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
                 card_view:srcCompat="@drawable/ic_action_name"
-                android:layout_below="@+id/imageView"
-                android:layout_marginLeft="120dp" />
+                android:layout_marginStart="127dp"
+                android:layout_marginTop="260dp"
+                />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -64,9 +62,9 @@
                 android:id="@+id/favoriteHeart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/email"
-                android:layout_marginStart="102dp"
-                android:layout_toEndOf="@+id/email" />
+                android:layout_marginStart="253dp"
+                android:layout_marginTop="260dp"
+                />
 
             <TextView
                 android:id="@+id/costOfRent"
@@ -125,6 +123,15 @@
                 android:textColor="@color/black" />
 
             <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView2"
+                android:layout_below="@+id/textView2"
+                android:text="1000 E 450 N #1"
+                android:textColor="@color/black" />
+
+            <TextView
                 android:id="@+id/sellerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -140,17 +147,17 @@
                 android:layout_height="wrap_content"
                 android:text="12/23/17"
                 android:textColor="@color/black"
-                android:layout_above="@+id/notes"
+                android:layout_marginTop="322dp"
                 android:layout_marginLeft="165dp" />
 
             <TextView
                 android:id="@+id/notes"
                 android:layout_width="270dp"
                 android:layout_height="100dp"
-                android:layout_below="@+id/textView2"
-                android:layout_centerHorizontal="true"
                 android:text="Notes"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:layout_below="@+id/address"
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 
