@@ -96,7 +96,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
 
        // imageView.setImageResource(dataSet.get(listPosition).getImage());
-        textViewCityState.setText(dataSet.get(listPosition).getCity() + ", " + dataSet.get(listPosition).getState());
+        textViewCityState.setText(Model.instance().getSelectedContract().getAvailableDate());
 
         if(dataSet.get(listPosition).getMaritalStatus().equals("Married"))
             genderRoomType.setText(dataSet.get(listPosition).getMaritalStatus());
