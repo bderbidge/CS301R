@@ -165,13 +165,19 @@ public class NewContractFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-            String temp = price.getText().toString();
-            int price1 = Integer.parseInt(temp);
-            double price2 = (double)price1;
+                String temp = price.getText().toString();
+                int price1 = Integer.parseInt(temp);
+                double price2 = (double)price1;
+                String addressString;
+                if(address2.getText() != null) {
+                     addressString = address.getText().toString() + address2.getText().toString();
+                }else{
+                     addressString = address.getText().toString() + address2.getText().toString();
+                }
                 String ID = UUID.randomUUID().toString();
                 Contract contract = new Contract(ID, apartmentName.getText().toString(),
                         Model.instance().getCurrentUser().getFullName(),
-                        address.getText().toString() + address2.getText().toString(), apartmentNumber.getText().toString(), -1, sellBy.getText().toString(),
+                        addressString, apartmentNumber.getText().toString(), -1, sellBy.getText().toString(),
                         city.getText().toString(), state.getText().toString(), postal.getText().toString(), price2
                         , maritalStatusSpinner.getSelectedItem().toString(),
                         sexSpinner.getSelectedItem().toString(),additionalInfo.getText().toString(), Model.instance().getCurrentUser().getPhoneNumber(),
