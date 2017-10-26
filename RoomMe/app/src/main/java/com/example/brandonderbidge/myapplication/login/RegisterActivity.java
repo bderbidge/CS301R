@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }else {
                             String ID = UUID.randomUUID().toString();
-                            User user = new User(ID, firstnameET.getText().toString() +
+                            User user = new User(ID, firstnameET.getText().toString() + " " +
                                     lastnameET.getText().toString(), phonenumberET.getText().toString(),
                                     emailET.getText().toString() );
                             Model.instance().setCurrentUser(user);

@@ -114,6 +114,30 @@ public class LoginActivity extends AppCompatActivity {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
+                    String email = user.getEmail();
+                    Query allPostFromAuthor = myRef.orderByChild("email").equalTo(email);
+                    allPostFromAuthor.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+
+                            if (snapshot.getValue() != null) {
+                                for (DataSnapshot post : snapshot.getChildren()) {
+                                    User user = post.getValue(User.class);
+
+                                    Log.d("THIS", "MADE IT TO FIREBASE LOGIN");
+                                    Model.instance().setCurrentUser(user);
+                                    switchToMainActivity();
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
 
                 } else {
                     // User is signed out
@@ -157,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onStart() {
-//        FirebaseAuth.getInstance().signOut();
+
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
 
@@ -373,7 +397,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                             Log.d("THIS", "MADE IT TO FIREBASE LOGIN");
                                             Model.instance().setCurrentUser(user);
-                                            switchToMainActivity();
+
 
                                         }
                                     } else {
@@ -386,7 +410,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Model.instance().setCurrentUser(user);
                                         myRef.child(ID).setValue(user);
                                     }
-
+                                    switchToMainActivity();
                                 }
 
                                 @Override
@@ -395,7 +419,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             });
 
-                            switchToMainActivity();
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());

@@ -210,4 +210,6 @@ public class BuyFragment extends Fragment {
 
         loadContracts();
     }
+
+
 }

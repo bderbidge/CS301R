@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.buy.BuyFragment;
 import com.example.brandonderbidge.myapplication.favorites.FavoriteFragment;
+import com.example.brandonderbidge.myapplication.profile.ProfileFragment;
 import com.example.brandonderbidge.myapplication.sell.SellFragment;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
@@ -65,7 +66,7 @@ public class MainFragment extends Fragment {
                                 break;
                             case R.id.navigation_more:
                                 Log.v(TAG, "Switching to More Activity");
-                                changeNavItemSelected("more");
+                                changeNavItemSelected("profile");
                                 break;
                         }
                         return true;
@@ -132,7 +133,10 @@ public class MainFragment extends Fragment {
                 new IconDrawable(getContext(), FontAwesomeIcons.fa_heart)
                         .colorRes(nav.equals("favorites") ? R.color.colorPrimary : R.color.greyedText)
                         .sizeDp(14));
-
+        menu.findItem(R.id.navigation_more).setIcon(
+                new IconDrawable(getContext(), FontAwesomeIcons.fa_user)
+                        .colorRes(nav.equals("profile") ? R.color.colorPrimary : R.color.greyedText)
+                        .sizeDp(14));
 
 
         FragmentManager fm = getFragmentManager();
@@ -147,6 +151,9 @@ public class MainFragment extends Fragment {
         } if (nav.equals("favorites")) {
             FavoriteFragment favoriteFragment = new FavoriteFragment();
             ft.replace(R.id.fragment_main_content, favoriteFragment, getString(R.string.favorite)).commit();
+        } if (nav.equals("profile")) {
+            ProfileFragment profileFragment = new ProfileFragment();
+            ft.replace(R.id.fragment_main_content, profileFragment, getString(R.string.profile)).commit();
         }
     }
 }
