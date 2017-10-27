@@ -83,7 +83,8 @@
                 android:layout_alignEnd="@+id/cityState"
                 android:layout_marginBottom="9dp"
                 android:background="@color/colorAccent"
-                android:src="@drawable/ic_action_delete" />
+                android:src="@drawable/ic_action_delete"
+                />
 
         </RelativeLayout>
 

@@ -46,8 +46,12 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
+
+import static com.example.brandonderbidge.myapplication.R.id.username;
 
 /**
  * Created by justinbrunner on 10/16/17.
@@ -59,6 +63,7 @@ public class NewContractFragment extends Fragment {
     DatabaseReference myRef = database.getReference("Apartments");
     DatabaseReference myUser = database.getReference("Users");
     private StorageReference mStorageRef;
+    private DatabaseReference mDatabase;
 
     private String TAG = "NewContract";
     private String ID;
@@ -293,6 +298,18 @@ public class NewContractFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                Map<String, Object> childUpdates = new HashMap<>();
+
+                Model.instance().getCurrentUser()
+                        .getMyContractsToSell().remove( Model.instance().getSelectedContract());
+                childUpdates.put("/Users/" + Model.instance().getCurrentUser().getID(), Model.instance().getCurrentUser());
+
+                myRef.child(Model.instance().getSelectedContract().getID()).removeValue();
+
+                mDatabase.updateChildren(childUpdates);
+
+                getFragmentManager().popBackStack();
             }
         });
 

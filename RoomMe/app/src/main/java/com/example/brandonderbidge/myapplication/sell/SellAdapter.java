@@ -82,7 +82,7 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                            int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.sell_layout, parent, false);
+                .inflate(R.layout.cards_layout, parent, false);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
