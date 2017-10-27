@@ -71,9 +71,7 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-            }
+            public void onClick(View view) {}
         });
 
         MyViewHolder myViewHolder = new MyViewHolder(view);

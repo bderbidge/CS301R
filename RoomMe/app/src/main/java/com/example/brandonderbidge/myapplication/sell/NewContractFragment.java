@@ -26,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
+import com.example.brandonderbidge.myapplication.main.MainActivity;
 import com.example.brandonderbidge.myapplication.main.MainController;
 import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.Model;
@@ -171,10 +172,7 @@ public class NewContractFragment extends Fragment {
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(
-                        Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                ((MainActivity) getActivity()).openImages();
             }
         });
 
