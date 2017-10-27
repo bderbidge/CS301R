@@ -1,7 +1,11 @@
 package com.example.brandonderbidge.myapplication.sell;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +17,7 @@ import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.buy.ContractActivity;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -94,7 +99,9 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
         textViewCostOfRent.setText(price);
 
 
-    //        imageView.setImageResource(dataSet.get(listPosition).getImage());
+        new DownloadImageTask(imageView)
+                .execute(dataSet.get(listPosition).getFilepath());
+
         textViewCityState.setText(dataSet.get(listPosition).getCity() + ", " + dataSet.get(listPosition).getState());
 
         if(dataSet.get(listPosition).getMaritalStatus().equals("Married")) {
@@ -109,5 +116,29 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
         return dataSet.size();
     }
 
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 
 }
