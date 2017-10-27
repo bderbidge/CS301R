@@ -43,7 +43,7 @@
     <string name="apartment_number">Apt #</string>
     <string name="sell_by">Sell By</string>
     <string name="date_available">Date Available</string>
-    <string name="available_by">Date Available By</string>
+    <string name="available_by">Contract Available By</string>
     <string name="address">Address</string>
     <string name="address_2">Address 2</string>
     <string name="city">City</string>
