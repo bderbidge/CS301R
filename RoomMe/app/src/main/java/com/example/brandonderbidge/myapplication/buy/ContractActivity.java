@@ -21,6 +21,7 @@ import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 
@@ -62,9 +63,7 @@ public class ContractActivity extends AppCompatActivity {
         textMessage = (ImageView) findViewById(R.id.text_img);
         fileImage = (ImageView) findViewById(R.id.imageView);
 
-        new DownloadImageTask(fileImage)
-                .execute(Model.instance().getSelectedContract().getFilepath());
-
+        Picasso.with(this).load(Model.instance().getSelectedContract().getFilepath()).into(fileImage);
 
         notes.setText(Model.instance().getSelectedContract().getAdditionalNotes());
         availableDate.setText(Model.instance().getSelectedContract().getAvailableDate());
@@ -197,28 +196,5 @@ public class ContractActivity extends AppCompatActivity {
     }
 
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
 
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
 }
