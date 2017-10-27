@@ -72,26 +72,7 @@ public class FavoriteFragment extends Fragment {
 
         for (int i = 0; i < Model.instance().getCurrentUser().getFavoriteContracts().size(); i++) {
             Contract contract = Model.instance().getCurrentUser().getFavoriteContracts().get(i);
-
-            if (FilterModel.getInstance().getMaritalStatus() != null) {
-                if (!contract.getMaritalStatus().equalsIgnoreCase(FilterModel.getInstance().getMaritalStatus())) {
-                    continue;
-                } else if (FilterModel.getInstance().getSex() != null
-                        && contract.getSex() != null
-                        && !contract.getSex().equalsIgnoreCase(FilterModel.getInstance().getSex())) {
-                    continue;
-                }
-            }
-            if (FilterModel.getInstance().getPriceLow() != null
-                    && contract.getPrice() < FilterModel.getInstance().getPriceLow()) {
-                continue;
-            } else if (FilterModel.getInstance().getPriceHigh() != null
-                    && contract.getPrice() > FilterModel.getInstance().getPriceHigh()) {
-                continue;
-            }
-
-
-            listOfContracts.add(Model.instance().getCurrentUser().getFavoriteContracts().get(i));
+            listOfContracts.add(contract);
         }
 
         adapter.setDataSet(listOfContracts);

@@ -106,6 +106,7 @@ public class FilterDialog extends DialogFragment {
             public void onClick(View view) {
                 availableBy.setText("");
                 FilterModel.getInstance().setAvailableBy(null);
+                dismiss();
             }
         });
 
