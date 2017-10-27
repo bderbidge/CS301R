@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                                 for (DataSnapshot post : snapshot.getChildren()) {
                                     User user = post.getValue(User.class);
 
-                                    Log.d("THIS", "MADE IT TO FIREBASE LOGIN");
+                                    Log.d(TAG, "MADE IT TO FIREBASE LOGIN");
                                     Model.instance().setCurrentUser(user);
                                     switchToMainActivity();
 
@@ -202,7 +202,7 @@ public class LoginActivity extends AppCompatActivity {
                         for (DataSnapshot post : snapshot.getChildren()) {
                             User user = post.getValue(User.class);
 
-                            Log.d("THIS", "MADE IT TO FIREBASE LOGIN");
+                            Log.d(TAG, "MADE IT TO FIREBASE LOGIN");
                             Model.instance().setCurrentUser(user);
                             switchToMainActivity();
 
@@ -263,7 +263,7 @@ public class LoginActivity extends AppCompatActivity {
                                             for (DataSnapshot post : snapshot.getChildren()) {
                                                 User user = post.getValue(User.class);
 
-                                                Log.d("THIS", "MADE IT TO FIREBASE LOGIN");
+                                                Log.d(TAG, "MADE IT TO FIREBASE LOGIN");
                                                 Model.instance().setCurrentUser(user);
                                                 switchToMainActivity();
 
@@ -317,8 +317,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                 Log.d("THIS", "MADE IT TO FIREBASE LOGIN");
                                 Model.instance().setCurrentUser(user);
-
-
                             }
                         }
                         else {
