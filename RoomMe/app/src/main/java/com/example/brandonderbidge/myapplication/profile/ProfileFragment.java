@@ -37,7 +37,7 @@ public class ProfileFragment extends Fragment {
     private TextView fullName;
     private TextView email;
     private TextView phone;
-    private Button edit;
+    //private Button edit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +53,7 @@ public class ProfileFragment extends Fragment {
         email.setText(Model.instance().getCurrentUser().getEmail());
         phone.setText(Model.instance().getCurrentUser().getPhoneNumber());
 
-        edit = view.findViewById(R.id.edit_profile);
+        //edit = view.findViewById(R.id.edit_profile);
         signOut = view.findViewById(R.id.signOut);
         getActivity().setTitle(R.string.profile);
 
@@ -68,13 +68,13 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        edit.setOnClickListener(new View.OnClickListener() {
+        /*edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), LoginActivity.class);
                 startActivity(i);
             }
-        });
+        });*/
 
         return view;
     }
