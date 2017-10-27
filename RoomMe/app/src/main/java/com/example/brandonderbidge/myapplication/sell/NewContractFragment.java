@@ -266,6 +266,24 @@ public class NewContractFragment extends Fragment {
 
                         }
                     });
+                }else {
+
+
+                    String ID = UUID.randomUUID().toString();
+                    Contract contract = new Contract(ID, apartmentName.getText().toString(),
+                            Model.instance().getCurrentUser().getFullName(), addressString,
+                            null, sellBy.getText().toString(), city.getText().toString(), state.getText().toString(),
+                            postal.getText().toString(), price2, maritalStatusSpinner.getSelectedItem().toString(),
+                            sexSpinner.getSelectedItem().toString(), additionalInfo.getText().toString(),
+                            Model.instance().getCurrentUser().getPhoneNumber(), Model.instance().getCurrentUser().getEmail(),
+                            dateAvailable.getText().toString());
+
+                    Model.instance().getAllContracts().put(ID, contract);
+                    Model.instance().getCurrentUser().getMyContractsToSell().add(contract);
+
+                    myRef.setValue(Model.instance().getAllContracts());
+                    myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
+                    getFragmentManager().popBackStack();
                 }
 
             }
