@@ -30,14 +30,13 @@ public class Contract {
     public Contract(){}
 
     public Contract(String ID, String apartmentName, String sellerName, String address,
-                    String apartmentNum, String filepath, String sellBy, String city, String state,
+                    String filepath, String sellBy, String city, String state,
                     String zipCode, Double price, String maritalStatus, String sex,
                     String additionalNotes, String phoneNumber, String email, String availableDate) {
         this.ID = ID;
         this.apartmentName = apartmentName;
         this.sellerName = sellerName;
         this.address = address;
-        this.apartmentNum = apartmentNum;
         this.filepath = filepath;
         this.sellBy = sellBy;
         this.city = city;
@@ -82,14 +81,6 @@ public class Contract {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getApartmentNum() {
-        return apartmentNum;
-    }
-
-    public void setApartmentNum(String apartmentNum) {
-        this.apartmentNum = apartmentNum;
     }
 
     public String getFilepath() {

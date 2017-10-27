@@ -251,7 +251,7 @@
 
 
         <ImageView
-            android:id="@+id/imgView"
+            android:id="@+id/img_view"
             android:layout_width="0dp"
             android:layout_height="50dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -265,7 +265,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/additional_info_label"
-            app:layout_constraintStart_toEndOf="@id/imgView"
+            app:layout_constraintStart_toEndOf="@id/img_view"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:textColor="@color/colorPrimaryLight"
             android:layout_marginTop="10dp"
@@ -277,7 +277,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgView"
+            app:layout_constraintTop_toBottomOf="@+id/img_view"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textSize="20sp"
             style="@style/AppTheme.PrimaryButton"

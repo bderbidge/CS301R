@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.model.Model;
+import com.example.brandonderbidge.myapplication.sell.NewContractFragment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
@@ -63,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
         setSellFragment(savedInstanceState);
 
-        if(Model.instance().getCurrentUser().getPhoneNumber().equals("")){
+        if(Model.instance().getCurrentUser().getPhoneNumber() == null ||
+                Model.instance().getCurrentUser().getPhoneNumber().equals("")){
 
             LayoutInflater layoutInflaterAndroid = LayoutInflater.from(this);
             View mView = layoutInflaterAndroid.inflate(R.layout.user_input_dialog_box, null);
@@ -162,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Log.v(TAG, "Image Result successful");
-            System.out.println("here");
 
             Uri selectedImage = data.getData();
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
@@ -178,24 +179,18 @@ public class MainActivity extends AppCompatActivity {
                 //getting image from gallery
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 Model.instance().setFilepath(filePath);
-                Log.e("Made it", "YUP");
-                //Setting image to ImageView
 
+                //Setting image to ImageView
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String picturePath = cursor.getString(columnIndex);
+                cursor.close();
+
+                // String picturePath contains the path of selected Image
+                ImageView imageView = (ImageView) findViewById(R.id.img_view);
+                imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             } catch (Exception e) {
                 e.printStackTrace();
-
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            // String picturePath contains the path of selected Image
-            ImageView imageView = (ImageView) findViewById(R.id.imgView);
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
-
             }
-
         }
     }
 
