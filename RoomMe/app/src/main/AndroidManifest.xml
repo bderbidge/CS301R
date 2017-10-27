@@ -65,4 +65,7 @@
             android:theme="@style/BuyTheme"/>
     </application>
 
+    <meta-data android:name="my.app.namespace.utils.GlideConfiguration"
+        android:value="GlideModule"/>
+
 </manifest>

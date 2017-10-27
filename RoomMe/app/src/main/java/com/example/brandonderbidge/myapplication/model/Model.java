@@ -1,5 +1,8 @@
 package com.example.brandonderbidge.myapplication.model;
 
+
+import android.net.Uri;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +19,15 @@ public class Model {
     private Map<String, Contract> idToContracts = new HashMap<>();
     private User currentUser;
     private Map<String, Contract> allContracts = new HashMap<>();
+    private Uri filepath;
+
+    public Uri getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(Uri filepath) {
+        this.filepath = filepath;
+    }
 
     public User getCurrentUser() {
         return currentUser;

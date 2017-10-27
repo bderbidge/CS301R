@@ -1,5 +1,7 @@
 package com.example.brandonderbidge.myapplication.model;
 
+import java.net.URI;
+
 /**
  * Created by brandonderbidge on 10/11/17.
  */
@@ -11,7 +13,7 @@ public class Contract {
     private String sellerName;
     private String address;
     private String apartmentNum;
-    private int image;
+    private URI filepath;
     private String sellBy;
     private String city;
     private String state;
@@ -28,7 +30,7 @@ public class Contract {
     public Contract(){}
 
     public Contract(String ID, String apartmentName, String sellerName, String address,
-                    String apartmentNum, int image, String sellBy, String city, String state,
+                    String apartmentNum, URI filepath, String sellBy, String city, String state,
                     String zipCode, Double price, String maritalStatus, String sex,
                     String additionalNotes, String phoneNumber, String email, String availableDate) {
         this.ID = ID;
@@ -36,7 +38,7 @@ public class Contract {
         this.sellerName = sellerName;
         this.address = address;
         this.apartmentNum = apartmentNum;
-        this.image = image;
+        this.filepath = filepath;
         this.sellBy = sellBy;
         this.city = city;
         this.state = state;
@@ -90,12 +92,12 @@ public class Contract {
         this.apartmentNum = apartmentNum;
     }
 
-    public int getImage() {
-        return image;
+    public URI getFilepath() {
+        return filepath;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setFilepath(URI filepath) {
+        this.filepath = filepath;
     }
 
     public String getSellBy() {
