@@ -1,9 +1,11 @@
 package com.example.brandonderbidge.myapplication.sell;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +18,15 @@ import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.R;
 import com.example.brandonderbidge.myapplication.buy.ContractActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -27,7 +37,7 @@ import java.util.ArrayList;
 public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> {
 
     private ArrayList<Contract> dataSet;
-
+    private FirebaseStorage mStorageRef;
     public class MyViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener{
 
@@ -86,6 +96,7 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
 
+        mStorageRef = FirebaseStorage.getInstance();
         TextView textViewName = holder.textViewName;
         TextView textViewCostOfRent = holder.textViewCostOfRent;
         ImageView imageView = holder.imageViewIcon;
@@ -97,10 +108,9 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
         textViewName.setText(dataSet.get(listPosition).getApartmentName());
 
         textViewCostOfRent.setText(price);
+        Context context = holder.imageViewIcon.getContext();
+        Picasso.with(context).load(dataSet.get(listPosition).getFilepath()).into(imageView);
 
-
-        new DownloadImageTask(imageView)
-                .execute(dataSet.get(listPosition).getFilepath());
 
         textViewCityState.setText(dataSet.get(listPosition).getCity() + ", " + dataSet.get(listPosition).getState());
 
@@ -116,29 +126,5 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
         return dataSet.size();
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
 
 }
