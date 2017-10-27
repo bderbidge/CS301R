@@ -38,6 +38,8 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
 
     private ArrayList<Contract> dataSet;
     private FirebaseStorage mStorageRef;
+    private SellFragment sellFragment;
+
     public class MyViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener{
 
@@ -62,16 +64,14 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
 
         @Override
         public void onClick(View v) {
-
-            Contract contract =  dataSet.get(getLayoutPosition());
-            Model.instance().setSelectedContract(contract);
-            Intent intent = new Intent(v.getContext(), ContractActivity.class);
-            v.getContext().startActivity(intent);
+            Model.instance().setSelectedContract(dataSet.get(getLayoutPosition()));
+            sellFragment.editContract();
         }
     }
 
-    public SellAdapter(ArrayList<Contract> data) {
+    public SellAdapter(ArrayList<Contract> data, SellFragment sellFragment) {
         this.dataSet = data;
+        this.sellFragment = sellFragment;
     }
 
     public void setDataSet(ArrayList<Contract> dataSet) {
@@ -111,6 +111,9 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
         Context context = holder.imageViewIcon.getContext();
         Picasso.with(context).load(dataSet.get(listPosition).getFilepath()).into(imageView);
 
+
+        /*new DownloadImageTask(imageView)
+                .execute(dataSet.get(listPosition).getFilepath());*/
 
         textViewCityState.setText(dataSet.get(listPosition).getCity() + ", " + dataSet.get(listPosition).getState());
 

@@ -46,6 +46,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -60,6 +61,7 @@ public class NewContractFragment extends Fragment {
     private StorageReference mStorageRef;
 
     private String TAG = "NewContract";
+    private String ID;
     private MainController mainController;
     private Spinner maritalStatusSpinner;
     private Spinner sexSpinner;
@@ -67,6 +69,7 @@ public class NewContractFragment extends Fragment {
     private EditText sellBy;
     private EditText dateAvailable;
     private Button saveButton;
+    private Button deleteButton;
     private boolean isSellByDateFrag;
     private EditText apartmentName;
     private EditText address;
@@ -103,6 +106,7 @@ public class NewContractFragment extends Fragment {
         sellBy = view.findViewById(R.id.sell_by);
         dateAvailable = view.findViewById(R.id.date_available);
         saveButton = view.findViewById(R.id.create_contract_btn);
+        deleteButton = view.findViewById(R.id.delete_contract);
         apartmentName = view.findViewById(R.id.apartment_name);
         address = view.findViewById(R.id.address_line_1);
         address2 = view.findViewById(R.id.address_line_2);
@@ -262,14 +266,21 @@ public class NewContractFragment extends Fragment {
 
                         }
                     });
-                } else {
-
                 }
 
             }
         });
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+
+        if (Model.instance().getSelectedContract() != null) {
+            setData();
+        }
         getActivity().setTitle(R.string.new_contract);
 
         return view;
@@ -337,5 +348,30 @@ public class NewContractFragment extends Fragment {
         inputManager.hideSoftInputFromWindow(
                 getActivity().getCurrentFocus() == null ? null : getActivity().getCurrentFocus().getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    private void setData() {
+        Contract contract = Model.instance().getSelectedContract();
+
+        deleteButton.setVisibility(View.VISIBLE);
+
+        ID = contract.getID();
+        apartmentName.setText(contract.getApartmentName());
+        sellBy.setText(contract.getSellBy());
+        dateAvailable.setText(contract.getAvailableDate());
+        address.setText(contract.getAddress());
+        city.setText(contract.getCity());
+        state.setText(contract.getState());
+        postal.setText(contract.getZipCode());
+        price.setText(String.format(Locale.US, "%1$,.2f", contract.getPrice()));
+        maritalStatusSpinner.setSelection(contract.getMaritalStatus().equals("Married") ? 0 : 1, false);
+
+        if (contract.getMaritalStatus().equals("Married")) {
+            sexSpinner.setEnabled(false);
+        } else {
+            sexSpinner.setSelection(contract.getSex().equals("Male") ? 0 : 1);
+        }
+
+        additionalInfo.setText(contract.getAdditionalNotes());
     }
 }

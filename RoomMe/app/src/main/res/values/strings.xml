@@ -54,6 +54,7 @@
     <string name="cancel_btn">CANCEL</string>
     <string name="ok">OK</string>
     <string name="save_btn">SAVE</string>
+    <string name="delete_btn">DELETE</string>
     <string name="clear">CLEAR</string>
     <string name="apply">APPLY</string>
     <string name="marital_status">Marital Status</string>

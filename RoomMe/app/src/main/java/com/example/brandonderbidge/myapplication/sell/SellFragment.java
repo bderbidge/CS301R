@@ -59,7 +59,7 @@ public class SellFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        adapter = new SellAdapter(listOfContracts);
+        adapter = new SellAdapter(listOfContracts, this);
         recyclerView.setAdapter(adapter);
 
         loadSellContracts();
@@ -68,6 +68,7 @@ public class SellFragment extends Fragment {
         fabNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Model.instance().setSelectedContract(null);
                 NewContractFragment  newContractFragment = new NewContractFragment();
                 newContractFragment.setMainController(mainController);
 
@@ -129,5 +130,14 @@ public class SellFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    public void editContract() {
+        NewContractFragment  newContractFragment = new NewContractFragment();
+        newContractFragment.setMainController(mainController);
+
+        FragmentManager fm = getFragmentManager();
+        fm.beginTransaction().add(R.id.activity_main_fragment_container, newContractFragment, getString(R.string.TAG_new_contract))
+                .addToBackStack(getString(R.string.TAG_new_contract)).commit();
     }
 }
