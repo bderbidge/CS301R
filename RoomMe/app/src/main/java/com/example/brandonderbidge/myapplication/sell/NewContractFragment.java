@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,10 +32,16 @@ import com.example.brandonderbidge.myapplication.main.MainActivity;
 import com.example.brandonderbidge.myapplication.main.MainController;
 import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.Model;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,6 +57,7 @@ public class NewContractFragment extends Fragment {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Apartments");
     DatabaseReference myUser = database.getReference("Users");
+    private StorageReference mStorageRef;
 
     private String TAG = "NewContract";
     private MainController mainController;
@@ -87,6 +96,7 @@ public class NewContractFragment extends Fragment {
 
         view.setBackgroundColor(Color.WHITE);
 
+        mStorageRef = FirebaseStorage.getInstance().getReference();
         maritalStatusSpinner = view.findViewById(R.id.marital_status_spinner);
         sexSpinner = view.findViewById(R.id.sex_spinner);
         addImage = view.findViewById(R.id.add_image);
@@ -199,36 +209,66 @@ public class NewContractFragment extends Fragment {
 
                 String temp = price.getText().toString();
                 int price1 = Integer.parseInt(temp);
-                double price2 = (double)price1;
-                String addressString;
+                final double price2 = (double)price1;
+                final String addressString;
                 if(address2.getText() != null) {
                     addressString = address.getText().toString() + address2.getText().toString();
                 }else{
                     addressString = address.getText().toString() + address2.getText().toString();
                 }
-                String ID = UUID.randomUUID().toString();
-                Contract contract = new Contract(ID, apartmentName.getText().toString(),
-                        Model.instance().getCurrentUser().getFullName(),
-                        addressString, null, null, sellBy.getText().toString(),
-                        city.getText().toString(), state.getText().toString(), postal.getText().toString(), price2
-                        , maritalStatusSpinner.getSelectedItem().toString(),
-                        sexSpinner.getSelectedItem().toString(),additionalInfo.getText().toString(), Model.instance().getCurrentUser().getPhoneNumber(),
-                        Model.instance().getCurrentUser().getEmail(), dateAvailable.getText().toString());
-
-                Model.instance().getAllContracts().put(ID, contract);
-                Model.instance().getCurrentUser().getMyContractsToSell().add(contract);
-
-                myRef.setValue(Model.instance().getAllContracts());
-                myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
 
                 ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
                 if (ab != null) {
                     ab.setDisplayHomeAsUpEnabled(false);
                 }
 
+
+                if (Model.instance().getFilepath() != null) {
+
+                    File f = new File(String.valueOf(Model.instance().getFilepath()));
+
+                    StorageReference childRef = mStorageRef.child(f.getName());
+
+                    //uploading the image
+                    UploadTask uploadTask = childRef.putFile(Model.instance().getFilepath());
+
+                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            Uri url = taskSnapshot.getDownloadUrl();
+                            url.toString();
+                            String ID = UUID.randomUUID().toString();
+                            Contract contract = new Contract(ID, apartmentName.getText().toString(),
+                                    Model.instance().getCurrentUser().getFullName(),
+                                    addressString, null, null, sellBy.getText().toString(),
+                                    city.getText().toString(), state.getText().toString(), postal.getText().toString(), price2
+                                    , maritalStatusSpinner.getSelectedItem().toString(),
+                                    sexSpinner.getSelectedItem().toString(),additionalInfo.getText().toString(), Model.instance().getCurrentUser().getPhoneNumber(),
+                                    Model.instance().getCurrentUser().getEmail(), dateAvailable.getText().toString());
+
+                            Model.instance().getAllContracts().put(ID, contract);
+                            Model.instance().getCurrentUser().getMyContractsToSell().add(contract);
+
+                            myRef.setValue(Model.instance().getAllContracts());
+                            myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
+
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+
+                        }
+                    });
+                } else {
+
+                }
                 getFragmentManager().popBackStack();
             }
         });
+
 
         getActivity().setTitle(R.string.new_contract);
 
