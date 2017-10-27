@@ -237,11 +237,11 @@ public class NewContractFragment extends Fragment {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                             Uri url = taskSnapshot.getDownloadUrl();
-                            url.toString();
+                            String path = url.toString();
                             String ID = UUID.randomUUID().toString();
                             Contract contract = new Contract(ID, apartmentName.getText().toString(),
                                     Model.instance().getCurrentUser().getFullName(),
-                                    addressString, null, null, sellBy.getText().toString(),
+                                    addressString, null, path, sellBy.getText().toString(),
                                     city.getText().toString(), state.getText().toString(), postal.getText().toString(), price2
                                     , maritalStatusSpinner.getSelectedItem().toString(),
                                     sexSpinner.getSelectedItem().toString(),additionalInfo.getText().toString(), Model.instance().getCurrentUser().getPhoneNumber(),

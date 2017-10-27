@@ -1,7 +1,11 @@
 package com.example.brandonderbidge.myapplication.buy;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,9 @@ import com.example.brandonderbidge.myapplication.model.Contract;
 import com.example.brandonderbidge.myapplication.model.Model;
 import com.example.brandonderbidge.myapplication.R;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -30,6 +37,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         ImageView imageViewIcon;
         TextView textViewcityState;
         TextView genderRoomType;
+        ImageView image;
 
 
         public MyViewHolder(View itemView) {
@@ -39,6 +47,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             this.imageViewIcon = itemView.findViewById(R.id.imageView);
             this.textViewcityState = itemView.findViewById(R.id.cityState);
             this.genderRoomType = itemView.findViewById(R.id.genderRoomType);
+            this.image = itemView.findViewById(R.id.imageView);
             itemView.setOnClickListener(this);
         }
 
@@ -94,8 +103,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         textViewCostOfRent.setText(price);
 
+        new DownloadImageTask(imageView)
+                .execute(dataSet.get(listPosition).getFilepath());
 
-       // imageView.setImageResource(dataSet.get(listPosition).getImage());
+
+
         textViewCityState.setText(dataSet.get(listPosition).getCity() + ", " + dataSet.get(listPosition).getState());
 
         if(dataSet.get(listPosition).getMaritalStatus().equals("Married"))
@@ -108,4 +120,30 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public int getItemCount() {
         return dataSet.size();
     }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 }
+

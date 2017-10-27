@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -171,14 +172,30 @@ public class MainActivity extends AppCompatActivity {
             if (cursor != null) {
                 cursor.moveToFirst();
             }
+            Uri filePath = data.getData();
 
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            try {
+                //getting image from gallery
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                Model.instance().setFilepath(filePath);
+                Log.e("Made it", "YUP");
+                //Setting image to ImageView
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
             // String picturePath contains the path of selected Image
             ImageView imageView = (ImageView) findViewById(R.id.imgView);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+
+            }
+
         }
     }
 

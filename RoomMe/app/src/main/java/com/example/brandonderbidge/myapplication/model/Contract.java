@@ -13,7 +13,7 @@ public class Contract {
     private String sellerName;
     private String address;
     private String apartmentNum;
-    private URI filepath;
+    private String filepath;
     private String sellBy;
     private String city;
     private String state;
@@ -30,7 +30,7 @@ public class Contract {
     public Contract(){}
 
     public Contract(String ID, String apartmentName, String sellerName, String address,
-                    String apartmentNum, URI filepath, String sellBy, String city, String state,
+                    String apartmentNum, String filepath, String sellBy, String city, String state,
                     String zipCode, Double price, String maritalStatus, String sex,
                     String additionalNotes, String phoneNumber, String email, String availableDate) {
         this.ID = ID;
@@ -92,11 +92,11 @@ public class Contract {
         this.apartmentNum = apartmentNum;
     }
 
-    public URI getFilepath() {
+    public String getFilepath() {
         return filepath;
     }
 
-    public void setFilepath(URI filepath) {
+    public void setFilepath(String filepath) {
         this.filepath = filepath;
     }
 
