@@ -51,6 +51,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.example.brandonderbidge.myapplication.R.id.available_by;
+import static com.example.brandonderbidge.myapplication.R.id.phoneNumber;
 import static com.example.brandonderbidge.myapplication.R.id.username;
 
 /**
@@ -121,7 +123,7 @@ public class NewContractFragment extends Fragment {
         price = view.findViewById(R.id.price);
         additionalInfo = view.findViewById(R.id.additional_info);
 
-        ArrayAdapter<CharSequence> maritalAdapter = ArrayAdapter.createFromResource(getContext(),
+        final ArrayAdapter<CharSequence> maritalAdapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.marital_status_list, R.layout.spinner_item);
         maritalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         maritalStatusSpinner.setAdapter(maritalAdapter);
@@ -198,7 +200,7 @@ public class NewContractFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(Model.instance().getSelectedContract()== null) {
                 if (address.getText().toString().equals("")) {
                     Toast.makeText(getContext(), "Please provide valid address information", Toast.LENGTH_LONG).show();
                     return;
@@ -232,65 +234,65 @@ public class NewContractFragment extends Fragment {
                 }
 
 
-                if (Model.instance().getFilepath() != null) {
+                    if (Model.instance().getFilepath() != null) {
 
-                    File f = new File(String.valueOf(Model.instance().getFilepath()));
+                        File f = new File(String.valueOf(Model.instance().getFilepath()));
 
-                    StorageReference childRef = mStorageRef.child(f.getName());
+                        StorageReference childRef = mStorageRef.child(f.getName());
 
-                    //uploading the image
-                    UploadTask uploadTask = childRef.putFile(Model.instance().getFilepath());
+                        //uploading the image
+                        UploadTask uploadTask = childRef.putFile(Model.instance().getFilepath());
 
-                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            Uri url = taskSnapshot.getDownloadUrl();
-                            String path = url.toString();
-                            String ID = UUID.randomUUID().toString();
-                            Contract contract = new Contract(ID, apartmentName.getText().toString(),
-                                    Model.instance().getCurrentUser().getFullName(), addressString,
-                                    path, sellBy.getText().toString(), city.getText().toString(), state.getText().toString(),
-                                    postal.getText().toString(), price2, maritalStatusSpinner.getSelectedItem().toString(),
-                                    sexSpinner.getSelectedItem().toString(), additionalInfo.getText().toString(),
-                                    Model.instance().getCurrentUser().getPhoneNumber(), Model.instance().getCurrentUser().getEmail(),
-                                    dateAvailable.getText().toString());
+                                Uri url = taskSnapshot.getDownloadUrl();
+                                String path = url.toString();
+                                String ID = UUID.randomUUID().toString();
+                                Contract contract = new Contract(ID, apartmentName.getText().toString(),
+                                        Model.instance().getCurrentUser().getFullName(), addressString,
+                                        path, sellBy.getText().toString(), city.getText().toString(), state.getText().toString(),
+                                        postal.getText().toString(), price2, maritalStatusSpinner.getSelectedItem().toString(),
+                                        sexSpinner.getSelectedItem().toString(), additionalInfo.getText().toString(),
+                                        Model.instance().getCurrentUser().getPhoneNumber(), Model.instance().getCurrentUser().getEmail(),
+                                        dateAvailable.getText().toString());
 
-                            Model.instance().getAllContracts().put(ID, contract);
-                            Model.instance().getCurrentUser().getMyContractsToSell().add(contract);
+                                Model.instance().getAllContracts().put(ID, contract);
+                                Model.instance().getCurrentUser().getMyContractsToSell().add(contract);
 
-                            myRef.setValue(Model.instance().getAllContracts());
-                            myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
-                            getFragmentManager().popBackStack();
+                                myRef.setValue(Model.instance().getAllContracts());
+                                myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
+                                getFragmentManager().popBackStack();
 
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-
-                        }
-                    });
-                }else {
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
 
 
-                    String ID = UUID.randomUUID().toString();
-                    Contract contract = new Contract(ID, apartmentName.getText().toString(),
-                            Model.instance().getCurrentUser().getFullName(), addressString,
-                            null, sellBy.getText().toString(), city.getText().toString(), state.getText().toString(),
-                            postal.getText().toString(), price2, maritalStatusSpinner.getSelectedItem().toString(),
-                            sexSpinner.getSelectedItem().toString(), additionalInfo.getText().toString(),
-                            Model.instance().getCurrentUser().getPhoneNumber(), Model.instance().getCurrentUser().getEmail(),
-                            dateAvailable.getText().toString());
+                            }
+                        });
+                    } else {
 
-                    Model.instance().getAllContracts().put(ID, contract);
-                    Model.instance().getCurrentUser().getMyContractsToSell().add(contract);
 
-                    myRef.setValue(Model.instance().getAllContracts());
-                    myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
-                    getFragmentManager().popBackStack();
+                        String ID = UUID.randomUUID().toString();
+                        Contract contract = new Contract(ID, apartmentName.getText().toString(),
+                                Model.instance().getCurrentUser().getFullName(), addressString,
+                                null, sellBy.getText().toString(), city.getText().toString(), state.getText().toString(),
+                                postal.getText().toString(), price2, maritalStatusSpinner.getSelectedItem().toString(),
+                                sexSpinner.getSelectedItem().toString(), additionalInfo.getText().toString(),
+                                Model.instance().getCurrentUser().getPhoneNumber(), Model.instance().getCurrentUser().getEmail(),
+                                dateAvailable.getText().toString());
+
+                        Model.instance().getAllContracts().put(ID, contract);
+                        Model.instance().getCurrentUser().getMyContractsToSell().add(contract);
+
+                        myRef.setValue(Model.instance().getAllContracts());
+                        myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
+                        getFragmentManager().popBackStack();
+                    }
                 }
-
             }
         });
 
