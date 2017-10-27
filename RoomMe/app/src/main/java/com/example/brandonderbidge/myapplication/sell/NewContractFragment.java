@@ -217,8 +217,8 @@ public class NewContractFragment extends Fragment {
                 }
 
                 String temp = price.getText().toString();
-                int price1 = Integer.parseInt(temp);
-                final double price2 = (double)price1;
+                double price1 = Double.parseDouble(temp);
+                final double price2 = price1;
                 final String addressString;
                 if(address2.getText() != null) {
                     addressString = address.getText().toString() + address2.getText().toString();

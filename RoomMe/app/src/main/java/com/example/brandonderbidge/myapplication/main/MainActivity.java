@@ -177,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 //getting image from gallery
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 Model.instance().setFilepath(filePath);
 
                 //Setting image to ImageView
