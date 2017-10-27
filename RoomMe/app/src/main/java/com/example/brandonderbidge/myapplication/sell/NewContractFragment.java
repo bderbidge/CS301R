@@ -252,7 +252,7 @@ public class NewContractFragment extends Fragment {
 
                             myRef.setValue(Model.instance().getAllContracts());
                             myUser.child(Model.instance().getCurrentUser().getID()).setValue(Model.instance().getCurrentUser());
-
+                            getFragmentManager().popBackStack();
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -265,7 +265,7 @@ public class NewContractFragment extends Fragment {
                 } else {
 
                 }
-                getFragmentManager().popBackStack();
+
             }
         });
 

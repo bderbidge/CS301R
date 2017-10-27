@@ -146,8 +146,10 @@
                 android:layout_height="wrap_content"
                 android:text="12/23/17"
                 android:textColor="@color/black"
-                android:layout_marginTop="322dp"
-                android:layout_marginLeft="165dp" />
+                android:layout_marginLeft="165dp"
+                android:layout_alignBaseline="@+id/textView2"
+                android:layout_alignBottom="@+id/textView2"
+                />
 
             <TextView
                 android:id="@+id/notes"
