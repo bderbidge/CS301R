@@ -1,9 +1,13 @@
 package com.example.brandonderbidge.myapplication.buy;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,6 +22,8 @@ import com.example.brandonderbidge.myapplication.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.InputStream;
+
 public class ContractActivity extends AppCompatActivity {
     TextView apartmentName ;
     TextView costOfRent ;
@@ -30,6 +36,7 @@ public class ContractActivity extends AppCompatActivity {
     ImageView email;
     ImageView heart;
     ImageView textMessage;
+    ImageView fileImage;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myUser = database.getReference("Users");
 
@@ -53,6 +60,11 @@ public class ContractActivity extends AppCompatActivity {
         email = (ImageView) findViewById(R.id.email);
         heart = (ImageView) findViewById(R.id.favoriteHeart);
         textMessage = (ImageView) findViewById(R.id.text_img);
+        fileImage = (ImageView) findViewById(R.id.imageView);
+
+        new DownloadImageTask(fileImage)
+                .execute(Model.instance().getSelectedContract().getFilepath());
+
 
         notes.setText(Model.instance().getSelectedContract().getAdditionalNotes());
         availableDate.setText(Model.instance().getSelectedContract().getAvailableDate());
@@ -182,5 +194,31 @@ public class ContractActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
         intent.putExtra(Intent.EXTRA_SUBJECT, "Interested in Contract");
         startActivity(Intent.createChooser(intent, ""));
+    }
+
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 }
