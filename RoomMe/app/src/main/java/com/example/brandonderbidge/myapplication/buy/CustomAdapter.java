@@ -66,6 +66,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         @Override
         public void onClick(View v) {
 
+
             Contract contract =  dataSet.get(getLayoutPosition());
             Model.instance().setSelectedContract(contract);
 
